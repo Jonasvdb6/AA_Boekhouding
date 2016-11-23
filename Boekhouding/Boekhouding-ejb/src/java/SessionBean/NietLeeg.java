@@ -15,5 +15,5 @@ import javax.ejb.Stateless;
 public class NietLeeg implements NietLeegLocal {
 
     // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    // "Insert Code > Add Business Method") test
 }
