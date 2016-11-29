@@ -10,13 +10,14 @@
 
 DROP TABLE onkosten;
 DROP TABLE kredieten;
-DROP TABLE users;
+DROP TABLE werknemers;
 
-CREATE TABLE users
+CREATE TABLE werknemers
 (
     pNummer int NOT NULL,
     pswd varchar(30) NOT NULL,
     werkType int NOT NULL,
+    bNummer int NOT NULL,
     PRIMARY KEY (pNummer)
 );
 
@@ -26,7 +27,7 @@ CREATE TABLE kredieten
     krSaldo double NOT NULL,
     krType int NOT NULL,
     PRIMARY KEY (krNummer),
-    pnummer int REFERENCES users(pNummer)
+    pnummer int REFERENCES werknemers(pNummer)
 );
 
 CREATE TABLE onkosten
@@ -37,7 +38,7 @@ CREATE TABLE onkosten
     onkostenBedrag double NOT NULL,
     status varchar(30) NOT NULL,
     PRIMARY KEY (onkostId),
-    pnummer int REFERENCES users(pNummer)
+    pnummer int REFERENCES werknemers(pNummer)
 );
 
 INSERT INTO users VALUES (999,'admin','3');
