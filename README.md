@@ -4,7 +4,7 @@
   -start xampp: sudo /opt/lampp/lampp start
   
 ##Push/pull
-  -Werken in eigen branch in NetBeans\n
+  -Werken in eigen branch in NetBeans
   -Nieuwe pagina's adden
   -Steeds commiten 
   
