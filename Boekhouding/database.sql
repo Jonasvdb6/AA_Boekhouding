@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 /**
- * Author:  simoneke
+ * Author:  simon
  * Created: Nov 29, 2016
  */
 
