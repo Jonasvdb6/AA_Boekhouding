@@ -15,12 +15,12 @@ import java.util.ArrayList;
 public class Werknemers 
 {
     
-    private int pNummer;
+    private int pNummer; //persoonsnummer
     private String pswd;
     private int werkType; // 1 => gewone werknemer ; 2 => manager ; 3 => boekhouder
     private ArrayList onkosten = new ArrayList();
     private ArrayList kredieten = new ArrayList();
-    private int bNummer;
+    private int bNummer; //baasnummer
     
     
     public double getOnkost(int i)
