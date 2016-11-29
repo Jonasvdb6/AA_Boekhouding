@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author jonas
+ * @author jonas & Simon
  */
 @WebServlet(urlPatterns = {"/Controller"})
 public class Controller extends HttpServlet {
