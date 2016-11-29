@@ -1,4 +1,4 @@
 # AA_Boekhouding
 
-#Linux
+##LINUX
   -start xampp: sudo /opt/lampp/lampp start
