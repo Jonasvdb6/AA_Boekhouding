@@ -12,6 +12,24 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Inloggen</h1>
+        <form method="post" action="Controller">
+            <table>
+                <tr>
+                    <td>Personeelsnummer :</td>
+                    <td><input type="Text" name="pnummer"/></td>
+                </tr>
+                <tr>
+                    <td>Paswoord:</td>
+                    <td><input type="Text" name="pswd"/></td>   
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Inloggen"/></td>
+                </tr>
+            </table>
+            <input type="hidden" name="indexhidden" value="inloggen"/>
+        </form>
+        
     </body>
 </html>
