@@ -20,7 +20,7 @@ public class Werknemers
     private int werkType; // 1 => gewone werknemer ; 2 => manager ; 3 => boekhouder
     private ArrayList onkosten = new ArrayList();
     private ArrayList kredieten = new ArrayList();
-    private int bNummer; //baasnummer
+    private int bNummer; //baasnummer (indien = 0 => CEO)
     
     
     public double getOnkost(int i)
