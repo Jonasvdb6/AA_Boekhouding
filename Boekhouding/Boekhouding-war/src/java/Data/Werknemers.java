@@ -15,11 +15,12 @@ import java.util.ArrayList;
 public class Werknemers 
 {
     
-    private int persNummer;
+    private int pNummer;
     private String pswd;
     private int werkType; // 1 => gewone werknemer ; 2 => manager ; 3 => boekhouder
     private ArrayList onkosten = new ArrayList();
     private ArrayList kredieten = new ArrayList();
+    private int bNummer;
     
     
     public double getOnkost(int i)
@@ -51,27 +52,35 @@ public class Werknemers
         kredieten.set(i, krediet);
     }
 
-    public int getPersNummer() {
-        return persNummer;
+    public int getpNummer() {
+        return pNummer;
     }
 
-    public void setPersNummer(int persNummer) {
-        this.persNummer = persNummer;
+    public void setpNummer(int pNr) {
+        pNummer = pNr;
+    }
+
+    public int getbNummer() {
+        return bNummer;
+    }
+
+    public void setbNummer(int bNr) {
+        bNummer = bNr;
     }
 
     public String getPswd() {
         return pswd;
     }
 
-    public void setPswd(String pswd) {
-        this.pswd = pswd;
+    public void setPswd(String psw) {
+        pswd = psw;
     }
 
     public int getWerkType() {
         return werkType;
     }
 
-    public void setWerkType(int werkType) {
-        this.werkType = werkType;
+    public void setWerkType(int type) {
+        werkType = type;
     }
 }

@@ -21,23 +21,23 @@ public class Krediet
         return krNummer;
     }
 
-    public void setKrNummer(int krNummer) {
-        this.krNummer = krNummer;
+    public void setKrNummer(int krNr) {
+        this.krNummer = krNr;
     }
 
     public double getKrSaldo() {
         return krSaldo;
     }
 
-    public void setKrSaldo(double krSaldo) {
-        this.krSaldo = krSaldo;
+    public void setKrSaldo(double krSal) {
+        this.krSaldo = krSal;
     }
 
     public int getKrType() {
         return krType;
     }
 
-    public void setKrType(int krType) {
-        this.krType = krType;
+    public void setKrType(int krTyp) {
+        this.krType = krTyp;
     }
 }

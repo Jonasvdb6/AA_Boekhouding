@@ -25,39 +25,39 @@ public class Onkost
         return onkostId;
     }
 
-    public void setOnkostId(int onkostId) {
-        this.onkostId = onkostId;
+    public void setOnkostId(int onkId) {
+        onkostId = onkId;
     }
 
     public String getOmschrijving() {
         return omschrijving;
     }
 
-    public void setOmschrijving(String s) {
-        omschrijving = s;
+    public void setOmschrijving(String omschr) {
+        omschrijving = omschr;
     }
 
     public Date getDatum() {
         return datum;
     }
 
-    public void setDatum(Date d) {
-        datum = d;
+    public void setDatum(Date date) {
+        datum = date;
     }
 
     public double getOnkostBedrag() {
         return onkostBedrag;
     }
 
-    public void setOnkostBedrag(double x) {
-        onkostBedrag = x;
+    public void setOnkostBedrag(double onkBedr) {
+        onkostBedrag = onkBedr;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String s) {
-        status = s;
+    public void setStatus(String stat) {
+        status = stat;
     }
 }
