@@ -5,10 +5,9 @@
   
 ##Push/pull
   -Werken in eigen branch in NetBeans <br />
-  -Nieuwe pagina's adden
-  -Steeds commiten 
-  
-  1) pull van master
-  2) Push naar eigen
-  3) Pull request op github naar master
+  -Nieuwe pagina's adden <br />
+  -Steeds commiten <br />
+  1) pull van master <br />
+  2) Push naar eigen <br />
+  3) Pull request op github naar master <br />
   
