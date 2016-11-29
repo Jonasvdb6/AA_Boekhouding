@@ -16,10 +16,6 @@ public class Krediet
     private double krSaldo;
     private int krType; // 1 => gewoon krediet ; 2 => gewaarborgd krediet
     
-    public Krediet()
-    {
-        
-    }
 
     public int getKrNummer() {
         return krNummer;
