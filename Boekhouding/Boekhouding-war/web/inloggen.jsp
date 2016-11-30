@@ -13,20 +13,15 @@
     </head>
     <body>
         <h1>Inloggen</h1>
-        <form method= "post" action="j_security_check" >
-            <input type="text" name= "j_username" >
-            <input type="password" name= "j_password" >
-        </form>
-        <%-- 
-        <form method="post" action="Controller">
+         <form method= "get" action="j_security_check" >
             <table>
                 <tr>
                     <td>Personeelsnummer :</td>
-                    <td><input type="Text" name="pnummer"/></td>
+                    <td><input type="text" name= "j_username" ></td>
                 </tr>
                 <tr>
                     <td>Paswoord:</td>
-                    <td><input type="Text" name="pswd"/></td>   
+                    <td><input type="password" name= "j_password" ></td>   
                 </tr>
                 <tr>
                     <td></td>
@@ -35,6 +30,5 @@
             </table>
             <input type="hidden" name="indexhidden" value="inloggen"/>
         </form>
-        --%>
     </body>
 </html>
