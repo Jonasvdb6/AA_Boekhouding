@@ -9,26 +9,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="inloggen.css">
+        <title>LOGIN</title>
     </head>
     <body>
-        <h1>Inloggen</h1>
-         <form method= "get" action="j_security_check" >
-            <table>
-                <tr>
-                    <td>Personeelsnummer :</td>
-                    <td><input type="text" name= "j_username" ></td>
-                </tr>
-                <tr>
-                    <td>Paswoord:</td>
-                    <td><input type="password" name= "j_password" ></td>   
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" value="Inloggen"/></td>
-                </tr>
-            </table>
-            <input type="hidden" name="indexhidden" value="inloggen"/>
-        </form>
+        <div class="container">
+            <img src="images/loginO.png">
+            <form method= "post" action="j_security_check" >
+                <input class="user-input" type="text" name= "j_username" placeholder="Personeelsnummer" required="">
+                <input class="pswd-input" type="password" name= "j_password"  placeholder="Paswoord" required=""></br>
+                <input class="login-but" type="submit" value="LOGIN">
+                <input type="hidden" name="indexhidden" value="inloggen"/>
+            </form>
+        </div>
     </body>
 </html>
