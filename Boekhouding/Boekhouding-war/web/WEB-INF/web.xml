@@ -24,7 +24,7 @@
     </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>CarresSec</realm-name>
+        <realm-name>boekhouding</realm-name>
         <form-login-config>
             <form-login-page>/inloggen.jsp</form-login-page>
             <form-error-page>/inloggenError.jsp</form-error-page>
