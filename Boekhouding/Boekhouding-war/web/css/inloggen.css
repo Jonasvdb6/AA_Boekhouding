@@ -47,7 +47,7 @@ input[type=text], input[type=password]
 }
 
 .user-input{
-    background-image:url(images/userO.png); 
+    background-image:url(../images/userO.png); 
     background-repeat: no-repeat; 
     background-position: 2px 8px;
     background-size: 30px 30px;
@@ -55,7 +55,7 @@ input[type=text], input[type=password]
 }
 
 .pswd-input{
-    background-image:url(images/sleutelO.png); 
+    background-image:url(../images/sleutelO.png); 
     background-repeat: no-repeat; 
     background-position: 2px 8px;
     background-size: 30px 30px;
