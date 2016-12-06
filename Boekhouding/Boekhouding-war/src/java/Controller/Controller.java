@@ -24,19 +24,30 @@ import javax.servlet.http.HttpSession;
 public class Controller extends HttpServlet {
 
   
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    {
         HttpSession sessie = request.getSession();
-        RequestDispatcher view = request.getRequestDispatcher("overzicht.jsp");
-        view.forward(request, response);
+        int pNummer = Integer.parseInt(request.getUserPrincipal().getName());
+        sessie.setAttribute("pNummer", pNummer);
+        gotoPage("overzicht", request, response);
     }
     
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         HttpSession sessie = request.getSession();
-        RequestDispatcher view = request.getRequestDispatcher("overzicht.jsp");
+        String s = request.getParameter("goto");
+        if( s.equals("inloggen") )
+        {
+            int pNummer = Integer.parseInt(request.getUserPrincipal().getName());
+            sessie.setAttribute("pNummer", pNummer);
+            gotoPage("overzicht", request, response);
+        }        
+    }
+    
+    protected void gotoPage(String naam, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        RequestDispatcher view = request.getRequestDispatcher(naam + ".jsp");
         view.forward(request, response);
-        
     }
     
     public String getServletInfo() {

@@ -13,5 +13,11 @@
     </head>
     <body>
         <h1>OVERZICHT</h1>
+        personeelnummer :
+        <%
+            HttpSession sessie = request.getSession();
+            Integer pNummer = (Integer) sessie.getAttribute("pNummer");
+            out.println(Integer.toString(pNummer));
+        %>
     </body>
 </html>
