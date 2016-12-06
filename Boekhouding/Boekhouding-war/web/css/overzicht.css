@@ -12,7 +12,6 @@ body
 {
     background-color: #333333;
     margin: 0 auto;
-    
 }
 
 .container
@@ -26,14 +25,28 @@ body
     margin-top: 5%; 
 }
 
-.menubalk img
+.menubalkpict
 {
     width: 9%;
     height: 9%;
-    padding-top: 1%;
+    padding-top: 2%;
     padding-bottom: 1%;
-    padding-left: 8%;
-    padding-right: 8%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.menubalklogoutpict
+{
+    width: 50%;
+    height: 100%;
+    position: absolute;
+}
+
+.menubalklogout
+{
+    position: absolute;
+    margin-right: -20%;
+    margin-top: 0%;
 }
 
 .menubalk hr

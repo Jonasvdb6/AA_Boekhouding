@@ -15,36 +15,40 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>OVERZICHT</h1>
-        personeelnummer :
-        <%
-            HttpSession sessie = request.getSession();
-            Integer pNummer = (Integer) sessie.getAttribute("pNummer");
-            out.println(Integer.toString(pNummer));
-        %>
         <div class="container">
-            <div class="menubalk">
+            <%--<div class="menubalk">--%>
                 <c:set var="werkType" scope="session" value="${3}"/>
                 <c:choose>
                     <c:when test="${werkType == 1}">
-                        <img src="images/nieuwO.png">
+                        <img class="menubalkpict" src="images/nieuwO.png">
                     </c:when>
                     <c:when test="${werkType == 2}">
-                        <img src="images/nieuwO.png">
-                        <img src="images/kredietenO.png">
+                        <img class="menubalkpict" src="images/nieuwO.png">
+                        <img class="menubalkpict" src="images/kredietenO.png">
                     </c:when>
                     <c:when test="${werkType == 3}">
-                        <img src="images/nieuwO.png">
-                        <img src="images/kredietenO.png">
-                        <img src="images/goedkeurenO.png">
+                        <img class="menubalkpict" src="images/nieuwO.png">
+                        <img class="menubalkpict" src="images/kredietenO.png">
+                        <img class="menubalkpict" src="images/goedkeurenO.png">
                     </c:when>
                     <c:when test="${werkType == 23}">
                         23
                     </c:when>
                 </c:choose>
+                <a href="inloggen.jsp" class="menubalklogout">Uitloggen<img class="menubalklogoutpict" src="images/logoutO.png"></a>
                 <hr>
-            </div>
-            
+                <%--</div>--%>
+                
+                
+                
+                
+            <h1>OVERZICHT</h1>
+            personeelnummer :
+            <%
+                HttpSession sessie = request.getSession();
+                Integer pNummer = (Integer) sessie.getAttribute("pNummer");
+                out.println(Integer.toString(pNummer));
+            %>            
         </div>
     </body>
 </html>
