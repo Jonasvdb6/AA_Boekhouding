@@ -14,10 +14,14 @@
     </head>
     <body>
         <div class="container">
-            <img src="images/loginO.png">
+            <img class="headImg" src="images/loginO.png">
             <form method= "post" action="j_security_check" >
-                <input class="user-input" type="text" name= "j_username" placeholder="Personeelsnummer" required="" autocomplete="off">
-                <input class="pswd-input" type="password" name= "j_password"  placeholder="Paswoord" required="" autocomplete="off"></br>
+                <img class="smallImage" src="images/userO.png">
+                <input type="text" name= "j_username" placeholder="Personeelsnummer" required="" ></br>
+                
+                <img class="smallImage" src="images/sleutelO.png">
+                <input type="password" name= "j_password"  placeholder="Paswoord" required="" ></br>
+                
                 <input class="login-but" type="submit" value="LOGIN">
                 <input type="hidden" name="goto" value="inloggen"/>
             </form>

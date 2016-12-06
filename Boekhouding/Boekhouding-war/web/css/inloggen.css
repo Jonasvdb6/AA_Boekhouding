@@ -12,7 +12,7 @@ body
 {
     background-color: #333333;
     margin: 0 auto;
-    
+
 }
 
 .container
@@ -26,12 +26,21 @@ body
     margin-top: 150px;
 }
 
-.container img
+.headImg
 {
     width: 120px;
     height: 103px;
     margin-top: 10px;
     margin-bottom: 20px;
+}
+
+.smallImage
+{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    margin-left: 6px;
+    margin-top: 9px;
 }
 
 input[type=text], input[type=password]
@@ -40,27 +49,10 @@ input[type=text], input[type=password]
     width: 300px;
     font-size: 24px;
     margin-bottom: 20px;
-    padding-left: 40px;
+    padding-left: 45px;
     border: none;
     border-radius: 4px;
     box-shadow: 0px 2px 3px #a19f9e;
-    outline-color: #1C70FC;
-}
-
-.user-input{
-    background-image:url(../images/userO.png); 
-    background-repeat: no-repeat; 
-    background-position: 2px 8px;
-    background-size: 30px 30px;
-    color: #333333;
-}
-
-.pswd-input{
-    background-image:url(../images/sleutelO.png); 
-    background-repeat: no-repeat; 
-    background-position: 2px 8px;
-    background-size: 30px 30px;
-    color: #333333;
 }
 
 .login-but
