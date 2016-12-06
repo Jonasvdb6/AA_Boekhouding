@@ -41,4 +41,4 @@ CREATE TABLE onkosten
     pnummer int REFERENCES werknemers(pNummer)
 );
 
-INSERT INTO users VALUES (999,'admin','3');
+INSERT INTO werknemers VALUES (999,'admin',3,999);
