@@ -48,7 +48,7 @@
                 </c:choose>
                 <form method= "post" action="<%= response.encodeURL("ControllerDo")%>">
                      <input type="image" src="images/logoutO.png" alt="submit" class="menubalklogout">
-                     <input type="hidden" name="goto" value="uitloggen"/>       
+                     <input type="hidden" name="goto" value="uitloggen"/>
                 </form>
                 <hr class="menubalkhr">
                 
