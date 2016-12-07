@@ -19,18 +19,28 @@
                 <c:set var="werkType" scope="session" value="${3}"/>
                 <c:choose>
                     <c:when test="${werkType == 1}">
-                        <img class="menubalkpict" src="images/nieuwO.png">
+                        <a href="nieuweOnkosten.jsp" class="menubalklinken">
+                            <img src="images/nieuwO.png" class="menubalkpict" alt="onkosten">
+                        </a>
                     </c:when>
                     <c:when test="${werkType == 2}">
-                        <img class="menubalkpict" src="images/nieuwO.png">
-                        <img class="menubalkpict" src="images/kredietenO.png">
+                        <a href="nieuweOnkosten.jsp" class="menubalklinken">
+                            <img src="images/nieuwO.png" class="menubalkpict" alt="onkosten">
+                        </a>
+                        <a href="bekijkKrediet.jsp.jsp" class="menubalklinken">
+                            <img class="menubalkpict" src="images/kredietenO.png">
+                        </a>
                     </c:when>
                     <c:when test="${werkType == 3}">
-                        <a href="onkosten.jsp">
-                            <img class="menubalkpict" src="images/nieuwO.png">
+                        <a href="nieuweOnkosten.jsp" class="menubalklinken">
+                            <img src="images/nieuwO.png" class="menubalkpict" alt="onkosten">
                         </a>
-                        <img class="menubalkpict" src="images/kredietenO.png">
-                        <img class="menubalkpict" src="images/goedkeurenO.png">
+                        <a href="bekijkKrediet.jsp.jsp" class="menubalklinken">
+                            <img class="menubalkpict" src="images/kredietenO.png">
+                        </a>
+                        <a href="goedkeurenKrediet.jsp" class="menubalklinken">
+                            <img class="menubalkpict" src="images/goedkeurenO.png">
+                        </a>
                     </c:when>
                     <c:when test="${werkType == 23}">
                         23
