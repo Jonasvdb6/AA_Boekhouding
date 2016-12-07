@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/overzicht.css">
-        <title>JSP Page</title>
+        <title>OVERZICHT</title>
     </head>
     <body>
         <div class="container">

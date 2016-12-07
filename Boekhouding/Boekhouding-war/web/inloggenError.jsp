@@ -9,9 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="css/inloggenError.css">
+        <title>ERROR</title>
     </head>
     <body>
-        <h1>ERROR</h1>
+        <div class="container">
+            <img class="headImg" src="images/loginErrorO.png"/></br>
+            <div class="errorTekst">
+                Er is een fout opgetreden bij het inloggen. Uw personeelsnummer
+                of paswoord is fout.
+            </div>
+        </div>
     </body>
 </html>
