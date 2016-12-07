@@ -16,13 +16,6 @@
     <security-constraint>
         <display-name>GeneralConstraint</display-name>
         <web-resource-collection>
-            <web-resource-name>GeneralConstraint</web-resource-name>
-            <description/>
-            <url-pattern>/overzicht.jsp</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-        </web-resource-collection>
-        <web-resource-collection>
             <web-resource-name>ControllerSecurity</web-resource-name>
             <description/>
             <url-pattern>/ControllerDo</url-pattern>

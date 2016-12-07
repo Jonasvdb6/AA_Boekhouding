@@ -16,7 +16,6 @@
     </head>
     <body>
         <div class="container">
-            <%--<div class="menubalk">--%>
                 <c:set var="werkType" scope="session" value="${3}"/>
                 <c:choose>
                     <c:when test="${werkType == 1}">
@@ -27,7 +26,9 @@
                         <img class="menubalkpict" src="images/kredietenO.png">
                     </c:when>
                     <c:when test="${werkType == 3}">
-                        <img class="menubalkpict" src="images/nieuwO.png">
+                        <a href="onkosten.jsp">
+                            <img class="menubalkpict" src="images/nieuwO.png">
+                        </a>
                         <img class="menubalkpict" src="images/kredietenO.png">
                         <img class="menubalkpict" src="images/goedkeurenO.png">
                     </c:when>
@@ -35,9 +36,11 @@
                         23
                     </c:when>
                 </c:choose>
-                <a href="inloggen.jsp" class="menubalklogout">Uitloggen<img class="menubalklogoutpict" src="images/logoutO.png"></a>
-                <hr>
-                <%--</div>--%>
+                <form method= "post" action="<%= response.encodeURL("ControllerDo")%>">
+                     <input type="image" src="images/logoutO.png" alt="submit" class="menubalklogout">
+                     <input type="hidden" name="goto" value="uitloggen"/>       
+                </form>
+                <hr class="menubalkhr">
                 
                 
                 
@@ -48,7 +51,7 @@
                 HttpSession sessie = request.getSession();
                 Integer pNummer = (Integer) sessie.getAttribute("pNummer");
                 out.println(Integer.toString(pNummer));
-            %>            
+            %>
         </div>
     </body>
 </html>

@@ -31,29 +31,24 @@ body
     height: 9%;
     padding-top: 2%;
     padding-bottom: 1%;
-    padding-left: 2%;
-    padding-right: 2%;
-}
-
-.menubalklogoutpict
-{
-    width: 50%;
-    height: 100%;
-    position: absolute;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .menubalklogout
 {
-    position: absolute;
-    margin-right: -20%;
-    margin-top: 0%;
+    width: 3%;
+    height: 4%;
+    min-height: 15px;
+    position: fixed;
+    margin-left: 26.5%;
+    margin-top: -6.5%;
 }
 
-.menubalk hr
+.menubalkhr
 {
     border: 0;
     height: 2px;
     background: #E95420;
     background-image: linear-gradient(to right, #f8cbbc, #E95420, #f8cbbc);
 }
-
