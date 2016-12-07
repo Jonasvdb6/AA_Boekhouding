@@ -27,7 +27,7 @@
                         <a href="nieuweOnkosten.jsp" class="menubalklinken">
                             <img src="images/nieuwO.png" class="menubalkpict" alt="onkosten">
                         </a>
-                        <a href="bekijkKrediet.jsp.jsp" class="menubalklinken">
+                        <a href="bekijkKrediet.jsp" class="menubalklinken">
                             <img class="menubalkpict" src="images/kredietenO.png">
                         </a>
                     </c:when>
@@ -35,7 +35,7 @@
                         <a href="nieuweOnkosten.jsp" class="menubalklinken">
                             <img src="images/nieuwO.png" class="menubalkpict" alt="onkosten">
                         </a>
-                        <a href="bekijkKrediet.jsp.jsp" class="menubalklinken">
+                        <a href="bekijkKrediet.jsp" class="menubalklinken">
                             <img class="menubalkpict" src="images/kredietenO.png">
                         </a>
                         <a href="goedkeurenKrediet.jsp" class="menubalklinken">
