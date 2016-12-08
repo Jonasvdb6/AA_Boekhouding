@@ -12,8 +12,9 @@ import javax.ejb.Stateless;
  * @author jonas
  */
 @Stateless
-public class NietLeeg implements NietLeegLocal {
+public class localStateless implements localStatelessLocal 
+{
 
     // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method") test 123 456 789
+    // "Insert Code > Add Business Method")
 }

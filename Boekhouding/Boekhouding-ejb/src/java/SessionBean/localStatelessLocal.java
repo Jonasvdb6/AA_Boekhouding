@@ -12,6 +12,7 @@ import javax.ejb.Local;
  * @author jonas
  */
 @Local
-public interface NietLeegLocal {
+public interface localStatelessLocal 
+{
     
 }
