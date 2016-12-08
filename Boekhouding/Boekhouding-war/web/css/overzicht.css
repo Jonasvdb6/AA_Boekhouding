@@ -45,10 +45,9 @@ body
     margin-top: -6.5%;
 }
 
-.menubalklinken
+.menubalkform
 {
-    color: #E6E4E2;
-    
+    display: inline;
 }
 
 .menubalkhr

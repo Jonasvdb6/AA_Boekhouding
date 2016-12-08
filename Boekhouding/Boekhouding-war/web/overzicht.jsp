@@ -19,34 +19,40 @@
                 <c:set var="werkType" scope="session" value="${3}"/>
                 <c:choose>
                     <c:when test="${werkType == 1}">
-                        <a href="nieuweOnkosten.jsp" class="menubalklinken">
-                            <img src="images/nieuwO.png" class="menubalkpict" alt="onkosten">
-                        </a>
+                        <form method="post" action="Controller" class="menubalkform">
+                            <input type="image" src="images/nieuwO.png" alt="submit" class="menubalkpict">
+                            <input type="hidden" name="goto" value="nieuweOnkosten"/>
+                        </form>
                     </c:when>
                     <c:when test="${werkType == 2}">
-                        <a href="nieuweOnkosten.jsp" class="menubalklinken">
-                            <img src="images/nieuwO.png" class="menubalkpict" alt="onkosten">
-                        </a>
-                        <a href="bekijkKrediet.jsp" class="menubalklinken">
-                            <img class="menubalkpict" src="images/kredietenO.png">
-                        </a>
+                        <form method="post" action="Controller" class="menubalkform">
+                            <input type="image" src="images/nieuwO.png" alt="submit" class="menubalkpict">
+                            <input type="hidden" name="goto" value="nieuweOnkosten"/>
+                        </form>
+                        <form method="post" action="Controller" class="menubalkform">
+                            <input type="image" src="images/kredietenO.png" alt="submit" class="menubalkpict">
+                            <input type="hidden" name="goto" value="bekijkKrediet"/>
+                        </form>
                     </c:when>
                     <c:when test="${werkType == 3}">
-                        <a href="nieuweOnkosten.jsp" class="menubalklinken">
-                            <img src="images/nieuwO.png" class="menubalkpict" alt="onkosten">
-                        </a>
-                        <a href="bekijkKrediet.jsp" class="menubalklinken">
-                            <img class="menubalkpict" src="images/kredietenO.png">
-                        </a>
-                        <a href="goedkeurenKrediet.jsp" class="menubalklinken">
-                            <img class="menubalkpict" src="images/goedkeurenO.png">
-                        </a>
+                        <form method="post" action="Controller" class="menubalkform">
+                            <input type="image" src="images/nieuwO.png" alt="submit" class="menubalkpict">
+                            <input type="hidden" name="goto" value="nieuweOnkosten"/>
+                        </form>
+                        <form method="post" action="Controller" class="menubalkform">
+                            <input type="image" src="images/kredietenO.png" alt="submit" class="menubalkpict">
+                            <input type="hidden" name="goto" value="bekijkKrediet"/>
+                        </form>
+                        <form method="post" action="Controller" class="menubalkform">
+                            <input type="image" src="images/goedkeurenO.png" alt="submit" class="menubalkpict">
+                            <input type="hidden" name="goto" value="goedkeurenKrediet"/>
+                        </form>
                     </c:when>
                     <c:when test="${werkType == 23}">
                         23
                     </c:when>
                 </c:choose>
-                <form method= "post" action="<%= response.encodeURL("ControllerDo")%>">
+                <form method= "post" action="Controller">
                      <input type="image" src="images/logoutO.png" alt="submit" class="menubalklogout">
                      <input type="hidden" name="goto" value="uitloggen"/>
                 </form>

@@ -19,6 +19,10 @@
                 Er is een fout opgetreden bij het inloggen. Uw personeelsnummer
                 of paswoord is fout.
             </div>
+            <form method="post" action="Controller">
+                <input class="errorBut" type="submit" value="OK" />
+                <input type="hidden" name="goto" value="inloggenError"/>
+            </form>
         </div>
     </body>
 </html>

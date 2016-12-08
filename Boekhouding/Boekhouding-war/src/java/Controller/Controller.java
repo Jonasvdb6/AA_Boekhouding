@@ -26,7 +26,7 @@ public class Controller extends HttpServlet {
   
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        HttpSession sessie = request.getSession();
+        HttpSession sessie = request.getSession(true);
         int pNummer = Integer.parseInt(request.getUserPrincipal().getName());
         sessie.setAttribute("pNummer", pNummer);
         gotoPage("overzicht", request, response);
@@ -34,14 +34,43 @@ public class Controller extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        HttpSession sessie = request.getSession();
+        HttpSession sessie = request.getSession(true);
         String s = request.getParameter("goto");
-        if( s.equals("inloggen") )
+        
+        /* INLOGGEN */
+        if(s.equals("inloggen") )
         {
             int pNummer = Integer.parseInt(request.getUserPrincipal().getName());
             sessie.setAttribute("pNummer", pNummer);
             gotoPage("overzicht", request, response);
-        }        
+        }
+        
+        /* INLOGGENERROR */
+        if(s.equals("inloggenError"))
+        {
+            gotoPage("inloggen", request, response);
+        }
+        
+        /* OVERZICHT */
+        if(s.equals("nieuweOnkosten"))
+        {
+            gotoPage("nieuweOnkosten", request, response);
+        }
+        if(s.equals("bekijkKrediet"))
+        {
+            gotoPage("bekijkKrediet", request, response);
+        }
+        if(s.equals("goedkeurenKrediet"))
+        {
+            gotoPage("goedkeurenKrediet", request, response);
+        }
+        if(s.equals("uitloggen"))
+        {
+            request.getSession().invalidate();
+            response.sendRedirect(request.getContextPath() + "/inloggen.jsp");
+            //gotoPage("inloggen", request, response);
+        }
+       
     }
     
     protected void gotoPage(String naam, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
