@@ -66,9 +66,8 @@ public class Controller extends HttpServlet {
         }
         if(s.equals("uitloggen"))
         {
-            request.getSession().invalidate();
-            response.sendRedirect(request.getContextPath() + "/inloggen.jsp");
-            //gotoPage("inloggen", request, response);
+            sessie.invalidate();
+            //response.sendRedirect("inloggen.jsp");
         }
        
     }
