@@ -16,7 +16,7 @@
     </head>
     <body>
         <div class="container">
-                <c:set var="werkType" scope="session" value="${3}"/>
+                <c:set var="werkType" scope="session" value="${3}"/> <%--TIJDELIJK--%>
                 <c:choose>
                     <c:when test="${werkType == 1}">
                         <form method="post" action="Controller" class="menubalkform">
@@ -57,17 +57,20 @@
                      <input type="hidden" name="goto" value="uitloggen"/>
                 </form>
                 <hr class="menubalkhr">
+                <c:forTokens items="test,edw,start,begin" delims="," var="name">
+                    <c:out value="${name}"/><p>
+                </c:forTokens>
+                <c:out value="${pNummer}" default="error"/>
                 
                 
-                
-                
-            <h1>OVERZICHT</h1>
+<%--        <h1>OVERZICHT</h1>
             personeelnummer :
             <%
                 HttpSession sessie = request.getSession();
                 Integer pNummer = (Integer) sessie.getAttribute("pNummer");
                 out.println(Integer.toString(pNummer));
-            %>
+            %> 
+--%>
         </div>
     </body>
 </html>
