@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="css/overzicht.css">
+        <link rel="stylesheet" type="text/css" href="css/nieuweOnkosten.css">
         <title>NIEUWE ONKOST</title>
     </head>
     <body>
@@ -33,55 +33,53 @@
                 <input type="hidden" name="goto" value="uitloggen"/>
             </form>
             <hr class="menubalkhr">
-            <div>
-                <form method="post" action="Controller" >
-                    <table class="onkostTable" width="80%" align="center">
-                        <thead>
-                            <tr>
-                                <th width="10%"/>
-                                <th width="10%"/>
-                                <th width="10%"/>
-                                <th width="30%"/>
-                                <th width="10%"/>
-                                <th width="10%"/>
-                            </tr>
-                        </thead>
+            <form method="post" action="Controller" >
+                <table class="tableOnkost" align="center">
+                    <thead>
                         <tr>
-                            <td>
-                                ID
-                            </td>
-                            <td>
-                                <c:out value="${onkostId}" default="error"/>
-                            </td>
-                            <td></td><td></td>
-                            <td>
-                                DATUM
-                            </td>
-                            <td>
-                                <c:out value="${datum}" default="error"/>
-                            </td>
+                            <th width="10%"/>
+                            <th width="10%"/>
+                            <th width="10%"/>
+                            <th width="30%"/>
+                            <th width="10%"/>
+                            <th width="10%"/>
                         </tr>
-                        <tr>
-                            <td></td><td></td>
-                            <td>
-                                Bedrag
-                            </td>
-                            <td>
-                                <input type="number" name="bedrag" min="0">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td><td></td>
-                            <td>
-                                Omschrijving
-                            </td>
-                            <td>
-                                <textarea name="omschrijving" rows="4" cols="100%">Algemene omschrijving nieuwe onkost.</textarea>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
+                    </thead>
+                    <tr>
+                        <td>
+                            ONKOST ID
+                        </td>
+                        <td>
+                            <c:out value="${onkostId}" default="error"/>
+                        </td>
+                        <td></td><td></td>
+                        <td>
+                            DATUM
+                        </td>
+                        <td>
+                            <c:out value="${datum}" default="error"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td><td></td>
+                        <td>
+                            Bedrag
+                        </td>
+                        <td>
+                            <input type="number" name="bedrag" min="0" step="0.01" placeholder="00.00">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td><td></td>
+                        <td valign="top">
+                            Omschrijving
+                        </td>
+                        <td>
+                            <textarea name="omschrijving" placeholder="Algemene omschrijving nieuwe onkost"></textarea>
+                        </td>
+                    </tr>
+                 </table>
+            </form>
         </div>
     </body>
 </html>
