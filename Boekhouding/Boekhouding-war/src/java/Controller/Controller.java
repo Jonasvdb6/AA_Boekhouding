@@ -83,9 +83,21 @@ public class Controller extends HttpServlet {
         /* NIEUWE ONKOST */
         if(s.equals("saveOnkost"))
         {
-            int pg = Integer.parseInt(request.getParameter("page"));
-            if (pg == 1){
+            String action = request.getParameter("action");
+            if (action.equals("save")){
+//                CODE OM ONKOST OP TE SLAAN
                 gotoPage("overzicht", request, response);
+            }
+            if (action.equals("send")){
+//                CODE OM ONKOST DOOR TE STUREN
+                gotoPage("overzicht", request, response);
+            }
+            if (action.equals("overzicht")){
+                gotoPage("overzicht", request, response);
+            }
+            if (action.equals("uitloggen")){
+                sessie.invalidate();
+                response.sendRedirect("inloggen.jsp");
             }
             
         }
