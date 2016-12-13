@@ -12,4 +12,4 @@
   3) Pull request op github naar master <br />
   
 ##TO DO
-[] nieuweOnkosten.jsp div ipv table
+- [ ] nieuweOnkosten.jsp div ipv table
