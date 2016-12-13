@@ -48,20 +48,6 @@ public class Controller extends HttpServlet
             gotoPage("overzicht", request, response);
         }
         
-        /*else if(goTo.equals("inloggen") || goTo.equals("overzicht"))
-        {
-//            MOET CODE HEBBEN OM ONKOSTEN OP TE VRAGEN UIT DATABASE
-            int pNummer = Integer.parseInt(request.getUserPrincipal().getName());
-            System.out.println("s:"+goTo+"\n\n");
-            int bNummer = stateless.getBNumer(pNummer);
-            
-            System.out.println("bnummer: \n\n\n");
-            
-            sessie.setAttribute("pNummer", pNummer);
-            //sessie.setAttribute("bNummer", bNummer);
-            gotoPage("overzicht", request, response);
-        }*/
-        
         /* INLOGGENERROR */
         else if(goTo.equals("inloggenError"))
         {
