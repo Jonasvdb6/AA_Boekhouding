@@ -34,6 +34,9 @@
                 <input type="hidden" name="goto" value="saveOnkost"/>
             </div>
             <hr class="menubalkhr">
+            <div class="titel">
+                Nieuwe onkost toevoegen
+            </div>
                 <table class="tableOnkost" align="center">
                     <thead>
                         <tr>

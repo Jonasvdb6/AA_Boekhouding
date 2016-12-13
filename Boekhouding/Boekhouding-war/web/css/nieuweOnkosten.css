@@ -138,3 +138,11 @@ body
     display: inline;
     margin-left: 68%;
 }
+
+.titel
+{
+    font-family: Arial;
+    font-size: 42px;
+    color: #E95420;
+    padding-top: 2%; 
+}
