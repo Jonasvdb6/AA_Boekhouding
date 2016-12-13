@@ -11,3 +11,5 @@
   2) Push naar eigen <br />
   3) Pull request op github naar master <br />
   
+##TO DO
+[] nieuweOnkosten.jsp div ipv table
