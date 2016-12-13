@@ -14,5 +14,5 @@ import javax.ejb.Local;
 @Local
 public interface localStatelessLocal 
 {
-    
+    public int getBNumer(int pnummer);
 }

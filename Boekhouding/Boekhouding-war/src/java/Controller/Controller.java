@@ -1,3 +1,4 @@
+
 package Controller;
 
 /*
@@ -6,10 +7,12 @@ package Controller;
  * and open the template in the editor.
  */
 
+import SessionBean.localStatelessLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +26,10 @@ import javax.servlet.http.HttpSession;
  * @author jonas & Simon
  */
 @WebServlet(urlPatterns = {"/Controller"})
-public class Controller extends HttpServlet {
-
+public class Controller extends HttpServlet 
+{
+    
+    @EJB private localStatelessLocal stateless;
   
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
@@ -41,11 +46,18 @@ public class Controller extends HttpServlet {
         String s = request.getParameter("goto");
         
         /* INLOGGEN */
+        System.out.println(" s blablablalbalbaldfladfl:" + s + "\n\n");
         if(s.equals("inloggen") || s.equals("overzicht"))
         {
 //            MOET CODE HEBBEN OM ONKOSTEN OP TE VRAGEN UIT DATABASE
             int pNummer = Integer.parseInt(request.getUserPrincipal().getName());
+            System.out.println("s:"+s+"\n\n");
+            int bNummer = stateless.getBNumer(pNummer);
+            
+            System.out.println("bnummer: \n\n\n");
+            
             sessie.setAttribute("pNummer", pNummer);
+            //sessie.setAttribute("bNummer", bNummer);
             gotoPage("overzicht", request, response);
         }
         

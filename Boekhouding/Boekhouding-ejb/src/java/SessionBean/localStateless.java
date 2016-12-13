@@ -5,7 +5,10 @@
  */
 package SessionBean;
 
+import java.io.Console;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -14,7 +17,15 @@ import javax.ejb.Stateless;
 @Stateless
 public class localStateless implements localStatelessLocal 
 {
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    
+    @PersistenceContext
+    private EntityManager em;
+    
+    public int getBNumer(int pnummer)
+    {
+        //Werknemers w = em.find (Werknemers.class, pnummer);
+        Werknemers w = (Werknemers) em.createNamedQuery("Werknemers.findByPNummer").setParameter("pNummer", pnummer).getSingleResult();
+        System.console().printf("Baasnummer: %d",w.getBNummer());
+        return w.getBNummer();
+    }
 }

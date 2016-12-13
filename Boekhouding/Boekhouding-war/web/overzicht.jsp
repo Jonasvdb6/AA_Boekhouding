@@ -63,14 +63,14 @@
                 <c:out value="${pNummer}" default="error"/>
                 
                 
-<%--        <h1>OVERZICHT</h1>
-            personeelnummer :
+        <h1>OVERZICHT</h1>
+            baasnummer :
             <%
-                HttpSession sessie = request.getSession();
-                Integer pNummer = (Integer) sessie.getAttribute("pNummer");
-                out.println(Integer.toString(pNummer));
+                //HttpSession sessie = request.getSession();
+                //Integer bNummer = (Integer) sessie.getAttribute("bNummer");
+                //out.println(Integer.toString(bNummer));
             %> 
---%>
+            
         </div>
     </body>
 </html>
