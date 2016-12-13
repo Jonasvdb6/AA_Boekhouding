@@ -50,10 +50,10 @@
                     </thead>
                     <tr>
                         <td>
-                            ID
+                            <b>ID</b>
                         </td>
                         <td>
-                            <c:out value="${onkostId}" default="error"/>
+                            <b><c:out value="${onkostId}" default="error"/></b>
                         </td>
                     </tr>
                     <tr>
