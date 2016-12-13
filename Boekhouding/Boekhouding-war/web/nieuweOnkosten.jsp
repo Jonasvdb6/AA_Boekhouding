@@ -12,7 +12,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/nieuweOnkosten.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
         <title>NIEUWE ONKOST</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $( function() {
+                $( "#datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+            } );
+        </script>
     </head>
     <body>
         <div class="container">
@@ -25,24 +34,15 @@
                 <input type="hidden" name="goto" value="saveOnkost"/>
             </div>
             <hr class="menubalkhr">
-            <div class="onkostveld">
-                <div class="onkostId">
-                    ID <c:out value="${onkostId}" default="error"/>
-                </div>
-                <div class="datum">
-                    DATUM <c:out value="${datum}" default="error"/>
-                </div>
-            </div>
-            <%--
                 <table class="tableOnkost" align="center">
                     <thead>
                         <tr>
+                            <th width="5%"/>
+                            <th width="5%"/>
                             <th width="10%"/>
-                            <th width="10%"/>
-                            <th width="10%"/>
-                            <th width="30%"/>
-                            <th width="10%"/>
-                            <th width="10%"/>
+                            <th width="60%"/>
+                            <th width="5%"/>
+                            <th width="5%"/>
                         </tr>
                     </thead>
                     <tr>
@@ -52,14 +52,15 @@
                         <td>
                             <c:out value="${onkostId}" default="error"/>
                         </td>
+                    </tr>
+                    <tr>
                         <td></td><td></td>
                         <td>
-                            DATUM
+                            Datum
                         </td>
                         <td>
-                            <c:out value="${datum}" default="error"/>
+                            <input type="text" id="datepicker" placeholder="01/01/2016" required="">
                         </td>
-                    
                     </tr>
                     <tr>
                         <td></td><td></td>
@@ -67,7 +68,7 @@
                             Bedrag
                         </td>
                         <td>
-                            <input type="number" name="bedrag" min="0" step="0.01" placeholder="00.00">
+                            <input type="number" name="bedrag" min="0" step="0.01" placeholder="00.00" required="">
                         </td>
                     </tr>
                     <tr>
@@ -79,7 +80,7 @@
                             <textarea name="omschrijving" placeholder="Algemene omschrijving nieuwe onkost"></textarea>
                         </td>
                     </tr>
-                 </table>--%>
+                 </table>
             </form>
         </div>
     </body>
