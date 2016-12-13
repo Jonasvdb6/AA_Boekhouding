@@ -36,6 +36,7 @@ public class Controller extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        int page = 0;
         HttpSession sessie = request.getSession(true);
         String s = request.getParameter("goto");
         
@@ -77,6 +78,20 @@ public class Controller extends HttpServlet {
         {
             sessie.invalidate();
             response.sendRedirect("inloggen.jsp");
+        }
+        
+        /* NIEUWE ONKOST */
+        if(s.equals("saveOnkost"))
+        {
+            int pg = Integer.parseInt(request.getParameter("page"));
+            if (pg == 1){
+                gotoPage("overzicht", request, response);
+            }
+            
+        }
+        if(s.equals("sendOnkost"))
+        {
+            gotoPage("overzicht", request, response);
         }
        
     }

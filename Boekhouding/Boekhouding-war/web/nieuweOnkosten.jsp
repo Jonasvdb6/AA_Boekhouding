@@ -16,7 +16,7 @@
     </head>
     <body>
         <div class="container">
-            <form method="post" action="Controller" class="menubalkform">
+            <%--<form method="post" action="Controller" class="menubalkform">
                 <input type="image" src="images/saveOnkost.png" alt="submit" class="menubalkpict">
                 <input type="hidden" name="goto" value="save"/>
             </form>
@@ -31,9 +31,20 @@
             <form method= "post" action="Controller">
                 <input type="image" src="images/logoutO.png" alt="submit" class="menubalklogout">
                 <input type="hidden" name="goto" value="uitloggen"/>
-            </form>
-            <hr class="menubalkhr">
+            </form>--%>
             <form method="post" action="Controller" >
+            <div class="menubalkform">
+                <input type="image" src="images/saveOnkost.png" alt="submit" name="save" class="menubalkpict" onclick="<script>nieuweOnkost('saveOnkost');</script>">
+                <%--<c:out value="${page}"/>
+                <input type="image" src="images/sendOnkost.png" alt="submit" name="save" class="menubalkpict" onclick="<c:set var='page' scope='session' value='sendOnkost'/>">
+                <c:out value="${page}"/>
+                <input type="image" src="images/overzicht.png" alt="submit" name="save" class="menubalkpict" onclick="<c:set var='page' scope='session' value='overzicht'/>">
+                <c:out value="${page}"/>
+                <input type="image" src="images/logoutO.png" alt="submit" name="save" class="menubalklogout" onclick="<c:set var='page' scope='session' value='uitloggen'/>">
+                <c:out value="${page}"/>--%>
+                <input type="hidden" name="goto" value="saveOnkost"/>
+            </div>
+            <hr class="menubalkhr">
                 <table class="tableOnkost" align="center">
                     <thead>
                         <tr>
@@ -47,7 +58,7 @@
                     </thead>
                     <tr>
                         <td>
-                            ONKOST ID
+                            ID
                         </td>
                         <td>
                             <c:out value="${onkostId}" default="error"/>
