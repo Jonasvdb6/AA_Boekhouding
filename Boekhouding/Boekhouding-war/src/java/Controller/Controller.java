@@ -9,7 +9,6 @@ package Controller;
 
 import SessionBean.localStatelessLocal;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ejb.EJB;
@@ -30,28 +29,30 @@ public class Controller extends HttpServlet
 {
     
     @EJB private localStatelessLocal stateless;
-  
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-    {
-        HttpSession sessie = request.getSession(true);
-        int pNummer = Integer.parseInt(request.getUserPrincipal().getName());
-        sessie.setAttribute("pNummer", pNummer);
-        gotoPage("overzicht", request, response);
-    }
     
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        int page = 0;
-        HttpSession sessie = request.getSession(true);
-        String s = request.getParameter("goto");
+        HttpSession sessie = request.getSession();
+        String goTo = request.getParameter("goto");
         
         /* INLOGGEN */
-        System.out.println(" s blablablalbalbaldfladfl:" + s + "\n\n");
-        if(s.equals("inloggen") || s.equals("overzicht"))
+        System.out.println(" goto (processRequest): " + goTo + "\n\n");
+        if( goTo == null )
+        {
+            int pNummer = Integer.parseInt(request.getUserPrincipal().getName());
+            int bNummer = stateless.getBNumer(pNummer);
+            
+            sessie.setAttribute("pNummer", pNummer);
+            sessie.setAttribute("bNummer", bNummer);
+            
+            gotoPage("overzicht", request, response);
+        }
+        
+        /*else if(goTo.equals("inloggen") || goTo.equals("overzicht"))
         {
 //            MOET CODE HEBBEN OM ONKOSTEN OP TE VRAGEN UIT DATABASE
             int pNummer = Integer.parseInt(request.getUserPrincipal().getName());
-            System.out.println("s:"+s+"\n\n");
+            System.out.println("s:"+goTo+"\n\n");
             int bNummer = stateless.getBNumer(pNummer);
             
             System.out.println("bnummer: \n\n\n");
@@ -59,16 +60,16 @@ public class Controller extends HttpServlet
             sessie.setAttribute("pNummer", pNummer);
             //sessie.setAttribute("bNummer", bNummer);
             gotoPage("overzicht", request, response);
-        }
+        }*/
         
         /* INLOGGENERROR */
-        if(s.equals("inloggenError"))
+        else if(goTo.equals("inloggenError"))
         {
             gotoPage("inloggen", request, response);
         }
         
         /* OVERZICHT */
-        if(s.equals("nieuweOnkosten"))
+        else if(goTo.equals("nieuweOnkosten"))
         {
 //            MOET CODE HEBBEN OM HOOGSTE ONOSTID OP TE VRAGEN UIT DATABASE
             int onkostId = 12345; //TIJDELIJK
@@ -78,22 +79,22 @@ public class Controller extends HttpServlet
             sessie.setAttribute("datum", dateformat.format(date));
             gotoPage("nieuweOnkosten", request, response);
         }
-        if(s.equals("bekijkKrediet"))
+        else if(goTo.equals("bekijkKrediet"))
         {
             gotoPage("bekijkKrediet", request, response);
         }
-        if(s.equals("goedkeurenKrediet"))
+        else if(goTo.equals("goedkeurenKrediet"))
         {
             gotoPage("goedkeurenKrediet", request, response);
         }
-        if(s.equals("uitloggen"))
+        else if(goTo.equals("uitloggen"))
         {
             sessie.invalidate();
             response.sendRedirect("inloggen.jsp");
         }
         
         /* NIEUWE ONKOST */
-        if(s.equals("saveOnkost"))
+        else if(goTo.equals("saveOnkost"))
         {
             String action = request.getParameter("action");
             if (action.equals("save")){
@@ -113,11 +114,20 @@ public class Controller extends HttpServlet
             }
             
         }
-        if(s.equals("sendOnkost"))
+        else if(goTo.equals("sendOnkost"))
         {
             gotoPage("overzicht", request, response);
         }
-       
+    }
+  
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    {
+        processRequest(request, response);
+    }
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+       processRequest(request, response);
     }
     
     protected void gotoPage(String naam, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

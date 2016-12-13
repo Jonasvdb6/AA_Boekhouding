@@ -66,9 +66,9 @@
         <h1>OVERZICHT</h1>
             baasnummer :
             <%
-                //HttpSession sessie = request.getSession();
-                //Integer bNummer = (Integer) sessie.getAttribute("bNummer");
-                //out.println(Integer.toString(bNummer));
+                HttpSession sessie = request.getSession();
+                Integer bNummer = (Integer) sessie.getAttribute("bNummer");
+                out.println(Integer.toString(bNummer));
             %> 
             
         </div>

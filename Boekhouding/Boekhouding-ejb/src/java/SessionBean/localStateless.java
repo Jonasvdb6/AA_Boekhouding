@@ -23,9 +23,8 @@ public class localStateless implements localStatelessLocal
     
     public int getBNumer(int pnummer)
     {
-        //Werknemers w = em.find (Werknemers.class, pnummer);
-        Werknemers w = (Werknemers) em.createNamedQuery("Werknemers.findByPNummer").setParameter("pNummer", pnummer).getSingleResult();
-        System.console().printf("Baasnummer: %d",w.getBNummer());
+        Werknemers w = em.find (Werknemers.class, pnummer);
+        //Werknemers w = (Werknemers) em.createNamedQuery("Werknemers.findByPNummer").setParameter("pNummer", pnummer).getSingleResult();
         return w.getBNummer();
     }
 }
