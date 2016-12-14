@@ -27,9 +27,9 @@
         <div class="container">
             <form method="post" action="Controller" >
             <div class="menubalkform">
-                <input type="image" src="images/saveOnkost.png" alt="submit" name="action" value="save" class="menubalkpict">
-                <input type="image" src="images/sendOnkost.png" alt="submit" name="action" value="send" class="menubalkpict">
-                <input type="image" src="images/overzicht.png" alt="submit" name="action" value="overzicht" class="menubalkpict">
+                <input type="image" src="images/saveOnkostO.png" alt="submit" name="action" value="save" class="menubalkpict">
+                <input type="image" src="images/sendOnkostO.png" alt="submit" name="action" value="send" class="menubalkpict">
+                <input type="image" src="images/overzichtO.png" alt="submit" name="action" value="overzicht" class="menubalkpict">
                 <input type="image" src="images/logoutO.png" alt="submit" name="action" value="uitloggen" class="menubalklogout">
                 <input type="hidden" name="goto" value="saveOnkost"/>
             </div>
@@ -62,7 +62,7 @@
                             Datum
                         </td>
                         <td>
-                            <input type="text" id="datepicker" placeholder="01/01/2016" required="">
+                            <input type="text" id="datepicker" placeholder="01/01/2016">
                         </td>
                     </tr>
                     <tr>
@@ -71,7 +71,7 @@
                             Bedrag
                         </td>
                         <td>
-                            <input type="number" name="bedrag" min="0" step="0.01" placeholder="00.00" required="">
+                            <input type="number" name="bedrag" min="0" step="0.01" placeholder="00.00">
                         </td>
                     </tr>
                     <tr>

@@ -85,6 +85,7 @@ public class Controller extends HttpServlet
             String action = request.getParameter("action");
             if (action.equals("save")){
 //                CODE OM ONKOST OP TE SLAAN
+
                 gotoPage("overzicht", request, response);
             }
             if (action.equals("send")){
