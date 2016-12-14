@@ -1,0 +1,148 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 14, 2016, 5:41:03 PM
+    Author     : simon
+*/
+
+body
+{
+    background-color: #333333;
+    margin: 0 auto;
+}
+
+.container
+{
+    width: 60%;
+    height: 100%;
+    text-align: center;
+    background-color: #E6E4E2;
+    margin: 0 auto;
+    border-radius: 4px;
+    margin-top: 5%;
+}
+
+.menubalkpict
+{
+    width: 9%;
+    height: 9%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.menubalklogout
+{
+    width: 2.8%;
+    height: 4%;
+    min-height: 15px;
+    position: fixed;
+    margin-left: 9.2%;
+    margin-top: 0.9%;
+}
+
+.menubalkform
+{
+    display: inline;
+}
+
+.menubalkhr
+{
+    border: 0;
+    height: 2px;
+    background: #E95420;
+    background-image: linear-gradient(to right, #f8cbbc, #E95420, #f8cbbc);
+}
+
+.tableOnkost
+{
+    font-family: Arial;
+    font-size: 18px;
+    background-color: white;
+    box-shadow: 0px 2px 3px #a19f9e;
+    border-radius: 4px;
+    border: none;
+    width: 90%;
+    padding: 2%;
+    margin-top: 3%;
+    margin-bottom: 5%;
+}
+
+.tableOnkost td
+{
+    text-align: left;
+    padding: 0.5%;
+}
+
+.tableOnkost input
+{
+    font-family: Arial;
+    font-size: 18px;
+    text-align: right;
+    height: 40px;
+    width: 30%;
+    padding-right: 2%;
+    background-color: #E6E4E2;
+    box-shadow: 0px 2px 3px #a19f9e;
+    border-radius: 4px;
+    border: none;
+    outline-color: #0356E1;
+}
+
+.tableOnkost textarea
+{
+    font-family: Arial;
+    font-size: 18px;
+    padding: 2%;
+    height: 200px;
+    width: 100%;
+    max-width: 100%;
+    background-color: #E6E4E2;
+    box-shadow: 0px 2px 3px #a19f9e;
+    border-radius: 4px;
+    border: none;
+    outline-color: #0356E1;
+    resize: none;
+}
+
+.alignR
+{
+    text-align: right;
+}
+
+.onkostveld
+{
+    margin: 2%;
+    background-color: white;
+    font-family: Arial;
+    font-size: 18px;
+    box-shadow: 0px 2px 3px #a19f9e;
+    border-radius: 4px;
+    border: none;
+    text-align: left;
+    height: 300px;
+}
+
+.onkostId
+{
+    display: inline;
+    margin-left: 2%;
+}
+
+.datum
+{
+    display: inline;
+    margin-left: 68%;
+}
+
+.titel
+{
+    font-family: Arial;
+    font-size: 42px;
+    color: #E95420;
+    padding-top: 2%; 
+}

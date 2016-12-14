@@ -70,7 +70,10 @@
                 Integer bNummer = (Integer) sessie.getAttribute("bNummer");
                 out.println(Integer.toString(bNummer));
             %> 
-            
+            <form method="post" action="Controller" class="menubalkform">
+                <input type="submit" alt="submit"value="bekijkOnkost">
+                <input type="hidden" name="goto" value="bekijkOnkost"/>
+            </form>
         </div>
     </body>
 </html>

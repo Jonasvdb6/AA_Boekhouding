@@ -9,8 +9,11 @@ package Controller;
 
 import SessionBean.localStatelessLocal;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -59,10 +62,7 @@ public class Controller extends HttpServlet
         {
 //            MOET CODE HEBBEN OM HOOGSTE ONOSTID OP TE VRAGEN UIT DATABASE
             int onkostId = 12345; //TIJDELIJK
-            Date date = new Date();
-            SimpleDateFormat dateformat = new SimpleDateFormat ("dd.MM.yyyy");
             sessie.setAttribute("onkostId", onkostId);
-            sessie.setAttribute("datum", dateformat.format(date));
             gotoPage("nieuweOnkosten", request, response);
         }
         else if(goTo.equals("bekijkKrediet"))
@@ -72,6 +72,31 @@ public class Controller extends HttpServlet
         else if(goTo.equals("goedkeurenKrediet"))
         {
             gotoPage("goedkeurenKrediet", request, response);
+        }
+        else if(goTo.equals("bekijkOnkost"))
+        {
+//            Waarde van bepaalde onkost uit database halen
+            
+            SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
+            Date date = new Date();
+            try {
+                date = dateformat.parse("21/02/2017");
+            } catch (ParseException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            int onkostId = 12345;
+            double onkostenBedrag = 5151.51;
+            String omschrijving = "dit is de eerste omschrijving";
+            String status = "in aanmaak";
+            
+            sessie.setAttribute("onkostId", onkostId);
+            sessie.setAttribute("datum", dateformat.format(date));
+            sessie.setAttribute("onkostenBedrag", onkostenBedrag);
+            sessie.setAttribute("omschrijving", omschrijving);
+            sessie.setAttribute("status", status);
+            
+            gotoPage("bekijkOnkost", request, response);
         }
         else if(goTo.equals("uitloggen"))
         {
