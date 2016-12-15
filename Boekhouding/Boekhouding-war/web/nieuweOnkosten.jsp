@@ -62,7 +62,7 @@
                             Datum
                         </td>
                         <td>
-                            <input type="text" id="datepicker" placeholder="01/01/2016">
+                            <input type="text" id="datepicker" name="datum" placeholder="01/01/2016">
                         </td>
                     </tr>
                     <tr>

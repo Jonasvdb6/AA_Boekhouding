@@ -25,7 +25,6 @@
     </head>
     <body>
         <div class="container">
-            <c:set var="status" scope="session" value="in aanmaak"/>
             <c:choose>
                 <c:when test="${status == 'in aanmaak'}">
                     <form method="post" action="Controller" >
@@ -58,6 +57,11 @@
                                 <td>
                                     <b><c:out value="${onkostId}" default="error"/></b>
                                 </td>
+                                <td></td>
+                                <td>
+                                    <b>STATUS:</b>
+                                    <b><c:out value="${status}" default="error"/></b>
+                                </td>
                             </tr>
                             <tr>
                                 <td></td><td></td>
@@ -65,7 +69,7 @@
                                     Datum
                                 </td>
                                 <td>
-                                    <input type="text" id="datepicker" value="<c:out value="${datum}" default="error"/>">
+                                    <input type="text" id="datepicker" name="datum" value="<c:out value="${datum}" default="error"/>">
                                 </td>
                             </tr>
                             <tr>
@@ -83,7 +87,7 @@
                                     Omschrijving
                                 </td>
                                 <td>
-                                    <textarea name="omschrijving" placeholder="Algemene omschrijving nieuwe onkost"></textarea>
+                                    <textarea name="omschrijving"><c:out value="${omschrijving}" default="error"/></textarea>
                                 </td>
                             </tr>
                         </table>
@@ -93,7 +97,7 @@
                     <form method="post" action="Controller" >
                         <div class="menubalkform">
                             <input type="image" src="images/overzichtO.png" alt="submit" name="action" value="overzicht" class="menubalkpict">
-                            <input type="image" src="images/logoutO.png" alt="submit" name="action" value="uitloggen" class="menubalklogout">
+                            <input type="image" src="images/logoutO.png" alt="submit" name="action" value="uitloggen" class="menubalklogout2">
                             <input type="hidden" name="goto" value="saveOnkost"/>
                         </div>
                         <hr class="menubalkhr">
@@ -119,6 +123,11 @@
                                 <td>
                                     <b><c:out value="${onkostId}" default="error"/></b>
                                 </td>
+                                <td></td>
+                                <td>
+                                    <b>STATUS:</b>
+                                    <b><c:out value="${status}" default="error"/></b>
+                                </td>
                             </tr>
                             <tr>
                                 <td></td><td></td>
@@ -126,7 +135,7 @@
                                     Datum
                                 </td>
                                 <td>
-                                    <input type="text" id="datepicker" placeholder="01/01/2016">
+                                    <c:out value="${datum}" default="error"/>
                                 </td>
                             </tr>
                             <tr>
@@ -135,7 +144,7 @@
                                     Bedrag
                                 </td>
                                 <td>
-                                    <input type="number" name="bedrag" min="0" step="0.01" placeholder="00.00">
+                                    <c:out value="${onkostenBedrag}" default="error"/>
                                 </td>
                             </tr>
                             <tr>
@@ -144,7 +153,7 @@
                                     Omschrijving
                                 </td>
                                 <td>
-                                    <textarea name="omschrijving" placeholder="Algemene omschrijving nieuwe onkost"></textarea>
+                                    <c:out value="${omschrijving}" default="error"/>
                                 </td>
                             </tr>
                         </table>

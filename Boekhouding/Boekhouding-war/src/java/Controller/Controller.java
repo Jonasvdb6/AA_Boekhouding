@@ -9,6 +9,7 @@ package Controller;
 
 import SessionBean.localStatelessLocal;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,6 +38,7 @@ public class Controller extends HttpServlet
     {
         HttpSession sessie = request.getSession();
         String goTo = request.getParameter("goto");
+        
         
         /* INLOGGEN */
         System.out.println(" goto (processRequest): " + goTo + "\n\n");
@@ -88,7 +90,7 @@ public class Controller extends HttpServlet
             int onkostId = 12345;
             double onkostenBedrag = 5151.51;
             String omschrijving = "dit is de eerste omschrijving";
-            String status = "in aanmaak";
+            String status = "test";
             
             sessie.setAttribute("onkostId", onkostId);
             sessie.setAttribute("datum", dateformat.format(date));
@@ -104,18 +106,53 @@ public class Controller extends HttpServlet
             response.sendRedirect("inloggen.jsp");
         }
         
-        /* NIEUWE ONKOST */
+        /* NIEUWE ONKOST + BEKIJK ONKOST*/
         else if(goTo.equals("saveOnkost"))
         {
             String action = request.getParameter("action");
             if (action.equals("save")){
 //                CODE OM ONKOST OP TE SLAAN
 
+                /* Data uit form halen */
+                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                Date datum = new Date();
+                try {
+                    datum = format.parse(request.getParameter("datum"));
+                } catch (ParseException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                double onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
+                String omschrijving = request.getParameter("omschrijving");
+                String status = "in aanmaak";
+                
+                /* Data afprinten */
+                System.out.println("datum : " + datum + "\n\n");
+                System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
+                System.out.println("omschrijving : " + omschrijving + "\n\n");
+                
                 gotoPage("overzicht", request, response);
             }
             if (action.equals("send")){
 //                CODE OM ONKOST DOOR TE STUREN
-                gotoPage("overzicht", request, response);
+
+                /* Data uit form halen */
+                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                Date datum = new Date();
+                try {
+                    datum = format.parse(request.getParameter("datum"));
+                } catch (ParseException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                double onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
+                String omschrijving = request.getParameter("omschrijving");
+                String status = "doorgestuurd";
+                
+                /* Data afprinten */
+                System.out.println("datum : " + datum + "\n\n");
+                System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
+                System.out.println("omschrijving : " + omschrijving + "\n\n");
+                
+                gotoPage("selectKrediet", request, response);
             }
             if (action.equals("overzicht")){
                 gotoPage("overzicht", request, response);
