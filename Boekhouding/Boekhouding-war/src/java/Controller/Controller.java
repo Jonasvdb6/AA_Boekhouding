@@ -7,12 +7,15 @@ package Controller;
  * and open the template in the editor.
  */
 
+import SessionBean.Kredieten;
 import SessionBean.localStatelessLocal;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -90,7 +93,7 @@ public class Controller extends HttpServlet
             int onkostId = 12345;
             double onkostenBedrag = 5151.51;
             String omschrijving = "dit is de eerste omschrijving";
-            String status = "test";
+            String status = "in aanmaak";
             
             sessie.setAttribute("onkostId", onkostId);
             sessie.setAttribute("datum", dateformat.format(date));
@@ -133,7 +136,6 @@ public class Controller extends HttpServlet
                 gotoPage("overzicht", request, response);
             }
             if (action.equals("send")){
-//                CODE OM ONKOST DOOR TE STUREN
 
                 /* Data uit form halen */
                 DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -145,12 +147,25 @@ public class Controller extends HttpServlet
                 }
                 double onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
                 String omschrijving = request.getParameter("omschrijving");
-                String status = "doorgestuurd";
+                
                 
                 /* Data afprinten */
                 System.out.println("datum : " + datum + "\n\n");
                 System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
                 System.out.println("omschrijving : " + omschrijving + "\n\n");
+                
+//                CODE OM ARRAYLIST VAN KREDIETEN TE KRIJGEN 
+//                EXTRA VARIABELE MEEGEVEN OM TE KIJKEN OF KREDIET ONDER 0 GAAT
+                List<Kredieten> kredList = new ArrayList<Kredieten>();
+                Kredieten k1 = new Kredieten(1,6513,1);             //TIJDELIJK
+                Kredieten k2 = new Kredieten(2,21681,2);            //TIJDELIJK
+                Kredieten k3 = new Kredieten(3,5846,1);             //TIJDELIJK
+                kredList.add(k1);                                   //TIJDELIJK
+                kredList.add(k2);                                   //TIJDELIJK
+                kredList.add(k3);                                   //TIJDELIJK
+                int negatief = 0;                                   //TIJDELIJK
+                request.setAttribute("kredList", kredList);
+                request.setAttribute("negatief", negatief);
                 
                 gotoPage("selectKrediet", request, response);
             }
@@ -161,12 +176,23 @@ public class Controller extends HttpServlet
                 sessie.invalidate();
                 response.sendRedirect("inloggen.jsp");
             }
-            
         }
-        else if(goTo.equals("sendOnkost"))
+        
+        /* SELECT KREDIET */
+        
+        else if(goTo.equals("onkostDoorsturen"))
         {
+            
+//            CODE OM ONKOST DOOR TE STUREN EN KREDIET AAN TE PASSEN
+            String krediet = request.getParameter("krediet");
+            String status = "doorgestuurd";
+            
+            System.out.println("krediet : " + krediet + "\n\n");
+            System.out.println("status : " + status + "\n\n");
+            
             gotoPage("overzicht", request, response);
         }
+        
     }
   
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
