@@ -57,23 +57,52 @@
                      <input type="hidden" name="goto" value="uitloggen"/>
                 </form>
                 <hr class="menubalkhr">
-                <c:forTokens items="test,edw,start,begin" delims="," var="name">
-                    <c:out value="${name}"/><p>
-                </c:forTokens>
-                <c:out value="${pNummer}" default="error"/>
+                <div class="titel">
+                    Overzicht
+                </div>
+                <form method="post" action="Controller" >
+                <table class="tableOnkost" align="center">
+                    <tr>
+                        <th>
+                            Datum
+                        </th>
+                        <th>
+                            Bedrag
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th width="10%">
+                            
+                        </th>
+                    </tr>
+                    <c:forEach items="${requestScope.onkList}" var="onk">
+                        <tr>
+                            <td>
+                                <c:out value="${onk.datum}"></c:out>
+                            </td>
+                            <td>
+                                <c:out value="${onk.onkostenBedrag}"></c:out>
+                            </td>
+                            <td>
+                                <c:out value="${onk.status}"></c:out>
+                            </td>
+                            <td>
+                                <button type="submit" name="onkost" value="${onk.onkostId}">Bekijk</button>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+                <input type="hidden" name="goto" value="bekijkOnkost"/>
+                </form>
                 
                 
-        <h1>OVERZICHT</h1>
             baasnummer :
             <%
                 HttpSession sessie = request.getSession();
                 Integer bNummer = (Integer) sessie.getAttribute("bNummer");
                 out.println(Integer.toString(bNummer));
             %> 
-            <form method="post" action="Controller" class="menubalkform">
-                <input type="submit" alt="submit"value="bekijkOnkost">
-                <input type="hidden" name="goto" value="bekijkOnkost"/>
-            </form>
         </div>
     </body>
 </html>
