@@ -17,27 +17,28 @@
         <div class="container">
             <form method="post" action="Controller" >
                 <div class="menubalkform">
-                    <input type="image" src="images/goedkeurenO.png" alt="submit" name="action" value="doorsturen" class="menubalkpict">
                     <input type="image" src="images/overzichtO.png" alt="submit" name="action" value="overzicht" class="menubalkpict">
                     <input type="image" src="images/logoutO.png" alt="submit" name="action" value="uitloggen" class="menubalklogout2">
-                    <input type="hidden" name="goto" value="onkostDoorsturen"/>
+                    <input type="hidden" name="goto" value="selectKredietStop"/>
                 </div>
-                <hr class="menubalkhr">
-                <div class="titel">
-                    Krediet selecteren
-                </div>
+            </form>
+            <hr class="menubalkhr">
+            <div class="titel">
+                Krediet selecteren
+            </div>
+            <form method="post" action="Controller" >
                 <table class="tableSelect" align="center">
                     <tr>
-                        <th>
+                        <th width="18%">
                             Nummer
                         </th>
-                        <th>
+                        <th width="18%">
                             Saldo
                         </th>
-                        <th>
+                        <th width="18%">
                             Type
                         </th>
-                        <th width="5%">
+                        <th width="15%">
                             
                         </th>
                     </tr>
@@ -52,10 +53,17 @@
                                         <c:out value="${kred.krSaldo}"></c:out>
                                     </td>
                                     <td>
-                                        <c:out value="${kred.krType}"></c:out>
+                                        <c:choose>
+                                            <c:when test="${kred.krType == 1}">
+                                                Niet-gewaarborgd
+                                            </c:when>
+                                            <c:otherwise>
+                                                Gewaarborgd
+                                            </c:otherwise>
+                                        </c:choose>
                                     </td>
                                     <td>
-                                        <input type="radio" name="krediet" value="${kred.krNummer}" required=""> 
+                                        <button type="submit" name="krediet" value="${kred.krNummer}" class="selectBut">Selecteer</button>
                                     </td>
                                 </tr>
                             </c:when>
@@ -78,6 +86,7 @@
                         </c:choose>
                     </c:forEach>
                 </table>
+                <input type="hidden" name="goto" value="selectKrediet"/>
             </form>
         </div>
     </body>

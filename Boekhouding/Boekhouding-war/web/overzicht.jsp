@@ -16,15 +16,14 @@
     </head>
     <body>
         <div class="container">
-                <c:set var="werkType" scope="session" value="${3}"/> <%--TIJDELIJK--%>
                 <c:choose>
-                    <c:when test="${werkType == 1}">
+                    <c:when test="${werkType == 1}"> <%--GEWOON--%>
                         <form method="post" action="Controller" class="menubalkform">
                             <input type="image" src="images/nieuwO.png" alt="submit" class="menubalkpict">
                             <input type="hidden" name="goto" value="nieuweOnkosten"/>
                         </form>
                     </c:when>
-                    <c:when test="${werkType == 2}">
+                    <c:when test="${werkType == 2}"> <%--BOEKHOUDER--%>
                         <form method="post" action="Controller" class="menubalkform">
                             <input type="image" src="images/nieuwO.png" alt="submit" class="menubalkpict">
                             <input type="hidden" name="goto" value="nieuweOnkosten"/>
@@ -34,7 +33,17 @@
                             <input type="hidden" name="goto" value="bekijkKrediet"/>
                         </form>
                     </c:when>
-                    <c:when test="${werkType == 3}">
+                    <c:when test="${werkType == 3}"> <%--MANAGER--%>
+                        <form method="post" action="Controller" class="menubalkform">
+                            <input type="image" src="images/nieuwO.png" alt="submit" class="menubalkpict">
+                            <input type="hidden" name="goto" value="nieuweOnkosten"/>
+                        </form>
+                        <form method="post" action="Controller" class="menubalkform">
+                            <input type="image" src="images/goedkeurenO.png" alt="submit" class="menubalkpict">
+                            <input type="hidden" name="goto" value="goedkeurenOnkost"/>
+                        </form>
+                    </c:when>
+                    <c:when test="${werkType == 23}"> <%--BOEKHOUDER + MANAGER--%>
                         <form method="post" action="Controller" class="menubalkform">
                             <input type="image" src="images/nieuwO.png" alt="submit" class="menubalkpict">
                             <input type="hidden" name="goto" value="nieuweOnkosten"/>
@@ -45,11 +54,8 @@
                         </form>
                         <form method="post" action="Controller" class="menubalkform">
                             <input type="image" src="images/goedkeurenO.png" alt="submit" class="menubalkpict">
-                            <input type="hidden" name="goto" value="goedkeurenKrediet"/>
+                            <input type="hidden" name="goto" value="goedkeurenOnkost"/>
                         </form>
-                    </c:when>
-                    <c:when test="${werkType == 23}">
-                        23
                     </c:when>
                 </c:choose>
                 <form method= "post" action="Controller">
@@ -72,7 +78,7 @@
                         <th>
                             Status
                         </th>
-                        <th width="10%">
+                        <th width="15%">
                             
                         </th>
                     </tr>
@@ -88,7 +94,7 @@
                                 <c:out value="${onk.status}"></c:out>
                             </td>
                             <td>
-                                <button type="submit" name="onkost" value="${onk.onkostId}">Bekijk</button>
+                                <button type="submit" name="onkost" value="${onk.onkostId}" class="overzichBut">Bekijk</button>
                             </td>
                         </tr>
                     </c:forEach>

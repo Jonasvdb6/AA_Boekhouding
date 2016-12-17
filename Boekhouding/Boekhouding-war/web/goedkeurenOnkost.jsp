@@ -1,6 +1,6 @@
 <%-- 
-    Document   : goedkeurenKrediet
-    Created on : Nov 29, 2016, 10:47:05 AM
+    Document   : goedkeurenOnkost
+    Created on : Dec 17, 2016, 4:18:08 PM
     Author     : simon
 --%>
 
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>GOEDKEUREN KREDIET</h1>
+        <h1>GOEDKEUREN ONKOST</h1>
     </body>
 </html>

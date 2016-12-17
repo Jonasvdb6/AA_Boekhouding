@@ -31,6 +31,7 @@
                         <div class="menubalkform">
                             <input type="image" src="images/saveOnkostO.png" alt="submit" name="action" value="save" class="menubalkpict">
                             <input type="image" src="images/sendOnkostO.png" alt="submit" name="action" value="send" class="menubalkpict">
+                            <input type="image" src="images/deleteO.png" alt="submit" name="action" value="delete" class="menubalkpict">
                             <input type="image" src="images/overzichtO.png" alt="submit" name="action" value="overzicht" class="menubalkpict">
                             <input type="image" src="images/logoutO.png" alt="submit" name="action" value="uitloggen" class="menubalklogout">
                             <input type="hidden" name="goto" value="saveOnkost"/>
