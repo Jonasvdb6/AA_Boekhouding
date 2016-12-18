@@ -30,7 +30,7 @@
                         </form>
                         <form method="post" action="Controller" class="menubalkform">
                             <input type="image" src="images/kredietenO.png" alt="submit" class="menubalkpict">
-                            <input type="hidden" name="goto" value="bekijkKrediet"/>
+                            <input type="hidden" name="goto" value="overzichtKrediet"/>
                         </form>
                     </c:when>
                     <c:when test="${werkType == 3}"> <%--MANAGER--%>
@@ -50,7 +50,7 @@
                         </form>
                         <form method="post" action="Controller" class="menubalkform">
                             <input type="image" src="images/kredietenO.png" alt="submit" class="menubalkpict">
-                            <input type="hidden" name="goto" value="bekijkKrediet"/>
+                            <input type="hidden" name="goto" value="overzichtKrediet"/>
                         </form>
                         <form method="post" action="Controller" class="menubalkform">
                             <input type="image" src="images/goedkeurenO.png" alt="submit" class="menubalkpict">
@@ -94,6 +94,7 @@
                                 <c:out value="${onk.status}"></c:out>
                             </td>
                             <td>
+                                <%--<input type="image" src="images/view.png" alt="submit" name="onkost" value="${onk.onkostId}" class="overzichPict">--%>
                                 <button type="submit" name="onkost" value="${onk.onkostId}" class="overzichBut">Bekijk</button>
                             </td>
                         </tr>

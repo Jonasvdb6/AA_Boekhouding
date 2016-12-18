@@ -4,7 +4,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Dec 6, 2016, 10:37:56 AM
+    Created on : Dec 18, 2016, 3:35:21 PM
     Author     : simon
 */
 
@@ -22,7 +22,7 @@ body
     background-color: #E6E4E2;
     margin: 0 auto;
     border-radius: 4px;
-    margin-top: 5%; 
+    margin-top: 5%;
 }
 
 .menubalkpict
@@ -41,13 +41,8 @@ body
     height: 4%;
     min-height: 15px;
     position: fixed;
-    margin-left: 26.5%;
-    margin-top: -6.5%;
-}
-
-.menubalkform
-{
-    display: inline;
+    margin-left: 20.8%;
+    margin-top: 0.9%; 
 }
 
 .menubalkhr
@@ -66,7 +61,7 @@ body
     padding-top: 2%; 
 }
 
-.tableOnkost
+.tableBekijk
 {
     font-family: Arial;
     font-size: 18px;
@@ -79,12 +74,12 @@ body
     margin-bottom: 5%;
 }
 
-.tableOnkost td
+.tableBekijk td
 {
     padding: 1%;
 }
 
-.tableOnkost th
+.tableBekijk th
 {
     padding: 1%;
     color: #E95420;
@@ -94,7 +89,7 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 
-.overzichBut
+.bekijkBut
 {
     padding-top: 1%;
     padding-bottom: 1%;
@@ -108,19 +103,13 @@ tr:nth-child(even) {
     font-size: 18px;
 }
 
-.overzichBut:hover
+.bekijkBut:hover
 {
     background-color: #c34113;
 }
 
-.overzichBut:active
+.bekijkBut:active
 {
     background-color: #c34113;
     box-shadow: none;
-}
-
-.overzichPict
-{
-    width: 75%;
-    height: 5%;
 }

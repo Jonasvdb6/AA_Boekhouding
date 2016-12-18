@@ -1,6 +1,6 @@
 <%-- 
     Document   : bekijkKrediet
-    Created on : Nov 29, 2016, 10:46:45 AM
+    Created on : Dec 18, 2016, 4:50:59 PM
     Author     : simon
 --%>
 
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>BEKIJK KREDIET</h1>
+        <h1>Hello World!</h1>
     </body>
 </html>

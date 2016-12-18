@@ -45,6 +45,16 @@ body
     margin-top: 0.9%;
 }
 
+.menubalklogout2
+{
+    width: 2.75%;
+    height: 4%;
+    min-height: 15px;
+    position: fixed;
+    margin-left: 20.8%;
+    margin-top: 0.9%;
+}
+
 .menubalkform
 {
     display: inline;

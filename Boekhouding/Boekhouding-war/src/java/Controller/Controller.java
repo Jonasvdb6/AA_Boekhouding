@@ -58,7 +58,7 @@ public class Controller extends HttpServlet
             } catch (ParseException ex) {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Onkosten o1 = new Onkosten(1,"eerste",date,6513,"in aanmaak");             //TIJDELIJK
+            Onkosten o1 = new Onkosten(1,"eerste",date,6513,"doorgestuurd");             //TIJDELIJK
             Onkosten o2 = new Onkosten(2,"tweede",date,54623,"in aanmaak");            //TIJDELIJK
             Onkosten o3 = new Onkosten(3,"derde",date,65867413,"in aanmaak");             //TIJDELIJK
             onkList.add(o1);                                   //TIJDELIJK
@@ -92,9 +92,18 @@ public class Controller extends HttpServlet
             sessie.setAttribute("onkostId", onkostId);
             gotoPage("nieuweOnkosten", request, response);
         }
-        else if(goTo.equals("bekijkKrediet"))
+        else if(goTo.equals("overzichtKrediet"))
         {
-            gotoPage("bekijkKrediet", request, response);
+            List<Kredieten> kredList = new ArrayList<Kredieten>();
+            Kredieten k1 = new Kredieten(1,6513,1);             //TIJDELIJK
+            Kredieten k2 = new Kredieten(2,21681,2);            //TIJDELIJK
+            Kredieten k3 = new Kredieten(3,5846,1);             //TIJDELIJK
+            kredList.add(k1);                                   //TIJDELIJK
+            kredList.add(k2);                                   //TIJDELIJK
+            kredList.add(k3);                                   //TIJDELIJK
+            request.setAttribute("kredList", kredList);
+            
+            gotoPage("overzichtKrediet", request, response);
         }
         else if(goTo.equals("goedkeurenOnkost"))
         {
@@ -141,10 +150,10 @@ public class Controller extends HttpServlet
 //                CODE OM ONKOST OP TE SLAAN
 
                 /* Data uit form halen */
-                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 Date datum = new Date();
                 try {
-                    datum = format.parse(request.getParameter("datum"));
+                    datum = formatter.parse(request.getParameter("datum"));
                 } catch (ParseException ex) {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -167,7 +176,7 @@ public class Controller extends HttpServlet
                 } catch (ParseException ex) {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                Onkosten o1 = new Onkosten(1,"eerste",date,6513,"in aanmaak");             //TIJDELIJK
+                Onkosten o1 = new Onkosten(1,"eerste",date,6513,"doorgestuurd");             //TIJDELIJK
                 Onkosten o2 = new Onkosten(2,"tweede",date,54623,"in aanmaak");            //TIJDELIJK
                 Onkosten o3 = new Onkosten(3,"derde",date,65867413,"in aanmaak");             //TIJDELIJK
                 onkList.add(o1);                                   //TIJDELIJK
@@ -180,18 +189,19 @@ public class Controller extends HttpServlet
             if (action.equals("send")){
 
                 /* Data uit form halen */
-                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                Date datum = new Date();
+                SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
+                Date date = new Date();
                 try {
-                    datum = format.parse(request.getParameter("datum"));
+                    date = dateformat.parse(request.getParameter("datum"));
                 } catch (ParseException ex) {
+                    System.out.println("EXCEPTION");
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 double onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
                 String omschrijving = request.getParameter("omschrijving");
                 
                 /* Data afprinten */
-                System.out.println("datum : " + datum + "\n\n");
+                System.out.println("datum : " + date + "\n\n");
                 System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
                 System.out.println("omschrijving : " + omschrijving + "\n\n");
                 
@@ -224,7 +234,7 @@ public class Controller extends HttpServlet
                 } catch (ParseException ex) {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                Onkosten o1 = new Onkosten(1,"eerste",date,6513,"in aanmaak");             //TIJDELIJK
+                Onkosten o1 = new Onkosten(1,"eerste",date,6513,"doorgestuurd");             //TIJDELIJK
                 Onkosten o2 = new Onkosten(2,"tweede",date,54623,"in aanmaak");            //TIJDELIJK
                 Onkosten o3 = new Onkosten(3,"derde",date,65867413,"in aanmaak");             //TIJDELIJK
                 onkList.add(o1);                                   //TIJDELIJK
@@ -248,7 +258,7 @@ public class Controller extends HttpServlet
                 } catch (ParseException ex) {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                Onkosten o1 = new Onkosten(1,"eerste",date,6513,"in aanmaak");             //TIJDELIJK
+                Onkosten o1 = new Onkosten(1,"eerste",date,6513,"doorgestuurd");             //TIJDELIJK
                 Onkosten o2 = new Onkosten(2,"tweede",date,54623,"in aanmaak");            //TIJDELIJK
                 Onkosten o3 = new Onkosten(3,"derde",date,65867413,"in aanmaak");             //TIJDELIJK
                 onkList.add(o1);                                   //TIJDELIJK
@@ -282,7 +292,7 @@ public class Controller extends HttpServlet
                 } catch (ParseException ex) {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                Onkosten o1 = new Onkosten(1,"eerste",date,6513,"in aanmaak");             //TIJDELIJK
+                Onkosten o1 = new Onkosten(1,"eerste",date,6513,"doorgestuurd");             //TIJDELIJK
                 Onkosten o2 = new Onkosten(2,"tweede",date,54623,"in aanmaak");            //TIJDELIJK
                 Onkosten o3 = new Onkosten(3,"derde",date,65867413,"in aanmaak");             //TIJDELIJK
                 onkList.add(o1);                                   //TIJDELIJK
@@ -316,7 +326,7 @@ public class Controller extends HttpServlet
             } catch (ParseException ex) {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Onkosten o1 = new Onkosten(1,"eerste",date,6513,"in aanmaak");             //TIJDELIJK
+            Onkosten o1 = new Onkosten(1,"eerste",date,6513,"doorgestuurd");             //TIJDELIJK
             Onkosten o2 = new Onkosten(2,"tweede",date,54623,"in aanmaak");            //TIJDELIJK
             Onkosten o3 = new Onkosten(3,"derde",date,65867413,"in aanmaak");             //TIJDELIJK
             onkList.add(o1);                                   //TIJDELIJK
@@ -325,6 +335,44 @@ public class Controller extends HttpServlet
             request.setAttribute("onkList", onkList);
                 
             gotoPage("overzicht", request, response);
+        }
+        
+        /* BEKIJK KREDIETEN */
+        
+        else if(goTo.equals("overzichtKredietStop"))
+        {
+            String action = request.getParameter("action");
+            
+            if(action.equals("overzicht"))
+            {
+                //            CODE OM ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
+                List<Onkosten> onkList = new ArrayList<Onkosten>();
+                SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
+                Date date = new Date();
+                try {
+                    date = dateformat.parse("21/02/2017");
+                } catch (ParseException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Onkosten o1 = new Onkosten(1,"eerste",date,6513,"doorgestuurd");             //TIJDELIJK
+                Onkosten o2 = new Onkosten(2,"tweede",date,54623,"in aanmaak");            //TIJDELIJK
+                Onkosten o3 = new Onkosten(3,"derde",date,65867413,"in aanmaak");             //TIJDELIJK
+                onkList.add(o1);                                   //TIJDELIJK
+                onkList.add(o2);                                   //TIJDELIJK
+                onkList.add(o3);                                   //TIJDELIJK
+                request.setAttribute("onkList", onkList);
+                
+                gotoPage("overzicht", request, response);
+            }
+            if (action.equals("uitloggen")){
+                sessie.invalidate();
+                response.sendRedirect("inloggen.jsp");
+            }
+        }
+        
+        else if(goTo.equals("bekijkKrediet"))
+        {
+            gotoPage("bekijkKrediet", request, response);
         }
         
     }
