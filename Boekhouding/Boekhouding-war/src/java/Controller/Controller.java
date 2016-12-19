@@ -37,6 +37,7 @@ public class Controller extends HttpServlet
 {
     
     @EJB private localStatelessLocal stateless;
+    int krNummer;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
@@ -337,7 +338,7 @@ public class Controller extends HttpServlet
             gotoPage("overzicht", request, response);
         }
         
-        /* BEKIJK KREDIETEN */
+        /* OVERZICHT KREDIETEN */
         
         else if(goTo.equals("overzichtKredietStop"))
         {
@@ -372,7 +373,66 @@ public class Controller extends HttpServlet
         
         else if(goTo.equals("bekijkKrediet"))
         {
+//            CODE OM ARRAYLIST VAN ONKOSTEN VAN KREDIET OP TE HALEN UIT DATABASE
+            List<Onkosten> onkList = new ArrayList<Onkosten>();
+            SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
+            Date date = new Date();
+            try {
+                date = dateformat.parse("21/02/2017");
+            } catch (ParseException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Onkosten o1 = new Onkosten(1,"eerste",date,6513,"doorgestuurd");             //TIJDELIJK
+            Onkosten o2 = new Onkosten(2,"tweede",date,54623,"in aanmaak");            //TIJDELIJK
+            Onkosten o3 = new Onkosten(3,"derde",date,65867413,"in aanmaak");             //TIJDELIJK
+            onkList.add(o1);                                   //TIJDELIJK
+            onkList.add(o2);                                   //TIJDELIJK
+            onkList.add(o3);                                   //TIJDELIJK
+            request.setAttribute("onkList", onkList);
+            
+            krNummer = Integer.parseInt(request.getParameter("krediet"));
+            
             gotoPage("bekijkKrediet", request, response);
+        }
+        
+        /* BEKIJK KREDIET */
+        
+        else if(goTo.equals("bekijkKredietStop"))
+        {
+            String action = request.getParameter("action");
+            
+            if(action.equals("overzicht"))
+            {
+                //            CODE OM ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
+                List<Onkosten> onkList = new ArrayList<Onkosten>();
+                SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
+                Date date = new Date();
+                try {
+                    date = dateformat.parse("21/02/2017");
+                } catch (ParseException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Onkosten o1 = new Onkosten(1,"eerste",date,6513,"doorgestuurd");             //TIJDELIJK
+                Onkosten o2 = new Onkosten(2,"tweede",date,54623,"in aanmaak");            //TIJDELIJK
+                Onkosten o3 = new Onkosten(3,"derde",date,65867413,"in aanmaak");             //TIJDELIJK
+                onkList.add(o1);                                   //TIJDELIJK
+                onkList.add(o2);                                   //TIJDELIJK
+                onkList.add(o3);                                   //TIJDELIJK
+                request.setAttribute("onkList", onkList);
+                
+                gotoPage("overzicht", request, response);
+            }
+            if (action.equals("uitloggen")){
+                sessie.invalidate();
+                response.sendRedirect("inloggen.jsp");
+            }
+        }
+        else if(goTo.equals("infoOnkost"))
+        {
+            int onkostId = Integer.parseInt(request.getParameter("onkostId"));
+            System.out.println("OnkostId: " + onkostId + "\n\n");
+            System.out.println("krNummer: " + krNummer + "\n\n");
+            gotoPage("infoOnkost", request, response);
         }
         
     }
