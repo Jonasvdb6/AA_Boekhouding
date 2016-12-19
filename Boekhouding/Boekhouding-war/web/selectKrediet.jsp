@@ -86,7 +86,7 @@
                         </c:choose>
                     </c:forEach>
                 </table>
-                <input type="hidden" name="goto" value="bekijkKrediet"/>
+                <input type="hidden" name="goto" value="selectKrediet"/>
             </form>
         </div>
     </body>

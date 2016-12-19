@@ -37,7 +37,16 @@ public class Controller extends HttpServlet
 {
     
     @EJB private localStatelessLocal stateless;
+    
+    /* globale variabelen */
+    
+    int pNummer;
+    int bNummer;
+    int werkType = 23;
     int krNummer;
+    int onkostId;
+    List<Onkosten> onkList = new ArrayList<Onkosten>();
+    List<Kredieten> kredList = new ArrayList<Kredieten>();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
@@ -51,7 +60,6 @@ public class Controller extends HttpServlet
         {
 //            CODE OM WERKTYPE EN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
             
-            List<Onkosten> onkList = new ArrayList<Onkosten>();
             SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
             Date date = new Date();
             try {
@@ -68,9 +76,8 @@ public class Controller extends HttpServlet
             request.setAttribute("onkList", onkList);
             
             
-            int pNummer = Integer.parseInt(request.getUserPrincipal().getName());
-            int bNummer = stateless.getBNumer(pNummer);
-            int werkType = 23;
+            pNummer = Integer.parseInt(request.getUserPrincipal().getName());
+            bNummer = stateless.getBNumer(pNummer);
             
             sessie.setAttribute("werkType", werkType);
             sessie.setAttribute("pNummer", pNummer);
@@ -89,13 +96,13 @@ public class Controller extends HttpServlet
         else if(goTo.equals("nieuweOnkosten"))
         {
 //            CODE OM HOOGSTE ONKOSTID OP TE VRAGEN UIT DATABASE
-            int onkostId = 12345; //TIJDELIJK
+            onkostId = 12345; //TIJDELIJK
             sessie.setAttribute("onkostId", onkostId);
             gotoPage("nieuweOnkosten", request, response);
         }
         else if(goTo.equals("overzichtKrediet"))
         {
-            List<Kredieten> kredList = new ArrayList<Kredieten>();
+//            CODE OM KREDIETEN UIT DATABASE TE HALEN
             Kredieten k1 = new Kredieten(1,6513,1);             //TIJDELIJK
             Kredieten k2 = new Kredieten(2,21681,2);            //TIJDELIJK
             Kredieten k3 = new Kredieten(3,5846,1);             //TIJDELIJK
@@ -114,7 +121,7 @@ public class Controller extends HttpServlet
         {
 //            CODE OM ONKOST UIT DATABASE TE HALEN VIA GEGEVEN ONKOSTID
             
-            int onkostId = Integer.parseInt(request.getParameter("onkost"));
+            onkostId = Integer.parseInt(request.getParameter("onkost"));
             System.out.println("onkostId : " + onkostId + "\n\n");
             
             SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
@@ -169,7 +176,6 @@ public class Controller extends HttpServlet
 
 //            CODE OM ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
                 
-                List<Onkosten> onkList = new ArrayList<Onkosten>();
                 SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
                 Date date = new Date();
                 try {
@@ -208,7 +214,7 @@ public class Controller extends HttpServlet
                 
 //                CODE OM ARRAYLIST VAN KREDIETEN TE KRIJGEN 
 //                EXTRA VARIABELE MEEGEVEN OM TE KIJKEN OF KREDIET ONDER 0 GAAT
-                List<Kredieten> kredList = new ArrayList<Kredieten>();
+
                 Kredieten k1 = new Kredieten(1,6513,1);             //TIJDELIJK
                 Kredieten k2 = new Kredieten(2,21681,2);            //TIJDELIJK
                 Kredieten k3 = new Kredieten(3,5846,1);             //TIJDELIJK
@@ -226,8 +232,7 @@ public class Controller extends HttpServlet
 //              CODE OM ONKOST TE DELETEN
                 
 //              CODE OM ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
-                
-                List<Onkosten> onkList = new ArrayList<Onkosten>();
+
                 SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
                 Date date = new Date();
                 try {
@@ -251,7 +256,6 @@ public class Controller extends HttpServlet
                 
 //            CODE OM ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
 
-                List<Onkosten> onkList = new ArrayList<Onkosten>();
                 SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
                 Date date = new Date();
                 try {
@@ -285,7 +289,7 @@ public class Controller extends HttpServlet
             if (action.equals("overzicht")){
                 
 //            CODE OM ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
-                List<Onkosten> onkList = new ArrayList<Onkosten>();
+
                 SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
                 Date date = new Date();
                 try {
@@ -319,7 +323,6 @@ public class Controller extends HttpServlet
             
 //            CODE OM ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
 
-            List<Onkosten> onkList = new ArrayList<Onkosten>();
             SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
             Date date = new Date();
             try {
@@ -346,8 +349,7 @@ public class Controller extends HttpServlet
             
             if(action.equals("overzicht"))
             {
-                //            CODE OM ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
-                List<Onkosten> onkList = new ArrayList<Onkosten>();
+//            CODE OM ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
                 SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
                 Date date = new Date();
                 try {
@@ -374,7 +376,7 @@ public class Controller extends HttpServlet
         else if(goTo.equals("bekijkKrediet"))
         {
 //            CODE OM ARRAYLIST VAN ONKOSTEN VAN KREDIET OP TE HALEN UIT DATABASE
-            List<Onkosten> onkList = new ArrayList<Onkosten>();
+
             SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
             Date date = new Date();
             try {
@@ -404,7 +406,7 @@ public class Controller extends HttpServlet
             if(action.equals("overzicht"))
             {
                 //            CODE OM ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
-                List<Onkosten> onkList = new ArrayList<Onkosten>();
+
                 SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
                 Date date = new Date();
                 try {
@@ -429,10 +431,54 @@ public class Controller extends HttpServlet
         }
         else if(goTo.equals("infoOnkost"))
         {
-            int onkostId = Integer.parseInt(request.getParameter("onkostId"));
+            
+//            CODE OM ONKOST UIT DATABASE TE HALEN DMV ONKOSTID
+            onkostId = Integer.parseInt(request.getParameter("onkostId"));
+            request.setAttribute("onkostId", onkostId);
+            
+            SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
+            Date date = new Date();
+            try {
+                date = dateformat.parse("21/02/2017");
+            } catch (ParseException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            double onkostenBedrag = 5151.51;
+            String omschrijving = "dit is de eerste omschrijving";
+            String status = "in aanmaak";
+            
+            sessie.setAttribute("onkostId", onkostId);
+            sessie.setAttribute("datum", dateformat.format(date));
+            sessie.setAttribute("onkostenBedrag", onkostenBedrag);
+            sessie.setAttribute("omschrijving", omschrijving);
+            sessie.setAttribute("status", status);
+            
             System.out.println("OnkostId: " + onkostId + "\n\n");
             System.out.println("krNummer: " + krNummer + "\n\n");
             gotoPage("infoOnkost", request, response);
+        }
+        
+        /* INFO ONKOST */
+        
+        else if(goTo.equals("infoOnkostStop"))
+        {
+            SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
+            Date date = new Date();
+            try {
+                date = dateformat.parse("21/02/2017");
+            } catch (ParseException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Onkosten o1 = new Onkosten(1,"eerste",date,6513,"doorgestuurd");             //TIJDELIJK
+            Onkosten o2 = new Onkosten(2,"tweede",date,54623,"in aanmaak");            //TIJDELIJK
+            Onkosten o3 = new Onkosten(3,"derde",date,65867413,"in aanmaak");             //TIJDELIJK
+            onkList.add(o1);                                   //TIJDELIJK
+            onkList.add(o2);                                   //TIJDELIJK
+            onkList.add(o3);                                   //TIJDELIJK
+            request.setAttribute("onkList", onkList);
+            
+            gotoPage("overzicht", request, response);
         }
         
     }

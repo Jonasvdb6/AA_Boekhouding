@@ -40,7 +40,7 @@ body
     width: 2.75%;
     height: 4%;
     min-height: 15px;
-    position: fixed;
+    position: absolute;
     margin-left: 20.8%;
     margin-top: 0.9%; 
 }
