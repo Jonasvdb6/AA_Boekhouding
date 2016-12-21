@@ -41,7 +41,7 @@
                             
                         </th>
                     </tr>
-                    <c:forEach items="${requestScope.kredList}" var="kred">
+                    <c:forEach items="${kredList}" var="kred">
                         <tr>
                             <td>
                                 <c:out value="${kred.krNummer}"></c:out>

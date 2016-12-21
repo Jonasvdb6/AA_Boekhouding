@@ -22,8 +22,9 @@
                 </div>
             </form>
             <hr class="menubalkhr">
+            
             <div class="titel">
-                Onkost ID: <c:out value="${onkostId}"></c:out>
+                Onkost ID: <c:out value="${Onkost.onkostId}"></c:out>
             </div>
             <table class="tableOnkost" align="center">
                 <thead>
@@ -41,12 +42,12 @@
                         <b>ID</b>
                     </td>
                     <td>
-                        <b><c:out value="${onkostId}" default="error"/></b>
+                        <b><c:out value="${Onkost.onkostId}" default="error"/></b>
                     </td>
                     <td></td>
                     <td>
                         <b>STATUS:</b>
-                        <b><c:out value="${status}" default="error"/></b>
+                        <b><c:out value="${Onkost.status}" default="error"/></b>
                     </td>
                 </tr>
                 <tr>
@@ -55,7 +56,7 @@
                         Datum
                     </td>
                     <td>
-                        <c:out value="${datum}" default="error"/>
+                        <c:out value="${Onkost.datum}" default="error"/>
                     </td>
                 </tr>
                 <tr>
@@ -64,7 +65,7 @@
                         Bedrag
                     </td>
                     <td>
-                        <c:out value="${onkostenBedrag}" default="error"/>
+                        <c:out value="${Onkost.onkostenBedrag}" default="error"/>
                     </td>
                 </tr>
                 <tr>
@@ -73,10 +74,11 @@
                         Omschrijving
                     </td>
                     <td>
-                        <c:out value="${omschrijving}" default="error"/>
+                        <c:out value="${Onkost.omschrijving}" default="error"/>
                     </td>
                 </tr>
             </table>
+                    
         </div>
     </body>
 </html>

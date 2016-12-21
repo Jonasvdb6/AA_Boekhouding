@@ -7,6 +7,10 @@
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% 
+    HttpSession sessie = request.getSession(); 
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -82,7 +86,7 @@
                             
                         </th>
                     </tr>
-                    <c:forEach items="${requestScope.onkList}" var="onk">
+                    <c:forEach items="${sessionScope.onkList}" var="onk">
                         <tr>
                             <td>
                                 <c:out value="${onk.datum}"></c:out>
@@ -95,21 +99,16 @@
                             </td>
                             <td>
                                 <%--<input type="image" src="images/view.png" alt="submit" name="onkost" value="${onk.onkostId}" class="overzichPict">--%>
-                                <button type="submit" name="onkost" value="${onk.onkostId}" class="overzichBut">Bekijk</button>
+                                <button type="submit" name="onkostId" value="${onk.onkostId}" class="overzichBut">Bekijk</button>
                             </td>
                         </tr>
                     </c:forEach>
                 </table>
                 <input type="hidden" name="goto" value="bekijkOnkost"/>
                 </form>
-                
+                <c:out value="${sessionScope.test}"></c:out>
                 
             baasnummer :
-            <%
-                HttpSession sessie = request.getSession();
-                Integer bNummer = (Integer) sessie.getAttribute("bNummer");
-                out.println(Integer.toString(bNummer));
-            %> 
         </div>
     </body>
 </html>

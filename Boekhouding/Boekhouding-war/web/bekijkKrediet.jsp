@@ -42,7 +42,7 @@
                             
                         </th>
                     </tr>
-                    <c:forEach items="${requestScope.onkList}" var="onk">
+                    <c:forEach items="${onkList}" var="onk">
                         <tr>
                             <td>
                                 <c:out value="${onk.datum}"></c:out>

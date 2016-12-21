@@ -26,7 +26,7 @@
     <body>
         <div class="container">
             <c:choose>
-                <c:when test="${status == 'in aanmaak'}">
+                <c:when test="${Onkost.status == 'in aanmaak'}">
                     <form method="post" action="Controller" >
                         <div class="menubalkform">
                             <input type="image" src="images/saveOnkostO.png" alt="submit" name="action" value="save" class="menubalkpict">
@@ -56,12 +56,12 @@
                                     <b>ID</b>
                                 </td>
                                 <td>
-                                    <b><c:out value="${onkostId}" default="error"/></b>
+                                    <b><c:out value="${Onkost.onkostId}" default="error"/></b>
                                 </td>
                                 <td></td>
                                 <td>
                                     <b>STATUS:</b>
-                                    <b><c:out value="${status}" default="error"/></b>
+                                    <b><c:out value="${Onkost.status}" default="error"/></b>
                                 </td>
                             </tr>
                             <tr>
@@ -70,7 +70,7 @@
                                     Datum
                                 </td>
                                 <td>
-                                    <input type="text" id="datepicker" name="datum" value="<c:out value="${datum}" default="error"/>">
+                                    <input type="text" id="datepicker" name="datum" value="<c:out value="${Onkost.datum}" default="error"/>">
                                 </td>
                             </tr>
                             <tr>
@@ -79,7 +79,7 @@
                                     Bedrag
                                 </td>
                                 <td>
-                                    <input type="number" name="bedrag" min="0" step="0.01" value="<c:out value="${onkostenBedrag}" default="error"/>">
+                                    <input type="number" name="bedrag" min="0" step="0.01" value="<c:out value="${Onkost.onkostenBedrag}" default="error"/>">
                                 </td>
                             </tr>
                             <tr>
@@ -88,7 +88,7 @@
                                     Omschrijving
                                 </td>
                                 <td>
-                                    <textarea name="omschrijving"><c:out value="${omschrijving}" default="error"/></textarea>
+                                    <textarea name="omschrijving"><c:out value="${Onkost.omschrijving}" default="error"/></textarea>
                                 </td>
                             </tr>
                         </table>
@@ -122,12 +122,12 @@
                                     <b>ID</b>
                                 </td>
                                 <td>
-                                    <b><c:out value="${onkostId}" default="error"/></b>
+                                    <b><c:out value="${Onkost.onkostId}" default="error"/></b>
                                 </td>
                                 <td></td>
                                 <td>
                                     <b>STATUS:</b>
-                                    <b><c:out value="${status}" default="error"/></b>
+                                    <b><c:out value="${Onkost.status}" default="error"/></b>
                                 </td>
                             </tr>
                             <tr>
@@ -136,7 +136,7 @@
                                     Datum
                                 </td>
                                 <td>
-                                    <c:out value="${datum}" default="error"/>
+                                    <c:out value="${Onkost.datum}" default="error"/>
                                 </td>
                             </tr>
                             <tr>
@@ -145,7 +145,7 @@
                                     Bedrag
                                 </td>
                                 <td>
-                                    <c:out value="${onkostenBedrag}" default="error"/>
+                                    <c:out value="${Onkost.onkostenBedrag}" default="error"/>
                                 </td>
                             </tr>
                             <tr>
@@ -154,7 +154,7 @@
                                     Omschrijving
                                 </td>
                                 <td>
-                                    <c:out value="${omschrijving}" default="error"/>
+                                    <c:out value="${Onkost.omschrijving}" default="error"/>
                                 </td>
                             </tr>
                         </table>
