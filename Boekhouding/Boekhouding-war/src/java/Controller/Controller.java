@@ -101,19 +101,8 @@ public class Controller extends HttpServlet
             gotoPage("goedkeurenOnkost", request, response);
         }
         else if(goTo.equals("bekijkOnkost"))
-        {
-//            CODE OM ONKOST UIT DATABASE TE HALEN DMV ONKOSTID
+        {            
             onkostId = Integer.parseInt(request.getParameter("onkostId"));
-            
-            SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
-            Date date = new Date();
-            try {
-                date = dateformat.parse("21/02/2017");
-            } catch (ParseException ex) {
-                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            //onkost = new Onkosten(1,"eerste",date,6513,"doorgestuurd");
             onkost = onkList.get(onkostId-1);
             sessie.setAttribute("Onkost", onkost);
             
