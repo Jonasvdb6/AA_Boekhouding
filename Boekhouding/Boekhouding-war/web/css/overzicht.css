@@ -19,6 +19,7 @@ body
 .container
 {
     width: 60%;
+    height: 100%;
     text-align: center;
     background-color: #E6E4E2;
     margin: 0 auto;

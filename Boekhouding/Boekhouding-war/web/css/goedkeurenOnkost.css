@@ -17,6 +17,7 @@ body
 .container
 {
     width: 60%;
+    height: 100%;
     text-align: center;
     background-color: #E6E4E2;
     margin: 0 auto;
@@ -37,12 +38,12 @@ body
 
 .menubalklogout
 {
-    width: 2.75%;
+    width: 2.78%;
     height: 4%;
     min-height: 15px;
     position: absolute;
-    margin-left: 26.5%;
-    margin-top: -6.5%;
+    margin-left: -2.4%;
+    margin-top: 0.9%;
 }
 
 .menubalkform

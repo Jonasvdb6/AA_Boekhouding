@@ -16,24 +16,21 @@
     <body>
         <div class="container">
             <form method="post" action="Controller" >
-            <div class="menubalkform">
-                <input type="image" src="images/overzichtO.png" alt="submit" name="action" value="overzicht" class="menubalkpict">
-                <input type="image" src="images/logoutO.png" alt="submit" name="action" value="uitloggen" class="menubalklogout">
-                <input type="hidden" name="goto" value="goedkeurenOnkostUpdate"/>
-            </div>
-            </form>
-            <form method="post" action="Controller" >
                 <div class="menubalkform">
                     <input type="image" src="images/goedkeurenO.png" alt="submit" name="action" value="goedkeuren" class="menubalkpict">
                     <input type="image" src="images/goedkeurenO.png" alt="submit" name="action" value="afkeuren" class="menubalkpict">
                     <input type="image" src="images/goedkeurenO.png" alt="submit" name="action" value="bekijkOnkost" class="menubalkpict">
                     <input type="image" src="images/goedkeurenO.png" alt="submit" name="action" value="bekijkKrediet" class="menubalkpict">
-                    
+                    <input type="image" src="images/overzichtO.png" alt="submit" name="action" value="overzicht" class="menubalkpict">
+                    <input type="image" src="images/logoutO.png" alt="submit" name="action" value="uitloggen" class="menubalklogout">
+                    <input type="hidden" name="goto" value="goedkeurenOnkostUpdate"/>
                 </div>
+            </form>
                 <hr class="menubalkhr">
                 <div class="titel">
                     Onkosten goedkeuren
                 </div>
+            <form method="post" action="Controller">
                 <table class="tableOnkost" align="center">
                     <tr>
                         <th>
@@ -61,7 +58,7 @@
                                 <c:out value="${onk.status}"></c:out>
                             </td>
                             <td>
-                                <input type="radio" alt="submit" name="onkostId" value="${onk.onkostId}" class="onkostOption">
+                                <input type="radio" alt="submit" name="onkostId" value="${onk.onkostId}" class="onkostOption" checked="checked">
                             </td>
                         </tr>
                     </c:forEach>
