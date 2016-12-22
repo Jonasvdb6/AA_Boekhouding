@@ -98,6 +98,9 @@ public class Controller extends HttpServlet
         }
         else if(goTo.equals("goedkeurenOnkost"))
         {
+//            CODE OM ARRAYLIST VAN ONKOSTEN OP TE VRAGEN UIT DATABASE
+//            STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS
+            
             gotoPage("goedkeurenOnkost", request, response);
         }
         else if(goTo.equals("bekijkOnkost"))
@@ -313,6 +316,51 @@ public class Controller extends HttpServlet
 //            CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
             //sessie.setAttribute("onkList", onkList);
             gotoPage("overzicht", request, response);
+        }
+        
+        /* GOEDKEUREN ONKOST */
+        
+        else if (goTo.equals("goedkeurenOnkostUpdate"))
+        {
+            String action = request.getParameter("action");
+            
+            if (action.equals("goedkeuren"))
+            {
+//                CODE OM STATUS VAN ONKOST AAN TE PASSEN IN BETAALD
+//                CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE VRAGEN UIT DATABASE
+//                STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS  
+                onkostId = Integer.parseInt(request.getParameter("onkostId"));
+                gotoPage("goedkeurenOnkost", request, response);
+            }
+            if (action.equals("afkeuren"))
+            {
+//                CODE OM STATUS VAN ONKOST AAN TE PASSEN IN AFGEKEURD
+//                CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE VRAGEN UIT DATABASE
+//                STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS  
+                onkostId = Integer.parseInt(request.getParameter("onkostId"));
+                gotoPage("goedkeurenOnkost", request, response);
+            }
+            if (action.equals("bekijkOnkost"))
+            {
+//                CODE OM DATA ONKOST UIT DATABASE TE HALEN DMV ONKOSTID 
+                onkostId = Integer.parseInt(request.getParameter("onkostId"));
+                gotoPage("infoOnkost", request, response);
+            }
+            if (action.equals("bekijkKrediet"))
+            {
+//            CODE OM ARRAYLIST VAN ONKOSTEN VAN KREDIET OP TE HALEN UIT DATABASE DMV ONKOSTID
+                onkostId = Integer.parseInt(request.getParameter("onkostId"));
+                gotoPage("bekijkKrediet", request, response);
+            }
+            if(action.equals("overzicht"))
+            {
+//            CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
+                gotoPage("overzicht", request, response);
+            }
+            if (action.equals("uitloggen")){
+                sessie.invalidate();
+                response.sendRedirect("inloggen.jsp");
+            }
         }
         
     }

@@ -4,11 +4,9 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Dec 6, 2016, 10:37:56 AM
+    Created on : Dec 22, 2016, 6:03:39 PM
     Author     : simon
 */
-
-
 
 body
 {
@@ -94,35 +92,4 @@ body
 
 tr:nth-child(even) {
     background-color: #dddddd;
-}
-
-.overzichBut
-{
-    padding-top: 1%;
-    padding-bottom: 1%;
-    padding-left: 15%;
-    padding-right: 15%;
-    color: #E6E4E2;
-    background-color: #E95420;
-    box-shadow: 0px 2px 3px #a19f9e;
-    border: none;
-    border-radius: 4px;
-    font-size: 18px;
-}
-
-.overzichBut:hover
-{
-    background-color: #c34113;
-}
-
-.overzichBut:active
-{
-    background-color: #c34113;
-    box-shadow: none;
-}
-
-.overzichPict
-{
-    width: 75%;
-    height: 5%;
 }
