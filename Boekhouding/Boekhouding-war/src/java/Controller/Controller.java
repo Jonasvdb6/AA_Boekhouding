@@ -56,14 +56,12 @@ public class Controller extends HttpServlet
         
         pNummer = Integer.parseInt(request.getUserPrincipal().getName());
         werkType = stateless.getWerkType(pNummer);
+        onkList = stateless.getOnkosten(pNummer);
         
         /* INLOGGEN */
         System.out.println(" goto (processRequest): " + goTo + "\n\n");
         if( goTo == null )
         {
-//            CODE OM WERKTYPE EN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
-            onkList = stateless.getOnkosten(pNummer);
-            
             sessie.setAttribute("werkType", werkType);
             sessie.setAttribute("pNummer", pNummer);
             sessie.setAttribute("onkList", onkList);
@@ -116,7 +114,6 @@ public class Controller extends HttpServlet
             }
 
             //onkost = new Onkosten(1,"eerste",date,6513,"doorgestuurd");
-            onkList = (List) sessie.getAttribute("onkList");
             onkost = onkList.get(onkostId-1);
             sessie.setAttribute("Onkost", onkost);
             
