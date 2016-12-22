@@ -107,8 +107,6 @@
                 <input type="hidden" name="goto" value="bekijkOnkost"/>
                 </form>
                 <c:out value="${sessionScope.test}"></c:out>
-                
-            baasnummer :
         </div>
     </body>
 </html>

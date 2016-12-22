@@ -34,7 +34,7 @@ CREATE TABLE onkosten
 (
     onkostId int NOT NULL,
     omschrijving varchar(100) NOT NULL,
-    datum date NOT NULL,
+    datum varchar(30) NOT NULL,
     onkostenBedrag double NOT NULL,
     status varchar(30) NOT NULL,
     PRIMARY KEY (onkostId),
@@ -45,4 +45,7 @@ INSERT INTO werknemers VALUES (999,'admin',3,999);
 INSERT INTO werknemers VALUES (1,'gewoon',1,999);
 INSERT INTO werknemers VALUES (2,'boekhouder',2,999);
 INSERT INTO werknemers VALUES (3,'manager',3,999);
-INSERT INTO werknemers VALUES (4,'bm',4,999);
+INSERT INTO werknemers VALUES (4,'bm',23,999);
+
+INSERT INTO onkosten VALUES (1, "Omschrijving: onkost id: 1, bla bla bla", "20/12/2016", 123456, "afgehandelt", 999);
+INSERT INTO onkosten VALUES (2, "Omschrijving: onkost id: 2, bli bli bli", "21/12/2016", 987654, "niet afgehandelt", 999);

@@ -42,11 +42,11 @@ public class Controller extends HttpServlet
     
     int pNummer;
     int bNummer;
-    int werkType = 23;
+    int werkType;
     int krNummer;
     int onkostId;
-    List<Onkosten> onkList = new ArrayList<Onkosten>();
-    List<Kredieten> kredList = new ArrayList<Kredieten>();
+    List<Onkosten> onkList = new ArrayList<>();
+    List<Kredieten> kredList = new ArrayList<>();
     Onkosten onkost;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
@@ -54,33 +54,19 @@ public class Controller extends HttpServlet
         HttpSession sessie = request.getSession();
         String goTo = request.getParameter("goto");
         
+        pNummer = Integer.parseInt(request.getUserPrincipal().getName());
+        werkType = stateless.getWerkType(pNummer);
         
         /* INLOGGEN */
         System.out.println(" goto (processRequest): " + goTo + "\n\n");
         if( goTo == null )
         {
 //            CODE OM WERKTYPE EN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
-            
-            SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
-            Date date = new Date();
-            try {
-                date = dateformat.parse("21/02/2017");
-            } catch (ParseException ex) {
-                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Onkosten o1 = new Onkosten(1,"eerste",date,6513,"doorgestuurd");             //TIJDELIJK
-            Onkosten o2 = new Onkosten(2,"tweede",date,54623,"in aanmaak");            //TIJDELIJK
-            Onkosten o3 = new Onkosten(3,"derde",date,65867413,"in aanmaak");             //TIJDELIJK
-            onkList.add(o1);                                   //TIJDELIJK
-            onkList.add(o2);                                   //TIJDELIJK
-            onkList.add(o3);                                   //TIJDELIJK
-            sessie.setAttribute("onkList", onkList);
-            pNummer = Integer.parseInt(request.getUserPrincipal().getName());
-            bNummer = stateless.getBNumer(pNummer);
+            onkList = stateless.getOnkosten(pNummer);
             
             sessie.setAttribute("werkType", werkType);
             sessie.setAttribute("pNummer", pNummer);
-            sessie.setAttribute("bNummer", bNummer);
+            sessie.setAttribute("onkList", onkList);
             
             gotoPage("overzicht", request, response);
         }
@@ -117,8 +103,7 @@ public class Controller extends HttpServlet
             gotoPage("goedkeurenOnkost", request, response);
         }
         else if(goTo.equals("bekijkOnkost"))
-        {         
-            
+        {
 //            CODE OM ONKOST UIT DATABASE TE HALEN DMV ONKOSTID
             onkostId = Integer.parseInt(request.getParameter("onkostId"));
             
@@ -130,7 +115,9 @@ public class Controller extends HttpServlet
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            onkost = new Onkosten(1,"eerste",date,6513,"doorgestuurd");
+            //onkost = new Onkosten(1,"eerste",date,6513,"doorgestuurd");
+            onkList = (List) sessie.getAttribute("onkList");
+            onkost = onkList.get(onkostId-1);
             sessie.setAttribute("Onkost", onkost);
             
             gotoPage("bekijkOnkost", request, response);
@@ -144,6 +131,8 @@ public class Controller extends HttpServlet
         /* NIEUWE ONKOST + BEKIJK ONKOST*/
         else if(goTo.equals("saveOnkost"))
         {
+            System.out.println("pnummer: " + pNummer + "\n\n");
+            System.out.println("onkList: " + onkList + "\n\n");
             String action = request.getParameter("action");
             if (action.equals("save")){
 //                CODE OM ONKOST OP TE SLAAN

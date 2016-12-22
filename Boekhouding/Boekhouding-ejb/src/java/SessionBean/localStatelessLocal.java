@@ -5,6 +5,8 @@
  */
 package SessionBean;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -15,4 +17,7 @@ import javax.ejb.Local;
 public interface localStatelessLocal 
 {
     public int getBNumer(int pnummer);
+    public int getWerkType(int pnummer);
+    public List getOnkosten(int pnummer);
+    public int getNewOnkostId(int pnummer);
 }
