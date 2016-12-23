@@ -49,3 +49,5 @@ INSERT INTO werknemers VALUES (4,'bm',23,999);
 
 INSERT INTO onkosten VALUES (1, "Omschrijving: onkost id: 1, bla bla bla", "20/12/2016", 123456, "afgehandelt", 999);
 INSERT INTO onkosten VALUES (2, "Omschrijving: onkost id: 2, bli bli bli", "21/12/2016", 987654, "niet afgehandelt", 999);
+INSERT INTO onkosten VALUES (3, "Omschrijving: onkost id: 3, bla bla bla", "20/12/2016", 465240, "afgehandelt", 999);
+INSERT INTO onkosten VALUES (4, "Omschrijving: onkost id: 4, bli bli bli", "21/12/2016", 456781, "niet afgehandelt", 999);
