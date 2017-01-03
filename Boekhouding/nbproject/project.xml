@@ -19,6 +19,18 @@
                     <file>${reference.BoekhoudingClient.j2ee-module-car}</file>
                     <path-in-war>/</path-in-war>
                 </library>
+                <library>
+                    <file>${reference.test.j2ee-module-car}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library>
+                    <file>${reference.StandAlone.j2ee-module-car}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library>
+                    <file>${reference.blans.j2ee-module-car}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
             </web-module-additional-libraries>
         </data>
         <references xmlns="http://www.netbeans.org/ns/ant-project-references/1">
@@ -40,6 +52,30 @@
             </reference>
             <reference>
                 <foreign-project>BoekhoudingClient</foreign-project>
+                <artifact-type>j2ee_ear_archive</artifact-type>
+                <script>build.xml</script>
+                <target>dist-ear</target>
+                <clean-target>clean-ear</clean-target>
+                <id>j2ee-module-car</id>
+            </reference>
+            <reference>
+                <foreign-project>StandAlone</foreign-project>
+                <artifact-type>j2ee_ear_archive</artifact-type>
+                <script>build.xml</script>
+                <target>dist-ear</target>
+                <clean-target>clean-ear</clean-target>
+                <id>j2ee-module-car</id>
+            </reference>
+            <reference>
+                <foreign-project>blans</foreign-project>
+                <artifact-type>j2ee_ear_archive</artifact-type>
+                <script>build.xml</script>
+                <target>dist-ear</target>
+                <clean-target>clean-ear</clean-target>
+                <id>j2ee-module-car</id>
+            </reference>
+            <reference>
+                <foreign-project>test</foreign-project>
                 <artifact-type>j2ee_ear_archive</artifact-type>
                 <script>build.xml</script>
                 <target>dist-ear</target>
