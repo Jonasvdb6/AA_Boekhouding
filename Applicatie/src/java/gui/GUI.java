@@ -30,10 +30,8 @@ public class GUI extends JFrame implements ActionListener{
     private JTextField kredietnr;
     private JButton zoekKnop;
     private JLabel labelInvoer;
-    private JLabel labelUitvoer;
     private JPanel panelInvoer;
     private JPanel panelKnoppen;
-    private JPanel panelUitvoer;
     
     public GUI(){
         
@@ -43,28 +41,23 @@ public class GUI extends JFrame implements ActionListener{
         c.setLayout(new BoxLayout(c,BoxLayout.Y_AXIS));
         panelInvoer = new JPanel();
         panelKnoppen = new JPanel();
-        panelUitvoer = new JPanel();
         panelInvoer.setLayout(new GridLayout(1,2));
         panelKnoppen.setLayout(new FlowLayout());
-        panelUitvoer.setLayout(new GridLayout(1,1));
         
         kredietnr = new JTextField();
         zoekKnop = new JButton("Bekijk");
         labelInvoer = new JLabel("Geef kredietnr");
-        labelUitvoer = new JLabel("eziu");
         
         panelInvoer.add(labelInvoer);
         panelInvoer.add(kredietnr);
         panelKnoppen.add(zoekKnop);
-        panelUitvoer.add(labelUitvoer);
         c.add(panelInvoer);
         c.add(panelKnoppen);
-        c.add(panelUitvoer);
         zoekKnop.addActionListener(this);
         
         setVisible(true); 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(300,50);
+        setSize(250,50);
     }
     
     
@@ -79,7 +72,7 @@ public class GUI extends JFrame implements ActionListener{
             return;
         }
         // CODE OM DATA UIT DATABASE TE HALEN
-        System.out.println("Krediet: " + KredietId + "\n\n");   
+        System.out.println("Krediet: " + KredietId + "\n\n");
     }
     
     public String getKrediet(){
