@@ -28,7 +28,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Kredieten.findByKrNummer", query = "SELECT k FROM Kredieten k WHERE k.krNummer = :krNummer"),
     @NamedQuery(name = "Kredieten.findByKrSaldo", query = "SELECT k FROM Kredieten k WHERE k.krSaldo = :krSaldo"),
     @NamedQuery(name = "Kredieten.findByKrType", query = "SELECT k FROM Kredieten k WHERE k.krType = :krType"),
-    @NamedQuery(name = "Kredieten.findByPnummer", query = "SELECT k FROM Kredieten k WHERE k.pnummer = :pnummer")})
+    @NamedQuery(name = "Kredieten.findByPnummer", query = "SELECT k FROM Kredieten k WHERE k.pnummer = :pnummer"),
+    //Query om kredieten van zichzelf en baas op te halen
+    @NamedQuery(name = "Kredieten.eigenKredieten", query = "SELECT k FROM Kredieten k WHERE k.pnummer = :pnummer"),
+    @NamedQuery(name = "Kredieten.baasKredieten", query = "SELECT k FROM Kredieten k WHERE k.pnummer = :bnummer")})
 public class Kredieten implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,6 +50,8 @@ public class Kredieten implements Serializable {
     private int krType;
     @Column(name = "pnummer")
     private Integer pnummer;
+    @Column(name = "negatief")
+    private int negatief;
 
     public Kredieten() {
     }
@@ -91,6 +96,14 @@ public class Kredieten implements Serializable {
 
     public void setPnummer(Integer pnummer) {
         this.pnummer = pnummer;
+    }
+    
+    public Integer getNegatief() {
+        return negatief;
+    }
+
+    public void setNegatief(Integer negatief) {
+        this.negatief = negatief;
     }
 
     @Override

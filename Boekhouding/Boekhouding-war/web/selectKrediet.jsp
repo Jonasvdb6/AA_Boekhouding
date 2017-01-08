@@ -44,8 +44,13 @@
                     </tr>
                     <c:forEach items="${kredList}" var="kred">
                         <c:choose>
-                            <c:when test="${negatief == 0}">
+                            <c:when test="${kred.negatief == 0}">
                                 <tr>
+                            </c:when>
+                            <c:otherwise>
+                                <tr Style= "background-color: red; font-style: italic;">
+                            </c:otherwise>
+                        </c:choose>
                                     <td>
                                         <c:out value="${kred.krNummer}"></c:out>
                                     </td>
@@ -66,24 +71,6 @@
                                         <button type="submit" name="krediet" value="${kred.krNummer}" class="selectBut">Selecteer</button>
                                     </td>
                                 </tr>
-                            </c:when>
-                            <c:otherwise>
-                                <tr>
-                                    <td>
-                                        <c:out value="${kred.krNummer}"></c:out>
-                                    </td>
-                                    <td>
-                                        <c:out value="${kred.krSaldo}"></c:out>
-                                    </td>
-                                    <td>
-                                        <c:out value="${kred.krType}"></c:out>
-                                    </td>
-                                    <td>
-                                        <input type="radio" name="krediet" value="${kred.krNummer}" required=""> 
-                                    </td>
-                                </tr>
-                            </c:otherwise>
-                        </c:choose>
                     </c:forEach>
                 </table>
                 <input type="hidden" name="goto" value="selectKrediet"/>

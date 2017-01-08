@@ -14,10 +14,14 @@ import javax.ejb.Local;
  * @author jonas
  */
 @Local
-public interface localStatelessLocal 
+public interface StatelessBeanLocal 
 {
     public int getBNumer(int pnummer);
     public int getWerkType(int pnummer);
     public List getOnkosten(int pnummer);
     public int getNewOnkostId(int pnummer);
+    public List getKredietenAll(int pnummer);
+    public Onkosten getOnkostById(int onkostId);
+    public List getKredietenEigenEnBaas(int pnummer, int bnummer);
+    public void setNegatief(int krNummer, int getal);
 }

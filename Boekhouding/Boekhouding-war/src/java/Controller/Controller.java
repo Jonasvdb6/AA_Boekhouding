@@ -9,7 +9,6 @@ package Controller;
 
 import SessionBean.Kredieten;
 import SessionBean.Onkosten;
-import SessionBean.localStatelessLocal;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -27,6 +26,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import SessionBean.StatelessBeanLocal;
 
 /**
  *
@@ -36,7 +36,7 @@ import javax.servlet.http.HttpSession;
 public class Controller extends HttpServlet 
 {
     
-    @EJB private localStatelessLocal stateless;
+    @EJB private StatelessBeanLocal stateless;
     
     /* globale variabelen */
     
@@ -57,6 +57,7 @@ public class Controller extends HttpServlet
         pNummer = Integer.parseInt(request.getUserPrincipal().getName());
         werkType = stateless.getWerkType(pNummer);
         onkList = stateless.getOnkosten(pNummer);
+        bNummer = stateless.getBNumer(pNummer);
         
         /* INLOGGEN */
         System.out.println(" goto (processRequest): " + goTo + "\n\n");
@@ -78,35 +79,32 @@ public class Controller extends HttpServlet
         /* OVERZICHT */
         else if(goTo.equals("nieuweOnkosten"))
         {
-//            CODE OM HOOGSTE ONKOSTID OP TE VRAGEN UIT DATABASE
-            onkostId = 12345; //TIJDELIJK
-            sessie.setAttribute("onkostId", onkostId);
+            onkostId = stateless.getNewOnkostId(pNummer);
+            sessie.setAttribute("onkostId", onkostId+1);
+            
             gotoPage("nieuweOnkosten", request, response);
         }
         else if(goTo.equals("overzichtKrediet"))
         {
-//            CODE OM KREDIETEN UIT DATABASE TE HALEN
-            Kredieten k1 = new Kredieten(1,6513,1);             //TIJDELIJK
-            Kredieten k2 = new Kredieten(2,21681,2);            //TIJDELIJK
-            Kredieten k3 = new Kredieten(3,5846,1);             //TIJDELIJK
-            kredList.add(k1);                                   //TIJDELIJK
-            kredList.add(k2);                                   //TIJDELIJK
-            kredList.add(k3);                                   //TIJDELIJK
+            kredList = stateless.getKredietenAll(pNummer);
             sessie.setAttribute("kredList", kredList);
             
             gotoPage("overzichtKrediet", request, response);
         }
         else if(goTo.equals("goedkeurenOnkost"))
         {
-//            CODE OM ARRAYLIST VAN ONKOSTEN OP TE VRAGEN UIT DATABASE
-//            STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS
+// ???            STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS
+            
+            onkList = stateless.getOnkosten(pNummer);
+            sessie.setAttribute("onkList", onkList);
             
             gotoPage("goedkeurenOnkost", request, response);
         }
         else if(goTo.equals("bekijkOnkost"))
         {            
             onkostId = Integer.parseInt(request.getParameter("onkostId"));
-            onkost = onkList.get(onkostId-1);
+            //-1 omdat de grootte van de arraylist bij 1 begint te tellen en de index bij 0
+            onkost = onkList.get(onkList.size()-1);
             sessie.setAttribute("Onkost", onkost);
             
             gotoPage("bekijkOnkost", request, response);
@@ -123,6 +121,7 @@ public class Controller extends HttpServlet
             System.out.println("pnummer: " + pNummer + "\n\n");
             System.out.println("onkList: " + onkList + "\n\n");
             String action = request.getParameter("action");
+            System.out.println(" action (processRequest): " + action + "\n\n");
             if (action.equals("save")){
 //                CODE OM ONKOST OP TE SLAAN
 
@@ -167,18 +166,32 @@ public class Controller extends HttpServlet
                 System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
                 System.out.println("omschrijving : " + omschrijving + "\n\n");
                 
-//                CODE OM ARRAYLIST VAN KREDIETEN TE KRIJGEN 
-//                EXTRA VARIABELE MEEGEVEN OM TE KIJKEN OF KREDIET ONDER 0 GAAT
-
-                Kredieten k1 = new Kredieten(1,6513,1);             //TIJDELIJK
-                Kredieten k2 = new Kredieten(2,21681,2);            //TIJDELIJK
-                Kredieten k3 = new Kredieten(3,5846,1);             //TIJDELIJK
-                kredList.add(k1);                                   //TIJDELIJK
-                kredList.add(k2);                                   //TIJDELIJK
-                kredList.add(k3);                                   //TIJDELIJK
-                int negatief = 0;                                   //TIJDELIJK
+                System.out.println("OnkostId : " + onkostId);
+                
+                //Zowel eigen kredieten al die van de baas worden opgehaald
+                kredList = stateless.getKredietenEigenEnBaas(pNummer, bNummer);
+                Onkosten o = stateless.getOnkostById(onkostId);
+                
+                for(int i=0; i<kredList.size(); i++)
+                {
+                    if(kredList.get(i).getKrType() == 1)
+                    {
+                        if( (kredList.get(i).getKrSaldo() - o.getOnkostenBedrag()) < 0 )
+                        {
+                            kredList.remove(i);
+                        }
+                    }
+                    else
+                    {
+                        if( (kredList.get(i).getKrSaldo() - o.getOnkostenBedrag()) < 0 )
+                        {
+                            krNummer = kredList.get(i).getKrNummer();
+                            stateless.setNegatief(krNummer, 1);
+                        }
+                    }
+                }
+                
                 sessie.setAttribute("kredList", kredList);
-                sessie.setAttribute("negatief", negatief);
                 
                 gotoPage("selectKrediet", request, response);
             }
@@ -196,7 +209,7 @@ public class Controller extends HttpServlet
             if (action.equals("overzicht")){
                 
 //            CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
-                //sessie.setAttribute("onkList", onkList);
+                sessie.setAttribute("onkList", onkList);
                 
                 gotoPage("overzicht", request, response);
             }

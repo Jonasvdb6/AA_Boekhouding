@@ -16,19 +16,11 @@
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
-                    <file>${reference.BoekhoudingClient.j2ee-module-car}</file>
+                    <file>${reference.Gui.j2ee-module-car}</file>
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
-                    <file>${reference.test.j2ee-module-car}</file>
-                    <path-in-war>/</path-in-war>
-                </library>
-                <library>
-                    <file>${reference.StandAlone.j2ee-module-car}</file>
-                    <path-in-war>/</path-in-war>
-                </library>
-                <library>
-                    <file>${reference.blans.j2ee-module-car}</file>
+                    <file>${reference.BoekhoudingLibrary.jar}</file>
                     <path-in-war>/</path-in-war>
                 </library>
             </web-module-additional-libraries>
@@ -51,31 +43,15 @@
                 <id>dist-ear</id>
             </reference>
             <reference>
-                <foreign-project>BoekhoudingClient</foreign-project>
-                <artifact-type>j2ee_ear_archive</artifact-type>
+                <foreign-project>BoekhoudingLibrary</foreign-project>
+                <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
-                <target>dist-ear</target>
-                <clean-target>clean-ear</clean-target>
-                <id>j2ee-module-car</id>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>StandAlone</foreign-project>
-                <artifact-type>j2ee_ear_archive</artifact-type>
-                <script>build.xml</script>
-                <target>dist-ear</target>
-                <clean-target>clean-ear</clean-target>
-                <id>j2ee-module-car</id>
-            </reference>
-            <reference>
-                <foreign-project>blans</foreign-project>
-                <artifact-type>j2ee_ear_archive</artifact-type>
-                <script>build.xml</script>
-                <target>dist-ear</target>
-                <clean-target>clean-ear</clean-target>
-                <id>j2ee-module-car</id>
-            </reference>
-            <reference>
-                <foreign-project>test</foreign-project>
+                <foreign-project>Gui</foreign-project>
                 <artifact-type>j2ee_ear_archive</artifact-type>
                 <script>build.xml</script>
                 <target>dist-ear</target>
