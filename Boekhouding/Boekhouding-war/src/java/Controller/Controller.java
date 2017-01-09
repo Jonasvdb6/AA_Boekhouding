@@ -108,15 +108,6 @@ public class Controller extends HttpServlet
             
             gotoPage("overzichtKrediet", request, response);
         }
-        else if(goTo.equals("goedkeurenOnkost"))
-        {
-// ???            STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS
-            
-            onkList = stateless.getOnkosten(pNummer);
-            sessie.setAttribute("onkList", onkList);
-            
-            gotoPage("goedkeurenOnkost", request, response);
-        }
         else if(goTo.equals("bekijkOnkost"))
         {
             System.out.println("onkost list voor : " + onkList);
@@ -152,6 +143,37 @@ public class Controller extends HttpServlet
             System.out.println("datum : " + datum + "\n\n");
             System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
             System.out.println("omschrijving : " + omschrijving + "\n\n");
+
+            onkList = stateless.getOnkosten(pNummer);
+            sessie.setAttribute("onkList", onkList);
+
+            gotoPage("overzicht", request, response);
+        }
+        
+        else if (goTo.equals("saveNew"))
+        {
+            /* Data uit form halen */
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Date datum = new Date();
+            try 
+            {
+                datum = formatter.parse(request.getParameter("datum")); 
+            }
+            catch (ParseException ex)
+            {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            double onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
+            String omschrijving = request.getParameter("omschrijving");
+            String status = "in aanmaak";
+
+            stateless.maakNewOnkost(onkostId+1, omschrijving, datum, onkostenBedrag, status, pNummer);
+
+            /* Data afprinten */
+            System.out.println("datum : " + datum + "\n\n");
+            System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
+            System.out.println("omschrijving : " + omschrijving + "\n\n");
+            System.out.println("onkostId : " + onkostId+1 + "\n\n");
 
             onkList = stateless.getOnkosten(pNummer);
             sessie.setAttribute("onkList", onkList);
@@ -223,7 +245,6 @@ public class Controller extends HttpServlet
         
         else if (goTo.equals("delete"))
         {
-//              CODE OM ONKOST TE DELETEN
             stateless.deleteOnkost(onkostId);
 
             onkList = stateless.getOnkosten(pNummer);
@@ -293,6 +314,16 @@ public class Controller extends HttpServlet
             sessie.setAttribute("onkList", onkList);
             
             gotoPage("overzicht", request, response);
+        }
+        
+        else if(goTo.equals("goedkeurenOnkost"))
+        {
+// ???            STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS
+            
+            onkList = stateless.getOnkosten(pNummer);
+            sessie.setAttribute("onkList", onkList);
+            
+            gotoPage("goedkeurenOnkost", request, response);
         }
         
         /* GOEDKEUREN ONKOST */

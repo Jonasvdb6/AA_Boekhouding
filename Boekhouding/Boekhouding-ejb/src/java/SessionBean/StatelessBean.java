@@ -80,6 +80,18 @@ public class StatelessBean implements StatelessBeanLocal
         em.remove(k);
     }
     
+    public void maakNewOnkost(int onkId, String omsch, Date d, double onkBed, String stat, int pnr)
+    {
+        Onkosten nieuw = new Onkosten();
+        nieuw.setOnkostId(onkId);
+        nieuw.setOmschrijving(omsch);
+        nieuw.setDatum(d);
+        nieuw.setOnkostenBedrag(onkBed);
+        nieuw.setStatus(stat);
+        nieuw.setPnummer(pnr);
+        em.persist(nieuw);
+    }
+    
     
     
 /*  *** Kredieten ***  */

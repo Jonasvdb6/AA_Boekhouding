@@ -27,8 +27,7 @@
         <div class="container">
             <form method="post" action="Controller" >
             <div class="menubalkform">
-                <input type="image" src="images/saveOnkostO.png" alt="submit" name="goto" value="save" class="menubalkpict">
-                <input type="image" src="images/sendOnkostO.png" alt="submit" name="goto" value="send" class="menubalkpict">
+                <input type="image" src="images/saveOnkostO.png" alt="submit" name="goto" value="saveNew" class="menubalkpict">
                 <input type="image" src="images/overzichtO.png" alt="submit" name="goto" value="overzicht" class="menubalkpict">
                 <input type="image" src="images/logoutO.png" alt="submit" name="goto" value="uitloggen" class="menubalklogout">
             </div>
