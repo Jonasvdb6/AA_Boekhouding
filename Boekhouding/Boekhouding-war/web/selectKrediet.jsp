@@ -72,6 +72,15 @@
                                     </td>
                                 </tr>
                     </c:forEach>
+                    <!-- Om de pagina 1 keer te reloaden zodat je css aangepast wordt en de achtergrond van de cellen up to date wordt gebracht naar rood -->
+                    <script type="text/javascript">
+                        window.onload = function() {
+                        if(!window.location.hash) {
+                            window.location = window.location + '#';
+                            window.location.reload();
+                        }
+                        };
+                    </script> 
                 </table>
                 <input type="hidden" name="goto" value="selectKrediet"/>
             </form>
