@@ -21,7 +21,7 @@ public interface StatelessBeanLocal
     public int getWerkType(int pnummer);
     public List getOnkosten(int pnummer);
     public int getOnkostId(int pnummer);
-    public List getKredietenAll(int pnummer);
+    public List getKredietenAll();
     public Onkosten getOnkostById(int onkostId);
     public List getKredietenEigenEnBaas(int pnummer, int bnummer);
     public void setNegatief(int krNummer, int getal);

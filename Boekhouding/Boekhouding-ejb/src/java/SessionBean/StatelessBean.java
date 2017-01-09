@@ -95,9 +95,9 @@ public class StatelessBean implements StatelessBeanLocal
     
     
 /*  *** Kredieten ***  */
-    public List getKredietenAll(int pnummer)
+    public List getKredietenAll()
     {
-        return em.createNamedQuery("Kredieten.findByPnummer").setParameter("pnummer", pnummer).getResultList();
+        return em.createNamedQuery("Kredieten.findAll").getResultList();
     }
     
     public List getKredietenEigenEnBaas(int pnummer, int bnummer)

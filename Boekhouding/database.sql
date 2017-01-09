@@ -59,6 +59,9 @@ INSERT INTO onkosten VALUES (5, "Omschrijving: onkost id: 5, bla bla bla", "1/01
 INSERT INTO onkosten VALUES (6, "Omschrijving: onkost id: 6, bla bla bla", "5/01/2017", 90000, "niet afgehandeld", 1);
 INSERT INTO onkosten VALUES (7, "Omschrijving: onkost id: 7, bla bla bla", "5/01/2017", 30000, "niet afgehandeld", 1);
 
+INSERT INTO onkosten VALUES (8, "Omschrijving: onkost id: 8, bla bla bla", "1/01/2017", 10000, "afgehandeld", 2);
+INSERT INTO onkosten VALUES (9, "Omschrijving: onkost id: 9, bla bla bla", "5/01/2017", 30000, "niet afgehandeld", 2);
+
 
 /* Kredieten */
 INSERT INTO kredieten VALUES (1, 5000, 1, 999, 0);
