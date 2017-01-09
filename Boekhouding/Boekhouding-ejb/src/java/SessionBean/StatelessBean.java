@@ -24,6 +24,7 @@ public class StatelessBean implements StatelessBeanLocal
     @PersistenceContext
     private EntityManager em;
     
+/*  *** Werknemers ***  */
     public int getBNumer(int pnummer)
     {
         Werknemers w = em.find (Werknemers.class, pnummer);
@@ -38,25 +39,37 @@ public class StatelessBean implements StatelessBeanLocal
         return w.getWerkType();
     }
     
+    
+    
+/*  *** Onkosten ***  */
     public List getOnkosten(int pnummer)
     {
         return em.createNamedQuery("Onkosten.findByPnummer").setParameter("pnummer", pnummer).getResultList();
     }
     
-    public int getNewOnkostId(int pnummer)
+    public int getOnkostId(int pnummer)
     {
         //De query geeft de laatste onkostId terug dus +1 om een nieuwe onkostId toe te voegen
         return (int) em.createNamedQuery("Onkosten.laatsteOnkId").setParameter("pnummer", pnummer).getSingleResult();
     }
     
-    public List getKredietenAll(int pnummer)
-    {
-        return em.createNamedQuery("Kredieten.findByPnummer").setParameter("pnummer", pnummer).getResultList();
-    }
-    
     public Onkosten getOnkostById(int onkostId)
     {
         return (Onkosten) em.createNamedQuery("Onkosten.findByOnkostId").setParameter("onkostId", onkostId).getSingleResult();
+    }
+    
+    public void setOnkostStatus(int onkostId, String status)
+    {
+        Onkosten k = (Onkosten) em.createNamedQuery("Onkosten.findByOnkostId").setParameter("onkostId", onkostId).getSingleResult();
+        k.setStatus(status);
+    }
+    
+    
+    
+/*  *** Kredieten ***  */
+    public List getKredietenAll(int pnummer)
+    {
+        return em.createNamedQuery("Kredieten.findByPnummer").setParameter("pnummer", pnummer).getResultList();
     }
     
     public List getKredietenEigenEnBaas(int pnummer, int bnummer)
@@ -76,5 +89,16 @@ public class StatelessBean implements StatelessBeanLocal
         Kredieten k = (Kredieten) em.createNamedQuery("Kredieten.findByKrNummer").setParameter("krNummer", krNummer).getSingleResult();
         k.setNegatief(getal);
         em.persist(k);
+    }
+    
+    public Kredieten getKredietById(int krNummer)
+    {
+       return (Kredieten) em.createNamedQuery("Kredieten.findByKrNummer").setParameter("krNummer", krNummer).getSingleResult();
+    }
+    
+    public void setKredietSaldo(int krNummer, double saldo)
+    {
+        Kredieten k = (Kredieten) em.createNamedQuery("Kredieten.findByKrNummer").setParameter("krNummer", krNummer).getSingleResult();
+        k.setKrSaldo(saldo);
     }
 }

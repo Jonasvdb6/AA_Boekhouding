@@ -46,6 +46,7 @@ public class Controller extends HttpServlet
     int werkType;
     int krNummer;
     int onkostId;
+    double onkostenBedrag;
     List<Onkosten> onkList = new ArrayList<>();
     List<Kredieten> kredList = new ArrayList<>();
     Onkosten onkost;
@@ -80,7 +81,7 @@ public class Controller extends HttpServlet
         /* OVERZICHT */
         else if(goTo.equals("nieuweOnkosten"))
         {
-            onkostId = stateless.getNewOnkostId(pNummer);
+            onkostId = stateless.getOnkostId(pNummer);
             sessie.setAttribute("onkostId", onkostId+1);
             
             gotoPage("nieuweOnkosten", request, response);
@@ -125,15 +126,19 @@ public class Controller extends HttpServlet
             System.out.println("onkList: " + onkList + "\n\n");
             String action = request.getParameter("action");
             System.out.println(" action (processRequest): " + action + "\n\n");
-            if (action.equals("save")){
+            if (action.equals("save"))
+            {
 //                CODE OM ONKOST OP TE SLAAN
 
                 /* Data uit form halen */
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 Date datum = new Date();
-                try {
-                    datum = formatter.parse(request.getParameter("datum"));
-                } catch (ParseException ex) {
+                try 
+                {
+                    datum = formatter.parse(request.getParameter("datum")); 
+                }
+                catch (ParseException ex) 
+                {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 double onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
@@ -150,18 +155,21 @@ public class Controller extends HttpServlet
                 
                 gotoPage("overzicht", request, response);
             }
-            if (action.equals("send")){
-
+            if (action.equals("send"))
+            {
                 /* Data uit form halen */
                 SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
                 Date date = new Date();
-                try {
+                try 
+                {
                     date = dateformat.parse(request.getParameter("datum"));
-                } catch (ParseException ex) {
+                }
+                catch (ParseException ex) 
+                {
                     System.out.println("EXCEPTION");
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                double onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
+                onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
                 String omschrijving = request.getParameter("omschrijving");
                 
                 /* Data afprinten */
@@ -208,60 +216,61 @@ public class Controller extends HttpServlet
                 
                 gotoPage("selectKrediet", request, response);
             }
-            if (action.equals("delete")){
-                
+            if (action.equals("delete"))
+            {
 //              CODE OM ONKOST TE DELETEN
                 
 //              CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
                 //sessie.setAttribute("onkList", onkList);
                 
                 gotoPage("overzicht", request, response);
-                
             }
             
-            if (action.equals("overzicht")){
-                
-//            CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
+            if (action.equals("overzicht"))
+            {
+                onkList = stateless.getOnkosten(pNummer);
                 sessie.setAttribute("onkList", onkList);
                 
                 gotoPage("overzicht", request, response);
             }
-            if (action.equals("uitloggen")){
+            if (action.equals("uitloggen"))
+            {
                 sessie.invalidate();
                 response.sendRedirect("inloggen.jsp");
             }
         }
         
         /* SELECT KREDIET */
-        
         else if(goTo.equals("selectKredietStop"))
         {
-            
             String action = request.getParameter("action");
             
-            if (action.equals("overzicht")){
-                
-//            CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
-                //sessie.setAttribute("onkList", onkList);
+            if (action.equals("overzicht"))
+            {
+                onkList = stateless.getOnkosten(pNummer);
+                sessie.setAttribute("onkList", onkList);
                 
                 gotoPage("overzicht", request, response);
             }
-            if (action.equals("uitloggen")){
+            if (action.equals("uitloggen"))
+            {
                 sessie.invalidate();
                 response.sendRedirect("inloggen.jsp");
             }
         }
         
-        else if(goTo.equals("selectKrediet")){
-//            CODE OM ONKOST DOOR TE STUREN EN KREDIET AAN TE PASSEN
-            String krediet = request.getParameter("krediet");
-            String status = "doorgestuurd";
+        else if(goTo.equals("selectKrediet"))
+        {
+            int krediet = Integer.parseInt(request.getParameter("krediet"));
+            double saldo = stateless.getKredietById(krediet).getKrSaldo() - onkostenBedrag;
+            stateless.setKredietSaldo(krediet, saldo);
+            
+            stateless.setOnkostStatus(onkostId, "Doorgestuurd");
             
             System.out.println("krediet : " + krediet + "\n\n");
-            System.out.println("status : " + status + "\n\n");
             
-//            CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
-            //sessie.setAttribute("onkList", onkList);
+            onkList = stateless.getOnkosten(pNummer);
+            sessie.setAttribute("onkList", onkList);
                 
             gotoPage("overzicht", request, response);
         }
@@ -274,8 +283,8 @@ public class Controller extends HttpServlet
             
             if(action.equals("overzicht"))
             {
-//            CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
-                //sessie.setAttribute("onkList", onkList);
+                onkList = stateless.getOnkosten(pNummer);
+                sessie.setAttribute("onkList", onkList);
                 
                 gotoPage("overzicht", request, response);
             }
@@ -302,12 +311,13 @@ public class Controller extends HttpServlet
             
             if(action.equals("overzicht"))
             {
-//            CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
-                //sessie.setAttribute("onkList", onkList);
+                onkList = stateless.getOnkosten(pNummer);
+                sessie.setAttribute("onkList", onkList);
                 
                 gotoPage("overzicht", request, response);
             }
-            if (action.equals("uitloggen")){
+            if (action.equals("uitloggen"))
+            {
                 sessie.invalidate();
                 response.sendRedirect("inloggen.jsp");
             }
@@ -320,9 +330,12 @@ public class Controller extends HttpServlet
             
             SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
             Date date = new Date();
-            try {
+            try
+            {
                 date = dateformat.parse("21/02/2017");
-            } catch (ParseException ex) {
+            }
+            catch (ParseException ex) 
+            {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -338,9 +351,11 @@ public class Controller extends HttpServlet
         
         else if(goTo.equals("infoOnkostStop"))
         {
-
 //            CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
             //sessie.setAttribute("onkList", onkList);
+            onkList = stateless.getOnkosten(pNummer);
+            sessie.setAttribute("onkList", onkList);
+            
             gotoPage("overzicht", request, response);
         }
         
@@ -380,7 +395,9 @@ public class Controller extends HttpServlet
             }
             if(action.equals("overzicht"))
             {
-//            CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
+                onkList = stateless.getOnkosten(pNummer);
+                sessie.setAttribute("onkList", onkList);
+                
                 gotoPage("overzicht", request, response);
             }
             if (action.equals("uitloggen")){
@@ -388,7 +405,6 @@ public class Controller extends HttpServlet
                 response.sendRedirect("inloggen.jsp");
             }
         }
-        
     }
   
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
@@ -407,7 +423,8 @@ public class Controller extends HttpServlet
         view.forward(request, response);
     }
     
-    public String getServletInfo() {
+    public String getServletInfo() 
+    {
         return "Short description";
     }
 }
