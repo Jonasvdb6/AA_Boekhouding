@@ -16,11 +16,11 @@
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
-                    <file>${reference.Gui.j2ee-module-car}</file>
+                    <file>${reference.BoekhoudingLibrary.jar}</file>
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
-                    <file>${reference.BoekhoudingLibrary.jar}</file>
+                    <file>${reference.Gui.j2ee-module-car}</file>
                     <path-in-war>/</path-in-war>
                 </library>
             </web-module-additional-libraries>

@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import SessionBean.StatelessBeanLocal;
+import java.util.Collections;
 
 /**
  *
@@ -101,10 +102,12 @@ public class Controller extends HttpServlet
             gotoPage("goedkeurenOnkost", request, response);
         }
         else if(goTo.equals("bekijkOnkost"))
-        {            
+        {
+            System.out.println("onkost list voor : " + onkList);
             onkostId = Integer.parseInt(request.getParameter("onkostId"));
+            System.out.println("onkost id : " + onkostId);
             //-1 omdat de grootte van de arraylist bij 1 begint te tellen en de index bij 0
-            onkost = onkList.get(onkList.size()-1);
+            onkost = stateless.getOnkostById(onkostId);
             sessie.setAttribute("Onkost", onkost);
             
             gotoPage("bekijkOnkost", request, response);
@@ -162,33 +165,43 @@ public class Controller extends HttpServlet
                 String omschrijving = request.getParameter("omschrijving");
                 
                 /* Data afprinten */
-                System.out.println("datum : " + date + "\n\n");
-                System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
-                System.out.println("omschrijving : " + omschrijving + "\n\n");
-                
                 System.out.println("OnkostId : " + onkostId);
+                System.out.println("datum : " + date);
+                System.out.println("onkostenBedrag : " + onkostenBedrag);
+                System.out.println("omschrijving : " + omschrijving);
                 
                 //Zowel eigen kredieten al die van de baas worden opgehaald
                 kredList = stateless.getKredietenEigenEnBaas(pNummer, bNummer);
-                Onkosten o = stateless.getOnkostById(onkostId);
                 
+                List<Integer> indexToRemove = new ArrayList<Integer>();
                 for(int i=0; i<kredList.size(); i++)
                 {
                     if(kredList.get(i).getKrType() == 1)
                     {
-                        if( (kredList.get(i).getKrSaldo() - o.getOnkostenBedrag()) < 0 )
+                        if( (kredList.get(i).getKrSaldo() - onkostenBedrag) < 0 )
                         {
-                            kredList.remove(i);
+                            indexToRemove.add(i);
                         }
                     }
                     else
                     {
-                        if( (kredList.get(i).getKrSaldo() - o.getOnkostenBedrag()) < 0 )
+                        krNummer = kredList.get(i).getKrNummer();
+                        if( (kredList.get(i).getKrSaldo() - onkostenBedrag) < 0 )
                         {
-                            krNummer = kredList.get(i).getKrNummer();
                             stateless.setNegatief(krNummer, 1);
                         }
+                        else
+                        {
+                            stateless.setNegatief(krNummer, 0);
+                        }
                     }
+                }
+                
+                //Om ervoor te zorgen dat de jusite elementen verwijderd worden
+                Collections.sort(indexToRemove, Collections.reverseOrder());
+                for(int i=0; i<indexToRemove.size(); i++)
+                {
+                    kredList.remove((int)indexToRemove.get(i));
                 }
                 
                 sessie.setAttribute("kredList", kredList);
