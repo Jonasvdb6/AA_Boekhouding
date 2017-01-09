@@ -26,15 +26,14 @@
     <body>
         <div class="container">
             <c:choose>
-                <c:when test="${Onkost.status == 'niet afgehandeld'}">
+                <c:when test="${Onkost.status == 'niet afgehandeld' || Onkost.status == 'in aanmaak'}">
                     <form method="post" action="Controller" >
                         <div class="menubalkform">
-                            <input type="image" src="images/saveOnkostO.png" alt="submit" name="action" value="save" class="menubalkpict">
-                            <input type="image" src="images/sendOnkostO.png" alt="submit" name="action" value="send" class="menubalkpict">
-                            <input type="image" src="images/deleteO.png" alt="submit" name="action" value="delete" class="menubalkpict">
-                            <input type="image" src="images/overzichtO.png" alt="submit" name="action" value="overzicht" class="menubalkpict">
-                            <input type="image" src="images/logoutO.png" alt="submit" name="action" value="uitloggen" class="menubalklogout">
-                            <input type="hidden" name="goto" value="saveOnkost"/>
+                            <input type="image" src="images/saveOnkostO.png" alt="submit" name="goto" value="save" class="menubalkpict">
+                            <input type="image" src="images/sendOnkostO.png" alt="submit" name="goto" value="send" class="menubalkpict">
+                            <input type="image" src="images/deleteO.png" alt="submit" name="goto" value="delete" class="menubalkpict">
+                            <input type="image" src="images/overzichtO.png" alt="submit" name="goto" value="overzicht" class="menubalkpict">
+                            <input type="image" src="images/logoutO.png" alt="submit" name="goto" value="uitloggen" class="menubalklogout">
                         </div>
                         <hr class="menubalkhr">
                         <div class="titel">
@@ -97,9 +96,8 @@
                 <c:otherwise>
                     <form method="post" action="Controller" >
                         <div class="menubalkform">
-                            <input type="image" src="images/overzichtO.png" alt="submit" name="action" value="overzicht" class="menubalkpict">
-                            <input type="image" src="images/logoutO.png" alt="submit" name="action" value="uitloggen" class="menubalklogout2">
-                            <input type="hidden" name="goto" value="saveOnkost"/>
+                            <input type="image" src="images/overzichtO.png" alt="submit" name="goto" value="overzicht" class="menubalkpict">
+                            <input type="image" src="images/logoutO.png" alt="submit" name="goto" value="uitloggen" class="menubalklogout2">
                         </div>
                         <hr class="menubalkhr">
                         <div class="titel">

@@ -17,9 +17,8 @@
         <div class="container">
             <form method="post" action="Controller" >
                 <div class="menubalkform">
-                    <input type="image" src="images/overzichtO.png" alt="submit" name="action" value="overzicht" class="menubalkpict">
-                    <input type="image" src="images/logoutO.png" alt="submit" name="action" value="uitloggen" class="menubalklogout2">
-                    <input type="hidden" name="goto" value="selectKredietStop"/>
+                    <input type="image" src="images/overzichtO.png" alt="submit" name="goTo" value="overzicht" class="menubalkpict">
+                    <input type="image" src="images/logoutO.png" alt="submit" name="goTo" value="uitloggen" class="menubalklogout2">
                 </div>
             </form>
             <hr class="menubalkhr">

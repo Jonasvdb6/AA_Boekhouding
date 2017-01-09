@@ -17,13 +17,12 @@
         <div class="container">
             <form method="post" action="Controller" >
                 <div class="menubalkform">
-                    <input type="image" src="images/goedkeurenO.png" alt="submit" name="action" value="goedkeuren" class="menubalkpict">
-                    <input type="image" src="images/afkeurenO.png" alt="submit" name="action" value="afkeuren" class="menubalkpict">
-                    <input type="image" src="images/bekijk.png" alt="submit" name="action" value="bekijkOnkost" class="menubalkpict">
-                    <input type="image" src="images/kredietBekijken.png" alt="submit" name="action" value="bekijkKrediet" class="menubalkpict">
-                    <input type="image" src="images/overzichtO.png" alt="submit" name="action" value="overzicht" class="menubalkpict">
-                    <input type="image" src="images/logoutO.png" alt="submit" name="action" value="uitloggen" class="menubalklogout">
-                    <input type="hidden" name="goto" value="goedkeurenOnkostUpdate"/>
+                    <input type="image" src="images/goedkeurenO.png" alt="submit" name="goto" value="goedkeuren" class="menubalkpict">
+                    <input type="image" src="images/afkeurenO.png" alt="submit" name="goto" value="afkeuren" class="menubalkpict">
+                    <input type="image" src="images/bekijk.png" alt="submit" name="goto" value="bekijkOnkost" class="menubalkpict">
+                    <input type="image" src="images/kredietBekijken.png" alt="submit" name="goto" value="bekijkKrediet" class="menubalkpict">
+                    <input type="image" src="images/overzichtO.png" alt="submit" name="goto" value="overzicht" class="menubalkpict">
+                    <input type="image" src="images/logoutO.png" alt="submit" name="goto" value="uitloggen" class="menubalklogout">
                 </div>
                 <hr class="menubalkhr">
                 <div class="titel">

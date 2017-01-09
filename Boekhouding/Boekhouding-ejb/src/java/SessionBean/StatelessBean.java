@@ -8,6 +8,7 @@ package SessionBean;
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,7 +50,6 @@ public class StatelessBean implements StatelessBeanLocal
     
     public int getOnkostId(int pnummer)
     {
-        //De query geeft de laatste onkostId terug dus +1 om een nieuwe onkostId toe te voegen
         return (int) em.createNamedQuery("Onkosten.laatsteOnkId").setParameter("pnummer", pnummer).getSingleResult();
     }
     
@@ -62,6 +62,22 @@ public class StatelessBean implements StatelessBeanLocal
     {
         Onkosten k = (Onkosten) em.createNamedQuery("Onkosten.findByOnkostId").setParameter("onkostId", onkostId).getSingleResult();
         k.setStatus(status);
+    }
+    
+    public void setOnkost(int onkostId, String omschrijving, Date datum, double onkBedrag, String status)
+    {
+        Onkosten o = (Onkosten) em.createNamedQuery("Onkosten.findByOnkostId").setParameter("onkostId", onkostId).getSingleResult();
+        o.setDatum(datum);
+        o.setOmschrijving(omschrijving);
+        o.setOnkostenBedrag(onkBedrag);
+        o.setStatus(status);
+        em.persist(o);
+    }
+    
+    public void deleteOnkost(int onkostId)
+    {
+        Onkosten k = (Onkosten) em.createNamedQuery("Onkosten.findByOnkostId").setParameter("onkostId", onkostId).getSingleResult();
+        em.remove(k);
     }
     
     

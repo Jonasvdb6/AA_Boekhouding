@@ -40,7 +40,6 @@ public class Controller extends HttpServlet
     @EJB private StatelessBeanLocal stateless;
     
     /* globale variabelen */
-    
     int pNummer;
     int bNummer;
     int werkType;
@@ -72,6 +71,20 @@ public class Controller extends HttpServlet
             gotoPage("overzicht", request, response);
         }
         
+        else if(goTo.equals("uitloggen"))
+        {
+            sessie.invalidate();
+            response.sendRedirect("inloggen.jsp");
+        }
+        
+        else if (goTo.equals("overzicht"))
+        {
+            onkList = stateless.getOnkosten(pNummer);
+            sessie.setAttribute("onkList", onkList);
+
+            gotoPage("overzicht", request, response);
+        }
+        
         /* INLOGGENERROR */
         else if(goTo.equals("inloggenError"))
         {
@@ -83,6 +96,8 @@ public class Controller extends HttpServlet
         {
             onkostId = stateless.getOnkostId(pNummer);
             sessie.setAttribute("onkostId", onkostId+1);
+            
+            System.out.println("onkostId : " + onkostId);
             
             gotoPage("nieuweOnkosten", request, response);
         }
@@ -107,156 +122,114 @@ public class Controller extends HttpServlet
             System.out.println("onkost list voor : " + onkList);
             onkostId = Integer.parseInt(request.getParameter("onkostId"));
             System.out.println("onkost id : " + onkostId);
-            //-1 omdat de grootte van de arraylist bij 1 begint te tellen en de index bij 0
             onkost = stateless.getOnkostById(onkostId);
             sessie.setAttribute("Onkost", onkost);
             
             gotoPage("bekijkOnkost", request, response);
-        }
-        else if(goTo.equals("uitloggen"))
-        {
-            sessie.invalidate();
-            response.sendRedirect("inloggen.jsp");
-        }
+        }        
         
         /* NIEUWE ONKOST + BEKIJK ONKOST*/
-        else if(goTo.equals("saveOnkost"))
+        else if (goTo.equals("save"))
         {
-            System.out.println("pnummer: " + pNummer + "\n\n");
-            System.out.println("onkList: " + onkList + "\n\n");
-            String action = request.getParameter("action");
-            System.out.println(" action (processRequest): " + action + "\n\n");
-            if (action.equals("save"))
+            /* Data uit form halen */
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Date datum = new Date();
+            try 
             {
-//                CODE OM ONKOST OP TE SLAAN
-
-                /* Data uit form halen */
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                Date datum = new Date();
-                try 
-                {
-                    datum = formatter.parse(request.getParameter("datum")); 
-                }
-                catch (ParseException ex) 
-                {
-                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                double onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
-                String omschrijving = request.getParameter("omschrijving");
-                String status = "in aanmaak";
-                
-                /* Data afprinten */
-                System.out.println("datum : " + datum + "\n\n");
-                System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
-                System.out.println("omschrijving : " + omschrijving + "\n\n");
-
-//            CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
-                //sessie.setAttribute("onkList", onkList);
-                
-                gotoPage("overzicht", request, response);
+                datum = formatter.parse(request.getParameter("datum")); 
             }
-            if (action.equals("send"))
+            catch (ParseException ex)
             {
-                /* Data uit form halen */
-                SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
-                Date date = new Date();
-                try 
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            double onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
+            String omschrijving = request.getParameter("omschrijving");
+            String status = "in aanmaak";
+
+            stateless.setOnkost(onkostId, omschrijving, datum, onkostenBedrag, status);
+
+            /* Data afprinten */
+            System.out.println("datum : " + datum + "\n\n");
+            System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
+            System.out.println("omschrijving : " + omschrijving + "\n\n");
+
+            onkList = stateless.getOnkosten(pNummer);
+            sessie.setAttribute("onkList", onkList);
+
+            gotoPage("overzicht", request, response);
+        }
+        
+        else if (goTo.equals("send"))
+        {
+            /* Data uit form halen */
+            SimpleDateFormat dateformat = new SimpleDateFormat ("dd/MM/yyyy");
+            Date date = new Date();
+            try 
+            {
+                date = dateformat.parse(request.getParameter("datum"));
+            }
+            catch (ParseException ex) 
+            {
+                System.out.println("EXCEPTION");
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
+            String omschrijving = request.getParameter("omschrijving");
+
+            /* Data afprinten */
+            System.out.println("OnkostId : " + onkostId);
+            System.out.println("datum : " + date);
+            System.out.println("onkostenBedrag : " + onkostenBedrag);
+            System.out.println("omschrijving : " + omschrijving);
+
+            //Zowel eigen kredieten al die van de baas worden opgehaald
+            kredList = stateless.getKredietenEigenEnBaas(pNummer, bNummer);
+
+            List<Integer> indexToRemove = new ArrayList<Integer>();
+            for(int i=0; i<kredList.size(); i++)
+            {
+                if(kredList.get(i).getKrType() == 1)
                 {
-                    date = dateformat.parse(request.getParameter("datum"));
-                }
-                catch (ParseException ex) 
-                {
-                    System.out.println("EXCEPTION");
-                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
-                String omschrijving = request.getParameter("omschrijving");
-                
-                /* Data afprinten */
-                System.out.println("OnkostId : " + onkostId);
-                System.out.println("datum : " + date);
-                System.out.println("onkostenBedrag : " + onkostenBedrag);
-                System.out.println("omschrijving : " + omschrijving);
-                
-                //Zowel eigen kredieten al die van de baas worden opgehaald
-                kredList = stateless.getKredietenEigenEnBaas(pNummer, bNummer);
-                
-                List<Integer> indexToRemove = new ArrayList<Integer>();
-                for(int i=0; i<kredList.size(); i++)
-                {
-                    if(kredList.get(i).getKrType() == 1)
+                    if( (kredList.get(i).getKrSaldo() - onkostenBedrag) < 0 )
                     {
-                        if( (kredList.get(i).getKrSaldo() - onkostenBedrag) < 0 )
-                        {
-                            indexToRemove.add(i);
-                        }
+                        indexToRemove.add(i);
+                    }
+                }
+                else
+                {
+                    krNummer = kredList.get(i).getKrNummer();
+                    if( (kredList.get(i).getKrSaldo() - onkostenBedrag) < 0 )
+                    {
+                        stateless.setNegatief(krNummer, 1);
                     }
                     else
                     {
-                        krNummer = kredList.get(i).getKrNummer();
-                        if( (kredList.get(i).getKrSaldo() - onkostenBedrag) < 0 )
-                        {
-                            stateless.setNegatief(krNummer, 1);
-                        }
-                        else
-                        {
-                            stateless.setNegatief(krNummer, 0);
-                        }
+                        stateless.setNegatief(krNummer, 0);
                     }
                 }
-                
-                //Om ervoor te zorgen dat de jusite elementen verwijderd worden
-                Collections.sort(indexToRemove, Collections.reverseOrder());
-                for(int i=0; i<indexToRemove.size(); i++)
-                {
-                    kredList.remove((int)indexToRemove.get(i));
-                }
-                
-                sessie.setAttribute("kredList", kredList);
-                
-                gotoPage("selectKrediet", request, response);
             }
-            if (action.equals("delete"))
+
+            //Om ervoor te zorgen dat de jusite elementen verwijderd worden
+            Collections.sort(indexToRemove, Collections.reverseOrder());
+            for(int i=0; i<indexToRemove.size(); i++)
             {
-//              CODE OM ONKOST TE DELETEN
-                
-//              CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE HALEN UIT DATABASE
-                //sessie.setAttribute("onkList", onkList);
-                
-                gotoPage("overzicht", request, response);
+                kredList.remove((int)indexToRemove.get(i));
             }
-            
-            if (action.equals("overzicht"))
-            {
-                onkList = stateless.getOnkosten(pNummer);
-                sessie.setAttribute("onkList", onkList);
-                
-                gotoPage("overzicht", request, response);
-            }
-            if (action.equals("uitloggen"))
-            {
-                sessie.invalidate();
-                response.sendRedirect("inloggen.jsp");
-            }
+
+            sessie.setAttribute("kredList", kredList);
+
+            gotoPage("selectKrediet", request, response);
         }
         
-        /* SELECT KREDIET */
-        else if(goTo.equals("selectKredietStop"))
+        else if (goTo.equals("delete"))
         {
-            String action = request.getParameter("action");
-            
-            if (action.equals("overzicht"))
-            {
-                onkList = stateless.getOnkosten(pNummer);
-                sessie.setAttribute("onkList", onkList);
-                
-                gotoPage("overzicht", request, response);
-            }
-            if (action.equals("uitloggen"))
-            {
-                sessie.invalidate();
-                response.sendRedirect("inloggen.jsp");
-            }
+//              CODE OM ONKOST TE DELETEN
+            stateless.deleteOnkost(onkostId);
+
+            onkList = stateless.getOnkosten(pNummer);
+            sessie.setAttribute("onkList", onkList);
+
+            gotoPage("overzicht", request, response);
         }
         
         else if(goTo.equals("selectKrediet"))
@@ -275,53 +248,16 @@ public class Controller extends HttpServlet
             gotoPage("overzicht", request, response);
         }
         
-        /* OVERZICHT KREDIETEN */
-        
-        else if(goTo.equals("overzichtKredietStop"))
-        {
-            String action = request.getParameter("action");
-            
-            if(action.equals("overzicht"))
-            {
-                onkList = stateless.getOnkosten(pNummer);
-                sessie.setAttribute("onkList", onkList);
-                
-                gotoPage("overzicht", request, response);
-            }
-            if (action.equals("uitloggen")){
-                sessie.invalidate();
-                response.sendRedirect("inloggen.jsp");
-            }
-        }
-        
         else if(goTo.equals("bekijkKrediet"))
         {
 //            CODE OM ARRAYLIST VAN ONKOSTEN VAN KREDIET OP TE HALEN UIT DATABASE
             
             krNummer = Integer.parseInt(request.getParameter("krediet"));
+            onkostId = Integer.parseInt(request.getParameter("onkostId"));
             
             gotoPage("bekijkKrediet", request, response);
         }
-        
-        /* BEKIJK KREDIET */
-        
-        else if(goTo.equals("bekijkKredietStop"))
-        {
-            String action = request.getParameter("action");
-            
-            if(action.equals("overzicht"))
-            {
-                onkList = stateless.getOnkosten(pNummer);
-                sessie.setAttribute("onkList", onkList);
-                
-                gotoPage("overzicht", request, response);
-            }
-            if (action.equals("uitloggen"))
-            {
-                sessie.invalidate();
-                response.sendRedirect("inloggen.jsp");
-            }
-        }
+
         else if(goTo.equals("infoOnkost"))
         {
             
@@ -360,50 +296,21 @@ public class Controller extends HttpServlet
         }
         
         /* GOEDKEUREN ONKOST */
-        
-        else if (goTo.equals("goedkeurenOnkostUpdate"))
+        else if (goTo.equals("goedkeuren"))
         {
-            String action = request.getParameter("action");
-            
-            if (action.equals("goedkeuren"))
-            {
-//                CODE OM STATUS VAN ONKOST AAN TE PASSEN IN BETAALD
-//                CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE VRAGEN UIT DATABASE
-//                STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS  
-                onkostId = Integer.parseInt(request.getParameter("onkostId"));
-                gotoPage("goedkeurenOnkost", request, response);
-            }
-            if (action.equals("afkeuren"))
-            {
-//                CODE OM STATUS VAN ONKOST AAN TE PASSEN IN AFGEKEURD
-//                CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE VRAGEN UIT DATABASE
-//                STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS  
-                onkostId = Integer.parseInt(request.getParameter("onkostId"));
-                gotoPage("goedkeurenOnkost", request, response);
-            }
-            if (action.equals("bekijkOnkost"))
-            {
-//                CODE OM DATA ONKOST UIT DATABASE TE HALEN DMV ONKOSTID 
-                onkostId = Integer.parseInt(request.getParameter("onkostId"));
-                gotoPage("infoOnkost", request, response);
-            }
-            if (action.equals("bekijkKrediet"))
-            {
-//            CODE OM ARRAYLIST VAN ONKOSTEN VAN KREDIET OP TE HALEN UIT DATABASE DMV ONKOSTID
-                onkostId = Integer.parseInt(request.getParameter("onkostId"));
-                gotoPage("bekijkKrediet", request, response);
-            }
-            if(action.equals("overzicht"))
-            {
-                onkList = stateless.getOnkosten(pNummer);
-                sessie.setAttribute("onkList", onkList);
-                
-                gotoPage("overzicht", request, response);
-            }
-            if (action.equals("uitloggen")){
-                sessie.invalidate();
-                response.sendRedirect("inloggen.jsp");
-            }
+//          CODE OM STATUS VAN ONKOST AAN TE PASSEN IN BETAALD
+//          CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE VRAGEN UIT DATABASE
+//          STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS  
+            onkostId = Integer.parseInt(request.getParameter("onkostId"));
+            gotoPage("goedkeurenOnkost", request, response);
+        }
+        else if (goTo.equals("afkeuren"))
+        {
+//          CODE OM STATUS VAN ONKOST AAN TE PASSEN IN AFGEKEURD
+//          CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE VRAGEN UIT DATABASE
+//          STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS  
+            onkostId = Integer.parseInt(request.getParameter("onkostId"));
+            gotoPage("goedkeurenOnkost", request, response);
         }
     }
   

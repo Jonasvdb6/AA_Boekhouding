@@ -6,6 +6,7 @@
 package SessionBean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -27,4 +28,6 @@ public interface StatelessBeanLocal
     public void setOnkostStatus(int onkostId, String status);
     public Kredieten getKredietById(int krNummer);
     public void setKredietSaldo(int krNummer, double saldo);
+    public void setOnkost(int onkostId, String omschrijving, Date datum, double onkBedrag, String status);
+    public void deleteOnkost(int onkostId);
 }
