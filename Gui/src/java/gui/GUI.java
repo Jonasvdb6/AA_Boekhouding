@@ -10,8 +10,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 //import SessionBean.localStateless;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -55,9 +57,19 @@ public class GUI extends JFrame implements ActionListener{
         c.add(panelKnoppen);
         zoekKnop.addActionListener(this);
         
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
+        int vensterBreedte = 250;
+        int vensterHoogte = 100;
+        
+        setSize(vensterBreedte,vensterHoogte);
+        System.out.println("width : " + width);
+        System.out.println("height : " + height);
+        setLocation(width/2-vensterBreedte/2,height/2-vensterHoogte/2);
         setVisible(true); 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(250,50);
     }
     
     
