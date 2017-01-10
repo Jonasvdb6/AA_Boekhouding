@@ -20,7 +20,7 @@ public interface StatelessBeanLocal
     public int getBNumer(int pnummer);
     public int getWerkType(int pnummer);
     public List getOnkosten(int pnummer);
-    public int getOnkostId(int pnummer);
+    public int getOnkostId();
     public List getKredietenAll();
     public Onkosten getOnkostById(int onkostId);
     public List getKredietenEigenEnBaas(int pnummer, int bnummer);

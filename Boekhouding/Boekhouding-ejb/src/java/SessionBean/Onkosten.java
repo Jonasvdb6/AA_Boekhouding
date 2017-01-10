@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Onkosten.findByStatus", query = "SELECT o FROM Onkosten o WHERE o.status = :status"),
     @NamedQuery(name = "Onkosten.findByPnummer", query = "SELECT o FROM Onkosten o WHERE o.pnummer = :pnummer"),
     //Query om laaste onkostId op te vragen:
-    @NamedQuery(name = "Onkosten.laatsteOnkId", query = "SELECT MAX(o.onkostId) FROM Onkosten o WHERE o.pnummer = :pnummer")})
+    @NamedQuery(name = "Onkosten.laatsteOnkId", query = "SELECT MAX(o.onkostId) FROM Onkosten o")})
 public class Onkosten implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -48,9 +48,9 @@ public class StatelessBean implements StatelessBeanLocal
         return em.createNamedQuery("Onkosten.findByPnummer").setParameter("pnummer", pnummer).getResultList();
     }
     
-    public int getOnkostId(int pnummer)
+    public int getOnkostId()
     {
-        return (int) em.createNamedQuery("Onkosten.laatsteOnkId").setParameter("pnummer", pnummer).getSingleResult();
+        return (int) em.createNamedQuery("Onkosten.laatsteOnkId").getSingleResult();
     }
     
     public Onkosten getOnkostById(int onkostId)

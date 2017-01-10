@@ -45,6 +45,7 @@ public class Controller extends HttpServlet
     int werkType;
     int krNummer;
     int onkostId;
+    int first = 1;
     double onkostenBedrag;
     List<Onkosten> onkList = new ArrayList<>();
     List<Kredieten> kredList = new ArrayList<>();
@@ -94,7 +95,7 @@ public class Controller extends HttpServlet
         /* OVERZICHT */
         else if(goTo.equals("nieuweOnkosten"))
         {
-            onkostId = stateless.getOnkostId(pNummer);
+            onkostId = stateless.getOnkostId();
             sessie.setAttribute("onkostId", onkostId+1);
             
             System.out.println("onkostId : " + onkostId);
@@ -131,12 +132,12 @@ public class Controller extends HttpServlet
             String omschrijving = request.getParameter("omschrijving");
             String status = "in aanmaak";
 
-            stateless.setOnkost(onkostId, omschrijving, datum, onkostenBedrag, status);
-
             /* Data afprinten */
             System.out.println("datum : " + datum + "\n\n");
             System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
             System.out.println("omschrijving : " + omschrijving + "\n\n");
+            
+            stateless.setOnkost(onkostId, omschrijving, datum, onkostenBedrag, status);
 
             onkList = stateless.getOnkosten(pNummer);
             sessie.setAttribute("onkList", onkList);
@@ -161,18 +162,21 @@ public class Controller extends HttpServlet
             String omschrijving = request.getParameter("omschrijving");
             String status = "in aanmaak";
 
-            stateless.maakNewOnkost(onkostId+1, omschrijving, datum, onkostenBedrag, status, pNummer);
-
             /* Data afprinten */
             System.out.println("datum : " + datum + "\n\n");
             System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
             System.out.println("omschrijving : " + omschrijving + "\n\n");
             System.out.println("onkostId : " + onkostId+1 + "\n\n");
+            
+            stateless.maakNewOnkost(onkostId+1, omschrijving, datum, onkostenBedrag, status, pNummer);
 
             onkList = stateless.getOnkosten(pNummer);
             sessie.setAttribute("onkList", onkList);
-
-            gotoPage("overzicht", request, response);
+            
+            if (goTo.equals("saveNew"))
+            {
+                gotoPage("overzicht", request, response);
+            }
         }
         
         else if (goTo.equals("send"))
@@ -237,6 +241,82 @@ public class Controller extends HttpServlet
             gotoPage("selectKrediet", request, response);
         }
         
+        else if (goTo.equals("sendNew"))
+        {
+            /* Save new */
+            /* Data uit form halen */
+            if (first == 1)
+            {
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Date datum = new Date();
+                try 
+                {
+                    datum = formatter.parse(request.getParameter("datum")); 
+                }
+                catch (ParseException ex)
+                {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
+                String omschrijving = request.getParameter("omschrijving");
+                String status = "in aanmaak";
+
+                /* Data afprinten */
+                System.out.println("datum : " + datum + "\n\n");
+                System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
+                System.out.println("omschrijving : " + omschrijving + "\n\n");
+                System.out.println("onkostId : " + onkostId+1 + "\n\n");
+
+                stateless.maakNewOnkost(onkostId+1, omschrijving, datum, onkostenBedrag, status, pNummer);
+
+                onkList = stateless.getOnkosten(pNummer);
+                sessie.setAttribute("onkList", onkList);
+                
+                onkostId += 1;
+                
+                first = 0;
+            }
+            
+            /* Send new */
+            //Zowel eigen kredieten al die van de baas worden opgehaald
+            kredList = stateless.getKredietenEigenEnBaas(pNummer, bNummer);
+
+            List<Integer> indexToRemove = new ArrayList<Integer>();
+            for(int i=0; i<kredList.size(); i++)
+            {
+                if(kredList.get(i).getKrType() == 1)
+                {
+                    if( (kredList.get(i).getKrSaldo() - onkostenBedrag) < 0 )
+                    {
+                        indexToRemove.add(i);
+                    }
+                }
+                else
+                {
+                    krNummer = kredList.get(i).getKrNummer();
+                    if( (kredList.get(i).getKrSaldo() - onkostenBedrag) < 0 )
+                    {
+                        stateless.setNegatief(krNummer, 1);
+                    }
+                    else
+                    {
+                        stateless.setNegatief(krNummer, 0);
+                    }
+                }
+            }
+
+            //Om ervoor te zorgen dat de jusite elementen verwijderd worden
+            Collections.sort(indexToRemove, Collections.reverseOrder());
+            for(int i=0; i<indexToRemove.size(); i++)
+            {
+                kredList.remove((int)indexToRemove.get(i));
+            }
+
+            sessie.setAttribute("kredList", kredList);
+
+            gotoPage("selectKrediet", request, response);
+        }
+        
         else if (goTo.equals("delete"))
         {
             stateless.deleteOnkost(onkostId);
@@ -249,13 +329,18 @@ public class Controller extends HttpServlet
         
         else if(goTo.equals("selectKrediet"))
         {
+            first = 1;
+            
             int krediet = Integer.parseInt(request.getParameter("krediet"));
             double saldo = stateless.getKredietById(krediet).getKrSaldo() - onkostenBedrag;
             stateless.setKredietSaldo(krediet, saldo);
             
             stateless.setOnkostStatus(onkostId, "Doorgestuurd");
             
+            System.out.println("onkostId : " + onkostId + "\n\n");
+            System.out.println("krediet saldo: " + stateless.getKredietById(krediet).getKrSaldo() + "\n\n");
             System.out.println("krediet : " + krediet + "\n\n");
+            System.out.println("onkostenBedrag : " + onkostenBedrag + "\n\n");
             
             onkList = stateless.getOnkosten(pNummer);
             sessie.setAttribute("onkList", onkList);
