@@ -63,6 +63,22 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">
+                            <c:out value="Totaal"></c:out>
+                        </td>
+                        <td style="font-weight: bold">
+                            <c:out value="${totaalKrediet}"></c:out>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </table>
                 <input type="hidden" name="goto" value="bekijkKrediet"/>
             </form>

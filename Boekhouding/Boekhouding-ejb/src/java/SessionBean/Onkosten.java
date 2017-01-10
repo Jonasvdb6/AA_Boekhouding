@@ -35,8 +35,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Onkosten.findByOnkostenBedrag", query = "SELECT o FROM Onkosten o WHERE o.onkostenBedrag = :onkostenBedrag"),
     @NamedQuery(name = "Onkosten.findByStatus", query = "SELECT o FROM Onkosten o WHERE o.status = :status"),
     @NamedQuery(name = "Onkosten.findByPnummer", query = "SELECT o FROM Onkosten o WHERE o.pnummer = :pnummer"),
-    //Query om laaste onkostId op te vragen:
-    @NamedQuery(name = "Onkosten.laatsteOnkId", query = "SELECT MAX(o.onkostId) FROM Onkosten o")})
+    //Query om laaste onkostId op te vragen
+    @NamedQuery(name = "Onkosten.laatsteOnkId", query = "SELECT MAX(o.onkostId) FROM Onkosten o"),
+    //Query om onkosten van bepaald krediet op te vragen
+    @NamedQuery(name = "Onkosten.onkostenVanKrediet", query = "SELECT o FROM Onkosten o WHERE o.krNummer = :krNummer"),
+    //Query om onkosten van bepaald krediet op te vragen met status doorgestuurd
+    @NamedQuery(name = "Onkosten.onkostenVanKredietDoorgestuurd", query = "SELECT o FROM Onkosten o WHERE o.krNummer = :krNummer and o.status = 'Doorgestuurd'")})
 public class Onkosten implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,6 +70,8 @@ public class Onkosten implements Serializable {
     private String status;
     @Column(name = "pnummer")
     private Integer pnummer;
+    @Column(name = "krNummer")
+    private Integer krNummer;
 
     public Onkosten() {
     }
@@ -74,12 +80,14 @@ public class Onkosten implements Serializable {
         this.onkostId = onkostId;
     }
 
-    public Onkosten(Integer onkostId, String omschrijving, Date datum, double onkostenBedrag, String status) {
+    public Onkosten(Integer onkostId, String omschrijving, Date datum, double onkostenBedrag, String status, Integer pnummer, Integer krNummer) {
         this.onkostId = onkostId;
         this.omschrijving = omschrijving;
         this.datum = datum;
         this.onkostenBedrag = onkostenBedrag;
         this.status = status;
+        this.pnummer = pnummer;
+        this.krNummer = krNummer;
     }
 
     public Integer getOnkostId() {
@@ -128,6 +136,14 @@ public class Onkosten implements Serializable {
 
     public void setPnummer(Integer pnummer) {
         this.pnummer = pnummer;
+    }
+    
+    public Integer getKrNummer() {
+        return krNummer;
+    }
+
+    public void setKrNummer(Integer krnummer) {
+        this.krNummer = krnummer;
     }
 
     @Override

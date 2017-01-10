@@ -62,6 +62,14 @@ public class StatelessBean implements StatelessBeanLocal
     {
         Onkosten k = (Onkosten) em.createNamedQuery("Onkosten.findByOnkostId").setParameter("onkostId", onkostId).getSingleResult();
         k.setStatus(status);
+        em.persist(k);
+    }
+    
+    public void setOnkostKrediet(int onkostId, int krNummer)
+    {
+        Onkosten k = (Onkosten) em.createNamedQuery("Onkosten.findByOnkostId").setParameter("onkostId", onkostId).getSingleResult();
+        k.setKrNummer(krNummer);
+        em.persist(k);
     }
     
     public void setOnkost(int onkostId, String omschrijving, Date datum, double onkBedrag, String status)
@@ -80,16 +88,35 @@ public class StatelessBean implements StatelessBeanLocal
         em.remove(k);
     }
     
-    public void maakNewOnkost(int onkId, String omsch, Date d, double onkBed, String stat, int pnr)
+    public void maakNewOnkost(int onkId, String omsch, Date d, double onkBed, String stat, int pnr, int krNr)
     {
-        Onkosten nieuw = new Onkosten();
-        nieuw.setOnkostId(onkId);
-        nieuw.setOmschrijving(omsch);
-        nieuw.setDatum(d);
-        nieuw.setOnkostenBedrag(onkBed);
-        nieuw.setStatus(stat);
-        nieuw.setPnummer(pnr);
+        Onkosten nieuw = new Onkosten(onkId, omsch, d, onkBed, stat, pnr, krNr);
         em.persist(nieuw);
+    }
+    
+    public List getOnkostenKrediet(int krNummer)
+    {
+        return em.createNamedQuery("Onkosten.onkostenVanKrediet").setParameter("krNummer", krNummer).getResultList();
+    }
+    
+    public int getKrNummerVanOnkost(int onkostId)
+    {
+        Onkosten o = (Onkosten) em.createNamedQuery("Onkosten.findByOnkostId").setParameter("onkostId", onkostId).getSingleResult();
+        return o.getKrNummer();
+    }
+    
+    public List getOnkostenManager(int pnummer)
+    {
+        List kredieten = em.createNamedQuery("Kredieten.findByPnummer").setParameter("pnummer", pnummer).getResultList();
+        List onkosten = new ArrayList();
+        for(int i=0; i<kredieten.size(); i++)
+        {
+            Kredieten k = (Kredieten) kredieten.get(i);
+            int krNummer = k.getKrNummer();
+            List onkostenPerKrediet = em.createNamedQuery("Onkosten.onkostenVanKredietDoorgestuurd").setParameter("krNummer", krNummer).getResultList();
+            onkosten.addAll(onkostenPerKrediet);
+        }
+        return onkosten;
     }
     
     

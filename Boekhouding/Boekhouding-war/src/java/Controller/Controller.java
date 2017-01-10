@@ -130,7 +130,7 @@ public class Controller extends HttpServlet
             }
             double onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
             String omschrijving = request.getParameter("omschrijving");
-            String status = "in aanmaak";
+            String status = "In aanmaak";
 
             /* Data afprinten */
             System.out.println("datum : " + datum + "\n\n");
@@ -160,7 +160,7 @@ public class Controller extends HttpServlet
             }
             double onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
             String omschrijving = request.getParameter("omschrijving");
-            String status = "in aanmaak";
+            String status = "In aanmaak";
 
             /* Data afprinten */
             System.out.println("datum : " + datum + "\n\n");
@@ -168,7 +168,7 @@ public class Controller extends HttpServlet
             System.out.println("omschrijving : " + omschrijving + "\n\n");
             System.out.println("onkostId : " + onkostId+1 + "\n\n");
             
-            stateless.maakNewOnkost(onkostId+1, omschrijving, datum, onkostenBedrag, status, pNummer);
+            stateless.maakNewOnkost(onkostId+1, omschrijving, datum, onkostenBedrag, status, pNummer, 0);
 
             onkList = stateless.getOnkosten(pNummer);
             sessie.setAttribute("onkList", onkList);
@@ -259,7 +259,7 @@ public class Controller extends HttpServlet
                 }
                 onkostenBedrag = Double.parseDouble(request.getParameter("bedrag"));
                 String omschrijving = request.getParameter("omschrijving");
-                String status = "in aanmaak";
+                String status = "In aanmaak";
 
                 /* Data afprinten */
                 System.out.println("datum : " + datum + "\n\n");
@@ -267,7 +267,7 @@ public class Controller extends HttpServlet
                 System.out.println("omschrijving : " + omschrijving + "\n\n");
                 System.out.println("onkostId : " + onkostId+1 + "\n\n");
 
-                stateless.maakNewOnkost(onkostId+1, omschrijving, datum, onkostenBedrag, status, pNummer);
+                stateless.maakNewOnkost(onkostId+1, omschrijving, datum, onkostenBedrag, status, pNummer, 0);
 
                 onkList = stateless.getOnkosten(pNummer);
                 sessie.setAttribute("onkList", onkList);
@@ -336,6 +336,7 @@ public class Controller extends HttpServlet
             stateless.setKredietSaldo(krediet, saldo);
             
             stateless.setOnkostStatus(onkostId, "Doorgestuurd");
+            stateless.setOnkostKrediet(onkostId, krediet);
             
             System.out.println("onkostId : " + onkostId + "\n\n");
             System.out.println("krediet saldo: " + stateless.getKredietById(krediet).getKrSaldo() + "\n\n");
@@ -349,24 +350,46 @@ public class Controller extends HttpServlet
         }
         
          else if(goTo.equals("overzichtKrediet"))
-        {
+        {            
             kredList = stateless.getKredietenAll();
+            double totaalKrediet=0;
+            for(int i=0; i<kredList.size(); i++)
+            {
+                totaalKrediet += kredList.get(i).getKrSaldo();
+            }
+            
             sessie.setAttribute("kredList", kredList);
+            sessie.setAttribute("totaalKrediet", totaalKrediet);
             
             gotoPage("overzichtKrediet", request, response);
         }
         
         else if(goTo.equals("bekijkKrediet"))
         {
-//            CODE OM ARRAYLIST VAN ONKOSTEN VAN KREDIET OP TE HALEN UIT DATABASE
-            
             krNummer = Integer.parseInt(request.getParameter("krediet"));
-            //onkostId = Integer.parseInt(request.getParameter("onkostId"));
-            
             System.out.println("krNummer : " + krNummer);
-            //System.out.println("onkostId : " + onkostId);
+            
+            onkList = stateless.getOnkostenKrediet(krNummer);
+            sessie.setAttribute("onkList", onkList);
             
             gotoPage("bekijkKrediet", request, response);
+        }
+        
+        else if(goTo.equals("infoKrediet"))
+        {
+            onkostId = Integer.parseInt(request.getParameter("onkostId"));
+            System.out.println("onkostId : " + onkostId);
+            
+            krNummer = stateless.getKrNummerVanOnkost(onkostId);
+            System.out.println("krNummer : " + krNummer);
+            
+            Kredieten k = stateless.getKredietById(krNummer);
+            
+            onkList = stateless.getOnkostenKrediet(krNummer);
+            sessie.setAttribute("onkList", onkList);
+            sessie.setAttribute("Krediet", k);
+            
+            gotoPage("infoKrediet", request, response);
         }
 
         else if(goTo.equals("infoOnkost"))
@@ -394,10 +417,8 @@ public class Controller extends HttpServlet
         
         /* INFO ONKOST */        
         else if(goTo.equals("goedkeurenOnkost"))
-        {
-// ???            STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS
-            
-            onkList = stateless.getOnkosten(pNummer);
+        {            
+            onkList = stateless.getOnkostenManager(pNummer);
             sessie.setAttribute("onkList", onkList);
             
             gotoPage("goedkeurenOnkost", request, response);
@@ -406,18 +427,22 @@ public class Controller extends HttpServlet
         /* GOEDKEUREN ONKOST */
         else if (goTo.equals("goedkeuren"))
         {
-//          CODE OM STATUS VAN ONKOST AAN TE PASSEN IN BETAALD
-//          CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE VRAGEN UIT DATABASE
-//          STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS  
             onkostId = Integer.parseInt(request.getParameter("onkostId"));
+            stateless.setOnkostStatus(onkostId, "Betaald");
+            
+            onkList = stateless.getOnkostenManager(pNummer);
+            sessie.setAttribute("onkList", onkList);
+            
             gotoPage("goedkeurenOnkost", request, response);
         }
         else if (goTo.equals("afkeuren"))
         {
-//          CODE OM STATUS VAN ONKOST AAN TE PASSEN IN AFGEKEURD
-//          CODE OM UPDATE VAN ARRAYLIST VAN ONKOSTEN OP TE VRAGEN UIT DATABASE
-//          STATUS MOET DOORGESTUURD ZIJN EN WAARVAN PERSOON KREDIETBEHEERDER IS  
             onkostId = Integer.parseInt(request.getParameter("onkostId"));
+            stateless.setOnkostStatus(onkostId, "Afgekeurd");
+            
+            onkList = stateless.getOnkostenManager(pNummer);
+            sessie.setAttribute("onkList", onkList);
+            
             gotoPage("goedkeurenOnkost", request, response);
         }
         

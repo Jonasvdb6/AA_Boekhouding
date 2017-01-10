@@ -30,5 +30,9 @@ public interface StatelessBeanLocal
     public void setKredietSaldo(int krNummer, double saldo);
     public void setOnkost(int onkostId, String omschrijving, Date datum, double onkBedrag, String status);
     public void deleteOnkost(int onkostId);
-    public void maakNewOnkost(int onkId, String omsch, Date d, double onkBed, String stat, int pnr);
+    public void maakNewOnkost(int onkId, String omsch, Date d, double onkBed, String stat, int pnr, int krNr);
+    public void setOnkostKrediet(int onkostId, int krNummer);
+    public List getOnkostenKrediet(int krNummer);
+    public int getKrNummerVanOnkost(int onkostId);
+    public List getOnkostenManager(int pnummer);
 }
