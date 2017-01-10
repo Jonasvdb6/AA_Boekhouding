@@ -6,6 +6,7 @@
 package SessionBean;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -167,8 +168,11 @@ public class Onkosten implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "SessionBean.Onkosten[ onkostId=" + onkostId + " ]";
+    public String toString() 
+    {
+        SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy");
+        String date = dt.format(datum);
+        return "Onkost met onkostnummer " + onkostId + ", ingediend door de werknemer met personeelsnummer " + pnummer + " met een bedrag van " + onkostenBedrag + "€ " + " op " + date + ".\n";
     }
     
 }

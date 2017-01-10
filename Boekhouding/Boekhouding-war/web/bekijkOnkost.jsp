@@ -26,7 +26,7 @@
     <body>
         <div class="container">
             <c:choose>
-                <c:when test="${Onkost.status == 'in aanmaak'}">
+                <c:when test="${Onkost.status == 'In aanmaak'}">
                     <form method="post" action="Controller" >
                         <div class="menubalkform">
                             <input type="image" src="images/saveOnkostO.png" alt="submit" name="goto" value="save" class="menubalkpict">

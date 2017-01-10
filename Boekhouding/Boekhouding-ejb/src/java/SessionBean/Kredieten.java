@@ -31,7 +31,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Kredieten.findByPnummer", query = "SELECT k FROM Kredieten k WHERE k.pnummer = :pnummer"),
     //Query om kredieten van zichzelf en baas op te halen
     @NamedQuery(name = "Kredieten.eigenKredieten", query = "SELECT k FROM Kredieten k WHERE k.pnummer = :pnummer"),
-    @NamedQuery(name = "Kredieten.baasKredieten", query = "SELECT k FROM Kredieten k WHERE k.pnummer = :bnummer")})
+    @NamedQuery(name = "Kredieten.baasKredieten", query = "SELECT k FROM Kredieten k WHERE k.pnummer = :bnummer"),
+    //Query om max kredietId op te vragen
+    @NamedQuery(name = "Kredieten.getMaxKredietId", query = "SELECT MAX(k.krNummer) FROM Kredieten k")})
 public class Kredieten implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -127,8 +129,9 @@ public class Kredieten implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "SessionBean.Kredieten[ krNummer=" + krNummer + " ]";
+    public String toString() 
+    {
+        return "Krediet met kredietnummer " + krNummer + ", heeft een saldo van: " + krSaldo + "€.\n";
     }
     
 }
