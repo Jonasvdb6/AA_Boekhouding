@@ -91,7 +91,7 @@ public class GUI extends JFrame implements ActionListener
             return;
         }
         int maxKredietId = bean.getMaxKredietId();
-        if (KredietId == 0 || KredietId > maxKredietId)
+        if (KredietId <= 0 || KredietId > maxKredietId)
         {
             System.out.println("Dit krediet bestaat niet, geef een geldig kredietnummer op.");
             return;
