@@ -61,7 +61,7 @@
                             Datum
                         </td>
                         <td>
-                            <input type="text" id="datepicker" name="datum" placeholder="01/01/2017">
+                            <input type="text" id="datepicker" name="datum" placeholder="01/01/2017" required="">
                         </td>
                     </tr>
                     <tr>
@@ -70,7 +70,7 @@
                             Bedrag
                         </td>
                         <td>
-                            <input type="number" name="bedrag" min="0" step="0.01" placeholder="00.00">
+                            <input type="number" name="bedrag" min="0" step="0.01" placeholder="00.00" required="">
                         </td>
                     </tr>
                     <tr>
@@ -79,7 +79,7 @@
                             Omschrijving
                         </td>
                         <td>
-                            <textarea name="omschrijving" placeholder="Algemene omschrijving nieuwe onkost"></textarea>
+                            <textarea name="omschrijving" placeholder="Algemene omschrijving nieuwe onkost" required=""></textarea>
                         </td>
                     </tr>
                  </table>

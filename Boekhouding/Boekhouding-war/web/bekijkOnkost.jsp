@@ -69,7 +69,7 @@
                                     Datum
                                 </td>
                                 <td>
-                                    <input type="text" id="datepicker" name="datum" value="<c:out value="${Onkost.datum}" default="error"/>">
+                                    <input type="text" id="datepicker" name="datum" value="<c:out value="${Onkost.datum}" default="error" required=""/>">
                                 </td>
                             </tr>
                             <tr>
@@ -78,7 +78,7 @@
                                     Bedrag
                                 </td>
                                 <td>
-                                    <input type="number" name="bedrag" min="0" step="0.01" value="<c:out value="${Onkost.onkostenBedrag}" default="error"/>">
+                                    <input type="number" name="bedrag" min="0" step="0.01" value="<c:out value="${Onkost.onkostenBedrag}" default="error" required=""/>">
                                 </td>
                             </tr>
                             <tr>
@@ -87,7 +87,7 @@
                                     Omschrijving
                                 </td>
                                 <td>
-                                    <textarea name="omschrijving"><c:out value="${Onkost.omschrijving}" default="error"/></textarea>
+                                    <textarea name="omschrijving"><c:out value="${Onkost.omschrijving}" default="error" required=""/></textarea>
                                 </td>
                             </tr>
                         </table>
