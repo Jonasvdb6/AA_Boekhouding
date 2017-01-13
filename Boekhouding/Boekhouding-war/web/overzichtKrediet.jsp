@@ -10,7 +10,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/overzichtKrediet.css">
-        <title>OVERZICHT KREDIETEN</title>
+        <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico' />
+        <title>E-Finances</title>
     </head>
     <body>
         <div class="container">

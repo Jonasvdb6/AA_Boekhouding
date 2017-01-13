@@ -14,7 +14,8 @@
         <link rel="stylesheet" type="text/css" href="css/nieuweOnkosten.css">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
-        <title>NIEUWE ONKOST</title>
+        <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico' />
+        <title>E-Finances</title>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
@@ -61,7 +62,7 @@
                             Datum
                         </td>
                         <td>
-                            <input type="text" id="datepicker" name="datum" placeholder="01/01/2017" required="">
+                            <input type="text" id="datepicker" name="datum" value="01/01/2017" required="">
                         </td>
                     </tr>
                     <tr>
@@ -70,7 +71,7 @@
                             Bedrag
                         </td>
                         <td>
-                            <input type="number" name="bedrag" min="0" step="0.01" placeholder="00.00" required="">
+                            <input type="number" name="bedrag" min="0" step="0.01" value="00.00" required="">
                         </td>
                     </tr>
                     <tr>
@@ -79,7 +80,7 @@
                             Omschrijving
                         </td>
                         <td>
-                            <textarea name="omschrijving" placeholder="Algemene omschrijving nieuwe onkost" required=""></textarea>
+                            <textarea name="omschrijving" required="">Algemene omschrijving nieuwe onkost</textarea>
                         </td>
                     </tr>
                  </table>
