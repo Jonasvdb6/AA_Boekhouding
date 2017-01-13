@@ -14,7 +14,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import javax.ejb.Stateless;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
